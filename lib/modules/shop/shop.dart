@@ -1,0 +1,12 @@
+export 'models/category_model.dart';
+export 'models/product_variant_model.dart';
+export 'models/order_model.dart';
+export 'models/product_model.dart';
+export 'bindings/shop_binding.dart';
+export 'controllers/shop_controller.dart';
+export 'screens/shop_dashboard_screen.dart';
+export 'screens/products_screen.dart';
+export 'screens/add_product_screen.dart';
+export 'screens/orders_screen.dart';
+export 'screens/inventory_screen.dart';
+export 'data/shop_repository.dart';
