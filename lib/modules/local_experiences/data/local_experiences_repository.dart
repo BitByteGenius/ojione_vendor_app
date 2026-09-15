@@ -1,12 +1,10 @@
 import '../../../core/network/api_client.dart';
-import '../../../core/network/api_endpoints.dart';
 import '../../../core/network/api_response.dart';
-import '../models/experience_category_model.dart';
 import '../models/experience_model.dart';
 import '../models/experience_schedule_model.dart';
 
 class LocalExperiencesRepository {
-  final ApiClient _apiClient = ApiClient.instance;
+  final ApiClient apiClient = ApiClient.instance;
 
   Future<ApiResponse<List<ExperienceModel>>> getExperiences() async {
     await Future.delayed(const Duration(milliseconds: 300));

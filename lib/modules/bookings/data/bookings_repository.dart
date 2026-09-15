@@ -1,5 +1,4 @@
 import '../../../core/network/api_client.dart';
-import '../../../core/network/api_endpoints.dart';
 import '../../../core/network/api_response.dart';
 import '../../../shared/enums/service_type.dart';
 import '../models/booking_filter_model.dart';
@@ -7,7 +6,7 @@ import '../models/booking_model.dart';
 import '../models/booking_status_model.dart';
 
 class BookingsRepository {
-  final ApiClient _apiClient = ApiClient.instance;
+  final ApiClient apiClient = ApiClient.instance;
 
   Future<ApiResponse<List<BookingModel>>> getBookings({BookingFilterModel? filter}) async {
     // API client call ready:

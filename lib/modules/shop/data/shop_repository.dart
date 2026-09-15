@@ -1,12 +1,10 @@
 import '../../../core/network/api_client.dart';
-import '../../../core/network/api_endpoints.dart';
 import '../../../core/network/api_response.dart';
-import '../models/category_model.dart';
 import '../models/order_model.dart';
 import '../models/product_model.dart';
 
 class ShopRepository {
-  final ApiClient _apiClient = ApiClient.instance;
+  final ApiClient apiClient = ApiClient.instance;
 
   Future<ApiResponse<List<ProductModel>>> getProducts() async {
     await Future.delayed(const Duration(milliseconds: 300));

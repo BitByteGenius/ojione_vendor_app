@@ -1,5 +1,4 @@
 import '../../../core/network/api_client.dart';
-import '../../../core/network/api_endpoints.dart';
 import '../../../core/network/api_response.dart';
 import '../../../shared/enums/service_type.dart';
 import '../models/earning_model.dart';
@@ -7,7 +6,7 @@ import '../models/payout_model.dart';
 import '../models/transaction_model.dart';
 
 class EarningsRepository {
-  final ApiClient _apiClient = ApiClient.instance;
+  final ApiClient apiClient = ApiClient.instance;
 
   Future<ApiResponse<EarningSummaryModel>> getSummary() async {
     // API client call ready:

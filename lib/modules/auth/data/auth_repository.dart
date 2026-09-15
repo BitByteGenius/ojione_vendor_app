@@ -1,5 +1,4 @@
 import '../../../core/network/api_client.dart';
-import '../../../core/network/api_endpoints.dart';
 import '../../../core/network/api_response.dart';
 import '../../../shared/enums/service_type.dart';
 import '../../../shared/enums/user_role.dart';
@@ -7,7 +6,7 @@ import '../models/auth_response_model.dart';
 import '../models/vendor_model.dart';
 
 class AuthRepository {
-  final ApiClient _apiClient = ApiClient.instance;
+  final ApiClient apiClient = ApiClient.instance;
 
   Future<ApiResponse<AuthResponseModel>> login({
     required String emailOrPhone,

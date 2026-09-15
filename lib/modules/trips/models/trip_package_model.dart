@@ -1,4 +1,4 @@
-import 'destination_model.dart';
+import 'itinerary_model.dart';
 
 class TripPackageModel {
   final String id;

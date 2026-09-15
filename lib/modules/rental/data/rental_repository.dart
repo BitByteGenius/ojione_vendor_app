@@ -1,11 +1,9 @@
 import '../../../core/network/api_client.dart';
-import '../../../core/network/api_endpoints.dart';
 import '../../../core/network/api_response.dart';
-import '../models/vehicle_category_model.dart';
 import '../models/vehicle_model.dart';
 
 class RentalRepository {
-  final ApiClient _apiClient = ApiClient.instance;
+  final ApiClient apiClient = ApiClient.instance;
 
   Future<ApiResponse<List<String>>> getAvailableCities() async {
     await Future.delayed(const Duration(milliseconds: 200));

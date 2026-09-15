@@ -1,10 +1,9 @@
 import '../../../core/network/api_client.dart';
-import '../../../core/network/api_endpoints.dart';
 import '../../../core/network/api_response.dart';
 import '../models/dashboard_metrics_model.dart';
 
 class DashboardRepository {
-  final ApiClient _apiClient = ApiClient.instance;
+  final ApiClient apiClient = ApiClient.instance;
 
   Future<ApiResponse<DashboardMetricsModel>> getMetrics() async {
     // Backend API integration ready:

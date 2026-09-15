@@ -100,7 +100,6 @@ class NotificationsScreen extends GetView<NotificationsController> {
       case NotificationType.vendor:
         return AppColors.secondary;
       case NotificationType.system:
-      default:
         return AppColors.info;
     }
   }
@@ -116,7 +115,6 @@ class NotificationsScreen extends GetView<NotificationsController> {
       case NotificationType.vendor:
         return Icons.person_outline_rounded;
       case NotificationType.system:
-      default:
         return Icons.info_outline_rounded;
     }
   }

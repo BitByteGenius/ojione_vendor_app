@@ -1,10 +1,9 @@
 import '../../../core/network/api_client.dart';
-import '../../../core/network/api_endpoints.dart';
 import '../../../core/network/api_response.dart';
 import '../models/notification_model.dart';
 
 class NotificationsRepository {
-  final ApiClient _apiClient = ApiClient.instance;
+  final ApiClient apiClient = ApiClient.instance;
 
   Future<ApiResponse<List<AppNotificationModel>>> getNotifications() async {
     await Future.delayed(const Duration(milliseconds: 300));

@@ -1,12 +1,10 @@
 import '../../../core/network/api_client.dart';
-import '../../../core/network/api_endpoints.dart';
 import '../../../core/network/api_response.dart';
-import '../models/destination_model.dart';
 import '../models/itinerary_model.dart';
 import '../models/trip_package_model.dart';
 
 class TripsRepository {
-  final ApiClient _apiClient = ApiClient.instance;
+  final ApiClient apiClient = ApiClient.instance;
 
   Future<ApiResponse<List<TripPackageModel>>> getPackages() async {
     await Future.delayed(const Duration(milliseconds: 300));
