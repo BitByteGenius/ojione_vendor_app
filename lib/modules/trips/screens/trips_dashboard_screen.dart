@@ -67,7 +67,7 @@ class TripsDashboardScreen extends GetView<TripsController> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: controller.packages.length,
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, index) => const Divider(),
                   itemBuilder: (context, index) {
                     final p = controller.packages[index];
                     return ListTile(

@@ -80,7 +80,7 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: controller.experiences.length,
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, index) => const Divider(),
                   itemBuilder: (context, index) {
                     final exp = controller.experiences[index];
                     return ListTile(

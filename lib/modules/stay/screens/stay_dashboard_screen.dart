@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/utils/formatters.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/app_loader.dart';
@@ -114,7 +113,7 @@ class StayDashboardScreen extends GetView<StayController> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: controller.properties.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: AppDimensions.spaceMd),
+                  separatorBuilder: (_, index) => const SizedBox(height: AppDimensions.spaceMd),
                   itemBuilder: (context, index) {
                     final prop = controller.properties[index];
                     return PropertyCard(property: prop);

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/utils/formatters.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/main_layout.dart';
@@ -73,7 +72,7 @@ class PropertyDetailsScreen extends GetView<StayController> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: prop.rooms.length,
-                separatorBuilder: (_, __) => const SizedBox(height: AppDimensions.spaceSm),
+                separatorBuilder: (_, index) => const SizedBox(height: AppDimensions.spaceSm),
                 itemBuilder: (context, index) {
                   return RoomCard(room: prop.rooms[index]);
                 },

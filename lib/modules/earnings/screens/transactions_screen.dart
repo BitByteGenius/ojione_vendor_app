@@ -29,7 +29,7 @@ class TransactionsScreen extends GetView<EarningsController> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.transactions.length,
-              separatorBuilder: (_, __) => const Divider(),
+              separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final tx = controller.transactions[index];
                 return Padding(

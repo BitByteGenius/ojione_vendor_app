@@ -32,7 +32,7 @@ class ItineraryScreen extends GetView<TripsController> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: pkg.itinerary.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: AppDimensions.spaceMd),
+                  separatorBuilder: (_, index) => const SizedBox(height: AppDimensions.spaceMd),
                   itemBuilder: (context, index) {
                     final day = pkg.itinerary[index];
                     return Container(

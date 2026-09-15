@@ -24,7 +24,7 @@ class RentalAvailabilityScreen extends GetView<RentalController> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.vehicles.length,
-              separatorBuilder: (_, __) => const Divider(),
+              separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final v = controller.vehicles[index];
                 return ListTile(

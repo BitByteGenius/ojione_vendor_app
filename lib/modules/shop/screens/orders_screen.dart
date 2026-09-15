@@ -26,7 +26,7 @@ class ShopOrdersScreen extends GetView<ShopController> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.orders.length,
-              separatorBuilder: (_, __) => const Divider(),
+              separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final ord = controller.orders[index];
                 return ListTile(

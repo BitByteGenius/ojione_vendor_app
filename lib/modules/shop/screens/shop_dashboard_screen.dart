@@ -88,7 +88,7 @@ class ShopDashboardScreen extends GetView<ShopController> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: controller.filteredProducts.length,
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, index) => const Divider(),
                   itemBuilder: (context, index) {
                     final p = controller.filteredProducts[index];
                     return ListTile(

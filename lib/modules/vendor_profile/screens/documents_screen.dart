@@ -41,7 +41,7 @@ class DocumentsScreen extends GetView<VendorProfileController> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: p.documents.length,
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, index) => const Divider(),
                   itemBuilder: (context, index) {
                     final doc = p.documents[index];
                     return Padding(

@@ -70,7 +70,7 @@ class RentalDashboardScreen extends GetView<RentalController> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: controller.filteredVehicles.length,
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, index) => const Divider(),
                   itemBuilder: (context, index) {
                     final v = controller.filteredVehicles[index];
                     return ListTile(

@@ -65,7 +65,7 @@ class AddVehicleScreen extends GetView<RentalController> {
                           const Text('Operating City (Backend-Driven)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
                           const SizedBox(height: 6),
                           Obx(() => DropdownButtonFormField<String>(
-                                value: controller.selectedCity.value,
+                                initialValue: controller.selectedCity.value,
                                 decoration: const InputDecoration(),
                                 items: controller.cities
                                     .map((c) => DropdownMenuItem(value: c, child: Text(c)))
@@ -97,7 +97,7 @@ class AddVehicleScreen extends GetView<RentalController> {
                           const Text('Rental Type', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
                           const SizedBox(height: 6),
                           Obx(() => DropdownButtonFormField<String>(
-                                value: controller.selectedRentalType.value,
+                                initialValue: controller.selectedRentalType.value,
                                 decoration: const InputDecoration(),
                                 items: const [
                                   DropdownMenuItem(value: 'Both', child: Text('Self-Drive & Chauffeur')),

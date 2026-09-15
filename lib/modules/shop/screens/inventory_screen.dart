@@ -24,7 +24,7 @@ class InventoryScreen extends GetView<ShopController> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.products.length,
-              separatorBuilder: (_, __) => const Divider(),
+              separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final p = controller.products[index];
                 return ListTile(

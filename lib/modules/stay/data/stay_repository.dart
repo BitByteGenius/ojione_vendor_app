@@ -1,5 +1,4 @@
 import '../../../core/network/api_client.dart';
-import '../../../core/network/api_endpoints.dart';
 import '../../../core/network/api_response.dart';
 import '../models/amenity_model.dart';
 import '../models/availability_model.dart';
@@ -9,7 +8,7 @@ import '../models/property_model.dart';
 import '../models/room_model.dart';
 
 class StayRepository {
-  final ApiClient _apiClient = ApiClient.instance;
+  final ApiClient apiClient = ApiClient.instance;
 
   Future<ApiResponse<List<PropertyModel>>> getProperties() async {
     await Future.delayed(const Duration(milliseconds: 300));

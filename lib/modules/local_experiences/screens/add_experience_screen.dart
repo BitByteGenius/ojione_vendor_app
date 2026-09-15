@@ -48,7 +48,7 @@ class AddExperienceScreen extends GetView<LocalExperiencesController> {
                           const Text('Category', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
                           const SizedBox(height: 6),
                           Obx(() => DropdownButtonFormField<String>(
-                                value: controller.selectedCategory.value,
+                                initialValue: controller.selectedCategory.value,
                                 decoration: const InputDecoration(),
                                 items: const [
                                   DropdownMenuItem(value: 'Cultural Walk', child: Text('Cultural Walk')),

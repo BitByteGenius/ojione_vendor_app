@@ -28,7 +28,7 @@ class PayoutsScreen extends GetView<EarningsController> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.payouts.length,
-              separatorBuilder: (_, __) => const Divider(),
+              separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final po = controller.payouts[index];
                 return Padding(

@@ -40,7 +40,7 @@ class NotificationsScreen extends GetView<NotificationsController> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.notifications.length,
-              separatorBuilder: (_, __) => const Divider(),
+              separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final n = controller.notifications[index];
                 return ListTile(

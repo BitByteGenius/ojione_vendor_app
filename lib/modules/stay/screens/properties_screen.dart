@@ -28,7 +28,7 @@ class PropertiesScreen extends GetView<StayController> {
         return ListView.separated(
           padding: const EdgeInsets.all(AppDimensions.spaceLg),
           itemCount: controller.properties.length,
-          separatorBuilder: (_, __) => const SizedBox(height: AppDimensions.spaceMd),
+          separatorBuilder: (_, index) => const SizedBox(height: AppDimensions.spaceMd),
           itemBuilder: (context, index) {
             final prop = controller.properties[index];
             return PropertyCard(property: prop);

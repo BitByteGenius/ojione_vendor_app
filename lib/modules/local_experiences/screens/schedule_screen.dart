@@ -31,7 +31,7 @@ class ScheduleScreen extends GetView<LocalExperiencesController> {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: exp.schedules.length,
-                            separatorBuilder: (_, __) => const Divider(),
+                            separatorBuilder: (_, index) => const Divider(),
                             itemBuilder: (context, index) {
                               final sch = exp.schedules[index];
                               return ListTile(

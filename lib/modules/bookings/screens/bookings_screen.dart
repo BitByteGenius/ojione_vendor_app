@@ -107,7 +107,7 @@ class BookingsScreen extends GetView<BookingsController> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.bookings.length,
-                    separatorBuilder: (_, __) => const Divider(),
+                    separatorBuilder: (_, index) => const Divider(),
                     itemBuilder: (context, index) {
                       final b = controller.bookings[index];
                       return ListTile(

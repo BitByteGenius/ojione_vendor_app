@@ -29,7 +29,7 @@ class DestinationsScreen extends GetView<TripsController> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: destinations.length,
-            separatorBuilder: (_, __) => const Divider(),
+            separatorBuilder: (_, index) => const Divider(),
             itemBuilder: (context, index) {
               final d = destinations[index];
               return ListTile(

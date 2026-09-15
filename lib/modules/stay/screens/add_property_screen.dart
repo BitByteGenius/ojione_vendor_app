@@ -48,7 +48,7 @@ class AddPropertyScreen extends GetView<StayController> {
                           const Text('Property Type', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
                           const SizedBox(height: 6),
                           Obx(() => DropdownButtonFormField<String>(
-                                value: controller.selectedPropertyType.value,
+                                initialValue: controller.selectedPropertyType.value,
                                 decoration: const InputDecoration(),
                                 items: const [
                                   DropdownMenuItem(value: 'Resort', child: Text('Resort')),
