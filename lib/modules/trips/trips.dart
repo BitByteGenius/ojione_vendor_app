@@ -1,0 +1,11 @@
+export 'models/destination_model.dart';
+export 'models/itinerary_model.dart';
+export 'models/trip_package_model.dart';
+export 'bindings/trips_binding.dart';
+export 'controllers/trips_controller.dart';
+export 'screens/trips_dashboard_screen.dart';
+export 'screens/packages_screen.dart';
+export 'screens/add_package_screen.dart';
+export 'screens/destinations_screen.dart';
+export 'screens/itinerary_screen.dart';
+export 'data/trips_repository.dart';
