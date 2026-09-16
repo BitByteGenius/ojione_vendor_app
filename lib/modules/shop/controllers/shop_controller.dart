@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../data/shop_repository.dart';
 import '../models/order_model.dart';
 import '../models/product_model.dart';
+import '../models/shop_analytics_model.dart';
 
 class ShopController extends GetxController {
   final ShopRepository _repository = ShopRepository();
@@ -10,6 +11,7 @@ class ShopController extends GetxController {
   final isLoading = true.obs;
   final products = <ProductModel>[].obs;
   final orders = <ShopOrderModel>[].obs;
+  final analytics = Rx<ShopDashboardAnalytics?>(null);
   final selectedStateFilter = 'All States'.obs;
 
   // Add Product Form Controllers
@@ -29,16 +31,26 @@ class ShopController extends GetxController {
   Future<void> loadShopData() async {
     try {
       isLoading.value = true;
-      final pRes = await _repository.getProducts();
+      final aFuture = _repository.getShopAnalytics();
+      final pFuture = _repository.getProducts();
+      final oFuture = _repository.getOrders();
+
+      final results = await Future.wait([aFuture, pFuture, oFuture]);
+      final aRes = results[0] as dynamic;
+      final pRes = results[1] as dynamic;
+      final oRes = results[2] as dynamic;
+
+      if (aRes.success && aRes.data != null) {
+        analytics.value = aRes.data;
+      }
       if (pRes.success && pRes.data != null) {
         products.assignAll(pRes.data!);
       }
-      final oRes = await _repository.getOrders();
       if (oRes.success && oRes.data != null) {
         orders.assignAll(oRes.data!);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load shop catalog');
+      Get.snackbar('Error', 'Failed to load shop catalog: $e');
     } finally {
       isLoading.value = false;
     }

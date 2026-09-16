@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../data/rental_repository.dart';
+import '../models/rental_analytics_model.dart';
 import '../models/vehicle_model.dart';
 
 class RentalController extends GetxController {
@@ -9,6 +10,7 @@ class RentalController extends GetxController {
   final isLoading = true.obs;
   final vehicles = <VehicleModel>[].obs;
   final cities = <String>[].obs;
+  final analytics = Rx<RentalDashboardAnalytics?>(null);
   final selectedCityFilter = 'All Cities'.obs;
 
   // Add Vehicle Form Controllers
@@ -29,17 +31,27 @@ class RentalController extends GetxController {
   Future<void> loadRentalData() async {
     try {
       isLoading.value = true;
-      final cRes = await _repository.getAvailableCities();
+      final aFuture = _repository.getRentalAnalytics();
+      final cFuture = _repository.getAvailableCities();
+      final vFuture = _repository.getVehicles();
+
+      final results = await Future.wait([aFuture, cFuture, vFuture]);
+      final aRes = results[0] as dynamic;
+      final cRes = results[1] as dynamic;
+      final vRes = results[2] as dynamic;
+
+      if (aRes.success && aRes.data != null) {
+        analytics.value = aRes.data;
+      }
       if (cRes.success && cRes.data != null) {
         cities.assignAll(cRes.data!);
         if (cities.isNotEmpty) selectedCity.value = cities.first;
       }
-      final vRes = await _repository.getVehicles();
       if (vRes.success && vRes.data != null) {
         vehicles.assignAll(vRes.data!);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load rental fleet');
+      Get.snackbar('Error', 'Failed to load rental fleet: $e');
     } finally {
       isLoading.value = false;
     }
