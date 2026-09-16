@@ -1,39 +1,46 @@
 import 'package:get/get.dart';
+import '../../../core/services/auth_service.dart';
 import '../data/dashboard_repository.dart';
 import '../models/dashboard_metrics_model.dart';
 
 class DashboardController extends GetxController {
   final DashboardRepository _repository = DashboardRepository();
 
-  final isLoading = true.obs;
-  final metrics = Rxn<DashboardMetricsModel>();
-
-  // Filter timeframe
-  final selectedTimeframe = 'This Month'.obs;
-  final List<String> timeframes = ['Today', 'This Week', 'This Month', 'This Year'];
+  final isLoading = false.obs;
+  final dashboardData = Rx<VendorCoreDashboardModel?>(null);
+  final errorMessage = RxString('');
 
   @override
   void onInit() {
     super.onInit();
-    loadDashboardData();
+    loadDashboard();
+
+    // Listen to assigned services changes so switching profiles immediately re-fetches
+    ever(AuthService.to.assignedServices, (_) {
+      loadDashboard();
+    });
   }
 
-  Future<void> loadDashboardData() async {
+  Future<void> loadDashboard() async {
     try {
       isLoading.value = true;
-      final response = await _repository.getMetrics();
-      if (response.success && response.data != null) {
-        metrics.value = response.data;
+      errorMessage.value = '';
+      final res = await _repository.getCoreDashboardData(
+        assignedServices: AuthService.to.assignedServices.toList(),
+      );
+      if (res.success && res.data != null) {
+        dashboardData.value = res.data;
+      } else {
+        errorMessage.value = res.message;
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load dashboard metrics');
+      errorMessage.value = e.toString();
     } finally {
       isLoading.value = false;
     }
   }
 
-  void setTimeframe(String tf) {
-    selectedTimeframe.value = tf;
-    loadDashboardData();
+  void refreshData() {
+    loadDashboard();
   }
 }

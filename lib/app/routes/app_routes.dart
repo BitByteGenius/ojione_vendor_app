@@ -5,6 +5,7 @@ class AppRoutes {
   static const String root = '/';
   static const String login = '/login';
   static const String register = '/register';
+  static const String registrationSuccess = '/registration-success';
   static const String otp = '/otp';
   static const String forgotPassword = '/forgot-password';
 

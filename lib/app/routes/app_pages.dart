@@ -31,6 +31,11 @@ class AppPages {
       binding: AuthBinding(),
     ),
     GetPage(
+      name: AppRoutes.registrationSuccess,
+      page: () => const RegistrationSuccessScreen(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
       name: AppRoutes.otp,
       page: () => const OtpScreen(),
       binding: AuthBinding(),

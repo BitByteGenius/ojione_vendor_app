@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../data/trips_repository.dart';
 import '../models/trip_package_model.dart';
+import '../models/trips_analytics_model.dart';
 
 class TripsController extends GetxController {
   final TripsRepository _repository = TripsRepository();
 
   final isLoading = true.obs;
   final packages = <TripPackageModel>[].obs;
+  final analytics = Rx<TripsDashboardAnalytics?>(null);
   final selectedPackage = Rxn<TripPackageModel>();
 
   // Add Package Form Controllers
@@ -21,21 +23,30 @@ class TripsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    loadPackages();
+    loadDashboardData();
   }
 
-  Future<void> loadPackages() async {
+  Future<void> loadDashboardData() async {
     try {
       isLoading.value = true;
-      final res = await _repository.getPackages();
-      if (res.success && res.data != null) {
-        packages.assignAll(res.data!);
+      final analyticsFuture = _repository.getTripsAnalytics();
+      final packagesFuture = _repository.getPackages();
+
+      final results = await Future.wait([analyticsFuture, packagesFuture]);
+      final analyticsRes = results[0] as dynamic;
+      final packagesRes = results[1] as dynamic;
+
+      if (analyticsRes.success && analyticsRes.data != null) {
+        analytics.value = analyticsRes.data;
+      }
+      if (packagesRes.success && packagesRes.data != null) {
+        packages.assignAll(packagesRes.data!);
         if (packages.isNotEmpty && selectedPackage.value == null) {
           selectedPackage.value = packages.first;
         }
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load tour packages');
+      Get.snackbar('Error', 'Failed to load tour packages: $e');
     } finally {
       isLoading.value = false;
     }
@@ -58,7 +69,7 @@ class TripsController extends GetxController {
       });
       if (res.success) {
         Get.snackbar('Success', 'Trip package submitted for approval');
-        loadPackages();
+        loadDashboardData();
         Get.back();
       }
     } catch (e) {

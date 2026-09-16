@@ -5,7 +5,6 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimensions.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../enums/service_type.dart';
-import '../enums/user_role.dart';
 
 class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -49,109 +48,218 @@ class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             const SizedBox(width: AppDimensions.spaceSm),
           ],
-          Text(title, style: AppTextStyles.h3),
-          const Spacer(),
+          Expanded(
+            child: Row(
+              children: [
+                Flexible(
+                  child: Text(
+                    title,
+                    style: AppTextStyles.h3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                if (trailing != null) ...[
+                  const SizedBox(width: AppDimensions.spaceSm),
+                  trailing!,
+                ],
+              ],
+            ),
+          ),
+          const SizedBox(width: AppDimensions.spaceSm),
 
-          // Service count badge
+          // Active Service Quick-Jump Selector (Shows only assigned services)
           Obx(() {
-            final count = auth.assignedServices.length;
+            final services = auth.assignedServices.toList();
+            if (services.isEmpty) return const SizedBox.shrink();
+
             return Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppDimensions.spaceSm + 2,
-                vertical: AppDimensions.spaceXs,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: AppColors.primaryLight,
-                borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
+                color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                ),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.check_circle_rounded, size: 14, color: AppColors.primary),
+                  const Text(
+                    'Service:',
+                    style: TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(width: 4),
-                  Text(
-                    '$count / 5 Services Active',
-                    style: AppTextStyles.caption.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w700,
+                  PopupMenuButton<ServiceType>(
+                    tooltip: 'Switch Service Dashboard',
+                    onSelected: (srv) {
+                      auth.setActiveService(srv);
+                      Get.toNamed(srv.routePath);
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          auth.activeService.value?.icon ?? Icons.hub_rounded,
+                          size: 15,
+                          color: auth.activeService.value?.color ?? AppColors.primary,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          auth.activeService.value?.displayName ?? 'Select Service',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: auth.activeService.value?.color ?? AppColors.primary,
+                          ),
+                        ),
+                        const Icon(Icons.arrow_drop_down_rounded, size: 18),
+                      ],
                     ),
+                    itemBuilder: (context) {
+                      return services.map((s) {
+                        return PopupMenuItem(
+                          value: s,
+                          child: Row(
+                            children: [
+                              Icon(s.icon, size: 16, color: s.color),
+                              const SizedBox(width: 8),
+                              Text(s.displayName),
+                            ],
+                          ),
+                        );
+                      }).toList();
+                    },
                   ),
                 ],
               ),
             );
           }),
 
-          const SizedBox(width: AppDimensions.spaceMd),
+          const SizedBox(width: AppDimensions.spaceSm),
 
-          // Role Switcher & Live Service Demo Menu
+          // Demo Vendor Switcher Button (Allows fast testing of strict service separation)
           PopupMenuButton<String>(
-            tooltip: 'Simulate Role / Service Access',
-            icon: const Icon(Icons.tune_rounded, size: 20),
+            tooltip: 'Switch Demo Vendor Profile (Test Service Isolation)',
+            icon: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withAlpha(25),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: AppColors.primary.withAlpha(80)),
+              ),
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.people_outline_rounded, size: 16, color: AppColors.primary),
+                  SizedBox(width: 4),
+                  Text(
+                    'Demo Profiles',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Icon(Icons.arrow_drop_down, size: 16, color: AppColors.primary),
+                ],
+              ),
+            ),
             onSelected: (val) {
-              if (val.startsWith('role:')) {
-                final roleStr = val.substring(5);
-                auth.setRole(UserRole.fromString(roleStr));
-              } else if (val.startsWith('toggle:')) {
-                final srvStr = val.substring(7);
-                auth.toggleService(ServiceType.fromString(srvStr));
+              if (val == 'demo_a') {
+                auth.setDemoVendorA_StayRental();
+                Get.offAllNamed('/dashboard');
+                Get.snackbar('Vendor Profile Loaded', 'Vendor A: Stay + Vehicle Rental (Shop, Trips, Experiences hidden)');
+              } else if (val == 'demo_b') {
+                auth.setDemoVendorB_ShopOnly();
+                Get.offAllNamed('/dashboard');
+                Get.snackbar('Vendor Profile Loaded', 'Vendor B: Shop Only (Stay, Rental, Trips, Experiences hidden)');
+              } else if (val == 'demo_c') {
+                auth.setDemoVendorC_TripsExperiences();
+                Get.offAllNamed('/dashboard');
+                Get.snackbar('Vendor Profile Loaded', 'Vendor C: Tours & Trips + Local Experiences');
+              } else if (val == 'demo_all') {
+                auth.assignedServices.assignAll(ServiceType.values);
+                auth.activeService.value = ServiceType.stay;
+                Get.offAllNamed('/dashboard');
+                Get.snackbar('Vendor Profile Loaded', 'Vendor D: All 5 Services Enabled');
+              } else if (val == 'register') {
+                Get.toNamed('/register');
               }
             },
             itemBuilder: (context) => [
               const PopupMenuItem(
                 enabled: false,
-                child: Text('SIMULATE USER ROLE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                child: Text('TEST SERVICE ISOLATION', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.grey)),
               ),
-              ...UserRole.values.map(
-                (r) => PopupMenuItem(
-                  value: 'role:${r.name}',
-                  child: Row(
-                    children: [
-                      Icon(
-                        auth.currentRole.value == r ? Icons.radio_button_checked : Icons.radio_button_off,
-                        size: 16,
-                        color: AppColors.primary,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(r.label),
-                    ],
-                  ),
+              const PopupMenuItem(
+                value: 'demo_a',
+                child: Row(
+                  children: [
+                    Icon(Icons.hotel_rounded, size: 16, color: AppColors.stayService),
+                    SizedBox(width: 4),
+                    Icon(Icons.directions_car_rounded, size: 16, color: AppColors.rentalService),
+                    SizedBox(width: 8),
+                    Text('Vendor A: Stay + Vehicle Rental'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'demo_b',
+                child: Row(
+                  children: [
+                    Icon(Icons.storefront_rounded, size: 16, color: AppColors.shopService),
+                    SizedBox(width: 8),
+                    Text('Vendor B: Shop Only'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'demo_c',
+                child: Row(
+                  children: [
+                    Icon(Icons.hiking_rounded, size: 16, color: AppColors.tripsService),
+                    SizedBox(width: 4),
+                    Icon(Icons.local_activity_rounded, size: 16, color: AppColors.localExpService),
+                    SizedBox(width: 8),
+                    Text('Vendor C: Trips + Local Experiences'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'demo_all',
+                child: Row(
+                  children: [
+                    Icon(Icons.all_inclusive_rounded, size: 16, color: AppColors.primary),
+                    SizedBox(width: 8),
+                    Text('Vendor D: All 5 Services'),
+                  ],
                 ),
               ),
               const PopupMenuDivider(),
               const PopupMenuItem(
-                enabled: false,
-                child: Text('TOGGLE ASSIGNED SERVICES', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
-              ),
-              ...ServiceType.values.map(
-                (s) => PopupMenuItem(
-                  value: 'toggle:${s.id}',
-                  child: Row(
-                    children: [
-                      Icon(
-                        auth.hasService(s) ? Icons.check_box : Icons.check_box_outline_blank,
-                        size: 16,
-                        color: s.color,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(s.displayName),
-                    ],
-                  ),
+                value: 'register',
+                child: Row(
+                  children: [
+                    Icon(Icons.person_add_outlined, size: 16, color: AppColors.primary),
+                    SizedBox(width: 8),
+                    Text('Register New Custom Vendor'),
+                  ],
                 ),
               ),
             ],
           ),
 
+          const SizedBox(width: AppDimensions.spaceSm),
+
           // Notifications bell
           IconButton(
             icon: const Badge(
               label: Text('3'),
-              child: Icon(Icons.notifications_none_rounded, size: 22),
+              child: Icon(Icons.notifications_none_rounded, size: 21),
             ),
             tooltip: 'Notifications',
             onPressed: () => Get.toNamed('/notifications'),
           ),
-
-          const SizedBox(width: AppDimensions.spaceSm),
 
           // Theme toggle
           IconButton(
@@ -159,13 +267,13 @@ class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
               isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
               size: 20,
             ),
-            tooltip: 'Toggle theme',
+            tooltip: 'Toggle light / dark mode',
             onPressed: () {
               Get.changeThemeMode(isDark ? ThemeMode.light : ThemeMode.dark);
             },
           ),
 
-          const SizedBox(width: AppDimensions.spaceMd),
+          const SizedBox(width: AppDimensions.spaceSm),
 
           // Profile Dropdown
           PopupMenuButton<String>(
@@ -187,26 +295,32 @@ class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               const PopupMenuDivider(),
-              const PopupMenuItem(value: 'profile', child: Text('Vendor Profile')),
-              const PopupMenuItem(value: 'settings', child: Text('Settings')),
+              const PopupMenuItem(value: 'profile', child: Text('Vendor Profile & KYC')),
+              const PopupMenuItem(value: 'settings', child: Text('Account Settings')),
               const PopupMenuDivider(),
               const PopupMenuItem(
                 value: 'logout',
-                child: Text('Logout', style: TextStyle(color: AppColors.error)),
+                child: Text('Sign Out', style: TextStyle(color: AppColors.error)),
               ),
             ],
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: 18,
+                  radius: 17,
                   backgroundColor: AppColors.primary,
-                  child: Text(
-                    auth.ownerName.value.substring(0, 1).toUpperCase(),
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
+                  child: Obx(() => Text(
+                        auth.ownerName.value.isNotEmpty
+                            ? auth.ownerName.value.substring(0, 1).toUpperCase()
+                            : 'V',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      )),
                 ),
-                const SizedBox(width: AppDimensions.spaceSm),
-                const Icon(Icons.keyboard_arrow_down_rounded, size: 18),
+                const SizedBox(width: 4),
+                const Icon(Icons.keyboard_arrow_down_rounded, size: 16),
               ],
             ),
           ),
