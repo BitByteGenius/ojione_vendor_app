@@ -108,7 +108,7 @@ class AuthService extends GetxService {
   }
 
   // Demo profile switchers to instantly test strict service separation
-  void setDemoVendorA_StayRental() {
+  void setDemoVendorAStayRental() {
     vendorId.value = 'VEN-DEMO-A';
     vendorName.value = 'Kaziranga Eco-Stay & Car Rentals';
     ownerName.value = 'Gunajit Sharma';
@@ -124,7 +124,7 @@ class AuthService extends GetxService {
     _syncVendorModel();
   }
 
-  void setDemoVendorB_ShopOnly() {
+  void setDemoVendorBShopOnly() {
     vendorId.value = 'VEN-DEMO-B';
     vendorName.value = 'Pragjyotish Assam Silk & Craft Store';
     ownerName.value = 'Ananya Goswami';
@@ -140,7 +140,7 @@ class AuthService extends GetxService {
     _syncVendorModel();
   }
 
-  void setDemoVendorC_TripsExperiences() {
+  void setDemoVendorCTripsExperiences() {
     vendorId.value = 'VEN-DEMO-C';
     vendorName.value = 'Brahmaputra Expeditions & Cultural Walks';
     ownerName.value = 'Bikramjit Saikia';

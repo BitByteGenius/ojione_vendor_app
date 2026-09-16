@@ -166,15 +166,15 @@ class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             onSelected: (val) {
               if (val == 'demo_a') {
-                auth.setDemoVendorA_StayRental();
+                auth.setDemoVendorAStayRental();
                 Get.offAllNamed('/dashboard');
                 Get.snackbar('Vendor Profile Loaded', 'Vendor A: Stay + Vehicle Rental (Shop, Trips, Experiences hidden)');
               } else if (val == 'demo_b') {
-                auth.setDemoVendorB_ShopOnly();
+                auth.setDemoVendorBShopOnly();
                 Get.offAllNamed('/dashboard');
                 Get.snackbar('Vendor Profile Loaded', 'Vendor B: Shop Only (Stay, Rental, Trips, Experiences hidden)');
               } else if (val == 'demo_c') {
-                auth.setDemoVendorC_TripsExperiences();
+                auth.setDemoVendorCTripsExperiences();
                 Get.offAllNamed('/dashboard');
                 Get.snackbar('Vendor Profile Loaded', 'Vendor C: Tours & Trips + Local Experiences');
               } else if (val == 'demo_all') {

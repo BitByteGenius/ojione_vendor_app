@@ -283,7 +283,7 @@ class TripsDashboardScreen extends GetView<TripsController> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: performances.length,
-      separatorBuilder: (_, __) => const Divider(height: 16),
+      separatorBuilder: (_, _) => const Divider(height: 16),
       itemBuilder: (context, index) {
         final p = performances[index];
         final isPending = p.status.contains('Pending');

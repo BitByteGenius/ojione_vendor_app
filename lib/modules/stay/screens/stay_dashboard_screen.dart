@@ -391,7 +391,7 @@ class StayDashboardScreen extends GetView<StayController> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: performances.length,
-        separatorBuilder: (_, __) => const Divider(height: 16),
+        separatorBuilder: (_, _) => const Divider(height: 16),
         itemBuilder: (context, index) {
           final p = performances[index];
           final isPending = p.approvalStatus.contains('Pending');
@@ -470,7 +470,7 @@ class StayDashboardScreen extends GetView<StayController> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: reviews.length,
-        separatorBuilder: (_, __) => const Divider(height: 16),
+        separatorBuilder: (_, _) => const Divider(height: 16),
         itemBuilder: (context, index) {
           final r = reviews[index];
           return Column(

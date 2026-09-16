@@ -356,7 +356,7 @@ class RentalDashboardScreen extends GetView<RentalController> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: list.length,
-      separatorBuilder: (_, __) => const Divider(height: 16),
+      separatorBuilder: (_, _) => const Divider(height: 16),
       itemBuilder: (context, index) {
         final v = list[index];
         final isRented = v.status == 'rented';

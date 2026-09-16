@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_dimensions.dart';
 
 class AppProgressBar extends StatelessWidget {
   final double percentage; // 0.0 to 100.0
