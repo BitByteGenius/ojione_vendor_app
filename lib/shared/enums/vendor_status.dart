@@ -94,6 +94,19 @@ enum VendorVerificationStatus {
     }
   }
 
+  Color get bgColor {
+    switch (this) {
+      case VendorVerificationStatus.unverified:
+        return const Color(0xFFF1F5F9);
+      case VendorVerificationStatus.pendingReview:
+        return AppColors.warningLight;
+      case VendorVerificationStatus.verified:
+        return AppColors.successLight;
+      case VendorVerificationStatus.rejected:
+        return AppColors.errorLight;
+    }
+  }
+
   static VendorVerificationStatus fromString(String value) {
     switch (value.toLowerCase()) {
       case 'verified':

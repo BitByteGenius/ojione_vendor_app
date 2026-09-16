@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../data/local_experiences_repository.dart';
+import '../models/experience_category_model.dart';
 import '../models/experience_model.dart';
+import '../models/local_experiences_analytics_model.dart';
 
 class LocalExperiencesController extends GetxController {
   final LocalExperiencesRepository _repository = LocalExperiencesRepository();
 
   final isLoading = true.obs;
   final experiences = <ExperienceModel>[].obs;
+  final categories = <ExperienceCategoryModel>[].obs;
+  final analytics = Rx<LocalExperiencesDashboardAnalytics?>(null);
   final selectedExperience = Rxn<ExperienceModel>();
 
   // Add Experience Form Controllers
@@ -18,26 +22,43 @@ class LocalExperiencesController extends GetxController {
   final durationHoursController = TextEditingController(text: '2.5');
   final maxCapacityController = TextEditingController(text: '10');
   final priceController = TextEditingController();
-  final selectedCategory = 'Cultural Walk'.obs;
+  final selectedCategory = 'Cultural Experience'.obs;
 
   @override
   void onInit() {
     super.onInit();
-    loadExperiences();
+    loadDashboardData();
   }
 
-  Future<void> loadExperiences() async {
+  Future<void> loadDashboardData() async {
     try {
       isLoading.value = true;
-      final res = await _repository.getExperiences();
-      if (res.success && res.data != null) {
-        experiences.assignAll(res.data!);
+      final aFuture = _repository.getExperiencesAnalytics();
+      final eFuture = _repository.getExperiences();
+      final cFuture = _repository.getCategories();
+
+      final results = await Future.wait([aFuture, eFuture, cFuture]);
+      final aRes = results[0] as dynamic;
+      final eRes = results[1] as dynamic;
+      final cRes = results[2] as dynamic;
+
+      if (aRes.success && aRes.data != null) {
+        analytics.value = aRes.data;
+      }
+      if (eRes.success && eRes.data != null) {
+        experiences.assignAll(eRes.data!);
         if (experiences.isNotEmpty && selectedExperience.value == null) {
           selectedExperience.value = experiences.first;
         }
       }
+      if (cRes.success && cRes.data != null) {
+        categories.assignAll(cRes.data!);
+        if (categories.isNotEmpty) {
+          selectedCategory.value = categories.first.name;
+        }
+      }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load local experiences');
+      Get.snackbar('Error', 'Failed to load experiences dashboard: $e');
     } finally {
       isLoading.value = false;
     }
@@ -62,7 +83,7 @@ class LocalExperiencesController extends GetxController {
       });
       if (res.success) {
         Get.snackbar('Success', res.message);
-        loadExperiences();
+        loadDashboardData();
         Get.back();
       }
     } catch (e) {

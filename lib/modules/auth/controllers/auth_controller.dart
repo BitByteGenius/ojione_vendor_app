@@ -24,6 +24,8 @@ class AuthController extends GetxController {
   final addressController = TextEditingController(text: 'Plot 42, Riverside Heritage Road, Uzanbazar');
 
   // Login Controllers
+  final emailController = TextEditingController(text: 'vendor@sewasetu.com');
+  final passwordController = TextEditingController(text: 'password123');
   final loginEmailController = TextEditingController(text: 'vendor@sewasetu.com');
   final loginPasswordController = TextEditingController(text: 'password123');
   final otpController = TextEditingController();
@@ -32,6 +34,7 @@ class AuthController extends GetxController {
   final isLoading = false.obs;
   final isPasswordVisible = false.obs;
   final termsAccepted = true.obs;
+  final rememberMe = true.obs;
 
   // Selected services during registration (Allows 1 or multiple)
   final selectedServices = <ServiceType>{
@@ -134,8 +137,12 @@ class AuthController extends GetxController {
   }
 
   Future<void> login() async {
-    final email = loginEmailController.text.trim();
-    final password = loginPasswordController.text;
+    final email = emailController.text.trim().isNotEmpty
+        ? emailController.text.trim()
+        : loginEmailController.text.trim();
+    final password = passwordController.text.isNotEmpty
+        ? passwordController.text
+        : loginPasswordController.text;
 
     if (email.isEmpty || password.isEmpty) {
       Get.snackbar('Error', 'Please enter email/phone and password');
@@ -206,6 +213,7 @@ class AuthController extends GetxController {
     aadhaarController.dispose();
     phoneController.dispose();
     emailController.dispose();
+    passwordController.dispose();
     cityController.dispose();
     stateController.dispose();
     pincodeController.dispose();

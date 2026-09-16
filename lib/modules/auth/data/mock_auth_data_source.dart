@@ -66,8 +66,8 @@ class MockAuthDataSource implements AuthDataSource {
     final response = AuthResponseModel(
       accessToken: 'mock-jwt-vendor-${DateTime.now().millisecondsSinceEpoch}',
       refreshToken: 'mock-refresh-token',
+      expiresIn: 86400,
       vendor: vendor,
-      permissions: vendor.permissions,
     );
 
     return ApiResponse.success(data: response, message: 'Login successful');
