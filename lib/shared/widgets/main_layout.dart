@@ -1,76 +1,74 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
-import 'app_responsive.dart';
-import 'app_sidebar.dart';
-import 'app_topbar.dart';
+import 'mobile_app_bar.dart';
 
-class MainLayout extends StatefulWidget {
+class MainLayout extends StatelessWidget {
   final String title;
+  final String? subtitle;
   final Widget body;
   final Widget? floatingActionButton;
   final Widget? trailingHeader;
+  final List<Widget>? actions;
+  final bool showBackButton;
+  final VoidCallback? onBackPressed;
+  final Widget? bottomNavigationBar;
+  final bool resizeToAvoidBottomInset;
+  final Color? backgroundColor;
+  final bool showVendorBadge;
+  final bool showNotificationBell;
 
   const MainLayout({
     super.key,
     required this.title,
+    this.subtitle,
     required this.body,
     this.floatingActionButton,
     this.trailingHeader,
+    this.actions,
+    this.showBackButton = true,
+    this.onBackPressed,
+    this.bottomNavigationBar,
+    this.resizeToAvoidBottomInset = true,
+    this.backgroundColor,
+    this.showVendorBadge = false,
+    this.showNotificationBell = true,
   });
 
   @override
-  State<MainLayout> createState() => _MainLayoutState();
-}
-
-class _MainLayoutState extends State<MainLayout> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _isCollapsed = false;
-
-  @override
   Widget build(BuildContext context) {
-    final isDesktop = AppResponsive.isDesktop(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bg = backgroundColor ?? (isDark ? AppColors.darkBackground : AppColors.lightBackground);
 
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.lightBackground,
-      drawer: !isDesktop
-          ? const Drawer(
-              child: AppSidebar(isCollapsed: false),
-            )
-          : null,
-      floatingActionButton: widget.floatingActionButton,
-      body: Row(
-        children: [
-          // Sidebar on Desktop
-          if (isDesktop)
-            AppSidebar(
-              isCollapsed: _isCollapsed,
-              onToggleCollapse: () {
-                setState(() {
-                  _isCollapsed = !_isCollapsed;
-                });
-              },
-            ),
+    final mergedActions = <Widget>[
+      if (trailingHeader != null)
+        Padding(
+          padding: const EdgeInsets.only(right: 6.0),
+          child: trailingHeader!,
+        ),
+      if (actions != null) ...actions!,
+    ];
 
-          // Main Screen Content Area
-          Expanded(
-            child: Column(
-              children: [
-                AppTopBar(
-                  title: widget.title,
-                  trailing: widget.trailingHeader,
-                  onMenuPressed: !isDesktop
-                      ? () => _scaffoldKey.currentState?.openDrawer()
-                      : null,
-                ),
-                Expanded(
-                  child: widget.body,
-                ),
-              ],
-            ),
-          ),
-        ],
+    return GestureDetector(
+      // Dismiss keyboard when tapping outside inputs on mobile
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: bg,
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+        appBar: MobileAppBar(
+          title: title,
+          subtitle: subtitle,
+          showBackButton: showBackButton,
+          onBackPressed: onBackPressed,
+          actions: mergedActions.isNotEmpty ? mergedActions : null,
+          showVendorBadge: showVendorBadge,
+          showNotificationBell: showNotificationBell,
+        ),
+        floatingActionButton: floatingActionButton,
+        bottomNavigationBar: bottomNavigationBar,
+        body: SafeArea(
+          top: false,
+          child: body,
+        ),
       ),
     );
   }

@@ -3,13 +3,18 @@ class AppRoutes {
 
   // Root & Auth
   static const String root = '/';
+  static const String splash = '/splash';
   static const String login = '/login';
   static const String register = '/register';
   static const String registrationSuccess = '/registration-success';
+  static const String registrationStatus = '/registration-status';
   static const String otp = '/otp';
   static const String forgotPassword = '/forgot-password';
 
-  // Core Management
+  // Mobile Core Navigation
+  static const String vendorShell = '/shell';
+  static const String vendorHome = '/vendor-home';
+  static const String servicesHub = '/services-hub';
   static const String dashboard = '/dashboard';
   static const String profile = '/profile';
   static const String editProfile = '/profile/edit';

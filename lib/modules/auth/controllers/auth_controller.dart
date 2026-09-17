@@ -24,7 +24,6 @@ class AuthController extends GetxController {
   final addressController = TextEditingController(text: 'Plot 42, Riverside Heritage Road, Uzanbazar');
 
   // Login Controllers
-  final emailController = TextEditingController(text: 'vendor@sewasetu.com');
   final passwordController = TextEditingController(text: 'password123');
   final loginEmailController = TextEditingController(text: 'vendor@sewasetu.com');
   final loginPasswordController = TextEditingController(text: 'password123');
