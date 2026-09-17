@@ -43,6 +43,11 @@ class AppColors {
   static const Color info = Color(0xFF0284C7);
   static const Color infoLight = Color(0xFFE0F2FE);
 
+  // Common Text Aliases
+  static const Color textPrimary = Color(0xFF0F172A);
+  static const Color textSecondary = Color(0xFF475569);
+  static const Color textMuted = Color(0xFF94A3B8);
+
   // Light Theme Neutrals
   static const Color lightBackground = Color(0xFFF8FAFC);
   static const Color lightSurface = Color(0xFFFFFFFF);
@@ -56,6 +61,7 @@ class AppColors {
   // Dark Theme Neutrals
   static const Color darkBackground = Color(0xFF0F172A);
   static const Color darkSurface = Color(0xFF1E293B);
+  static const Color darkCard = Color(0xFF1E293B);
   static const Color darkBorder = Color(0xFF334155);
   static const Color darkDivider = Color(0xFF1E293B);
 
