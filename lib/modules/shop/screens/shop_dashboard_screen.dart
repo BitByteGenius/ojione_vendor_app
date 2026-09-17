@@ -299,9 +299,19 @@ class ShopDashboardScreen extends GetView<ShopController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(c.categoryName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5)),
+                  Text(
+                    c.categoryName,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   const SizedBox(height: 2),
-                  Text('${c.productsCount} Products listed • ${c.ordersCount} Units fulfilled', style: AppTextStyles.caption),
+                  Text(
+                    '${c.productsCount} Products listed • ${c.ordersCount} Units fulfilled',
+                    style: AppTextStyles.caption,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),

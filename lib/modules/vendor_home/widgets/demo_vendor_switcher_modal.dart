@@ -5,6 +5,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../shared/enums/service_type.dart';
+import '../../auth/data/mock_vendor_profiles.dart';
 
 class DemoVendorSwitcherModal extends StatelessWidget {
   const DemoVendorSwitcherModal({super.key});
@@ -24,6 +25,9 @@ class DemoVendorSwitcherModal extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.85,
+      ),
       decoration: BoxDecoration(
         color: isDark ? AppColors.darkSurface : Colors.white,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
@@ -32,133 +36,82 @@ class DemoVendorSwitcherModal extends StatelessWidget {
         AppDimensions.spaceLg,
         AppDimensions.spaceSm,
         AppDimensions.spaceLg,
-        AppDimensions.space2xl,
+        AppDimensions.spaceLg,
       ),
       child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Handle bar
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Colors.grey.withAlpha(100),
-                  borderRadius: BorderRadius.circular(2),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Handle bar
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withAlpha(100),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: AppDimensions.spaceMd),
+              const SizedBox(height: AppDimensions.spaceMd),
 
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withAlpha(25),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Icon(Icons.swap_horiz_rounded, color: AppColors.primary, size: 20),
-                ),
-                const SizedBox(width: 12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Switch Vendor Profile', style: AppTextStyles.h3),
-                    const Text(
-                      'Test strict multi-service access control & isolation',
-                      style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withAlpha(25),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: AppDimensions.spaceLg),
+                    child: const Icon(Icons.swap_horiz_rounded, color: AppColors.primary, size: 20),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Switch Vendor Profile', style: AppTextStyles.h3),
+                        const Text(
+                          'Test strict multi-service access control & isolation',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppDimensions.spaceLg),
 
-            // Profile Options
-            _buildVendorOption(
-              title: 'Vendor A: Stay + Vehicle Rental',
-              subtitle: 'Gunajit Sharma • Assam Heritage & Car Rentals',
-              services: [ServiceType.stay, ServiceType.rental],
-              isSelected: auth.assignedServices.length == 2 &&
-                  auth.assignedServices.contains(ServiceType.stay) &&
-                  auth.assignedServices.contains(ServiceType.rental),
-              onTap: () {
-                auth.setDemoVendorAStayRental();
-                Get.back();
-                Get.snackbar('Profile Switched', 'Active: Stay + Vehicle Rental',
-                    snackPosition: SnackPosition.BOTTOM);
-              },
-            ),
-
-            const SizedBox(height: AppDimensions.spaceSm),
-
-            _buildVendorOption(
-              title: 'Vendor B: Shop Only (Indigenous Crafts)',
-              subtitle: 'Ananya Goswami • Pragjyotish Silk Store',
-              services: [ServiceType.shop],
-              isSelected: auth.assignedServices.length == 1 &&
-                  auth.assignedServices.contains(ServiceType.shop),
-              onTap: () {
-                auth.setDemoVendorBShopOnly();
-                Get.back();
-                Get.snackbar('Profile Switched', 'Active: Shop Only (Stay/Trips Hidden)',
-                    snackPosition: SnackPosition.BOTTOM);
-              },
-            ),
-
-            const SizedBox(height: AppDimensions.spaceSm),
-
-            _buildVendorOption(
-              title: 'Vendor C: Tours & Trips + Local Experiences',
-              subtitle: 'Bikramjit Saikia • Brahmaputra Expeditions',
-              services: [ServiceType.trips, ServiceType.localExperiences],
-              isSelected: auth.assignedServices.length == 2 &&
-                  auth.assignedServices.contains(ServiceType.trips) &&
-                  auth.assignedServices.contains(ServiceType.localExperiences),
-              onTap: () {
-                auth.setDemoVendorCTripsExperiences();
-                Get.back();
-                Get.snackbar('Profile Switched', 'Active: Tours & Trips + Local Experiences',
-                    snackPosition: SnackPosition.BOTTOM);
-              },
-            ),
-
-            const SizedBox(height: AppDimensions.spaceSm),
-
-            _buildVendorOption(
-              title: 'Vendor D: Stay + Shop + Local Experiences',
-              subtitle: 'Priyanka Borah • Kaziranga Cultural Eco-Resort',
-              services: [ServiceType.stay, ServiceType.shop, ServiceType.localExperiences],
-              isSelected: auth.assignedServices.length == 3 &&
-                  auth.assignedServices.contains(ServiceType.stay) &&
-                  auth.assignedServices.contains(ServiceType.shop) &&
-                  auth.assignedServices.contains(ServiceType.localExperiences),
-              onTap: () {
-                auth.vendorId.value = 'VEN-DEMO-D';
-                auth.vendorName.value = 'Kaziranga Cultural Eco-Resort & Craft Village';
-                auth.ownerName.value = 'Priyanka Borah';
-                auth.email.value = 'priyanka@kazirangaecoresort.com';
-                auth.phone.value = '+91 94351 99887';
-                auth.aadhaarNumber.value = '8899 4433 2211';
-                auth.city.value = 'Kaziranga';
-                auth.state.value = 'Assam';
-                auth.pincode.value = '785609';
-                auth.address.value = 'Central Range, Kohora, Kaziranga';
-                auth.assignedServices.assignAll([
-                  ServiceType.stay,
-                  ServiceType.shop,
-                  ServiceType.localExperiences,
-                ]);
-                auth.activeService.value = ServiceType.stay;
-                Get.back();
-                Get.snackbar('Profile Switched', 'Active: Stay + Shop + Local Experiences',
-                    snackPosition: SnackPosition.BOTTOM);
-              },
-            ),
-          ],
+              // Profile Options dynamically loaded from mock vendor layer
+              ...MockVendorProfiles.allProfiles.map((p) {
+                final isSelected = auth.vendorId.value == p.id;
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: AppDimensions.spaceSm),
+                  child: _buildVendorOption(
+                    title: p.label,
+                    subtitle: '${p.ownerName} • ${p.businessName}',
+                    services: p.services,
+                    isSelected: isSelected,
+                    onTap: () {
+                      auth.applyVendorProfile(p);
+                      Get.back();
+                      Get.snackbar(
+                        'Profile Switched',
+                        'Active: ${p.label}',
+                        snackPosition: SnackPosition.BOTTOM,
+                        duration: const Duration(seconds: 2),
+                      );
+                    },
+                  ),
+                );
+              }),
+            ],
+          ),
         ),
       ),
     );
@@ -210,6 +163,8 @@ class DemoVendorSwitcherModal extends StatelessWidget {
                   children: [
                     Text(
                       title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
@@ -219,11 +174,14 @@ class DemoVendorSwitcherModal extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       subtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                     ),
                     const SizedBox(height: 6),
                     Wrap(
                       spacing: 6,
+                      runSpacing: 4,
                       children: services.map((s) {
                         return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),

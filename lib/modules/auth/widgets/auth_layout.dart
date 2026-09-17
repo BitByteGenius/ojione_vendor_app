@@ -94,6 +94,7 @@ class AuthLayout extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

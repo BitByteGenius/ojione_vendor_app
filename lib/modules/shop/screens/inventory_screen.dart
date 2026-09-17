@@ -27,17 +27,58 @@ class InventoryScreen extends GetView<ShopController> {
               separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final p = controller.products[index];
-                return ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.inventory_rounded, color: Colors.blueGrey),
-                  title: Text(p.name, style: AppTextStyles.h4),
-                  subtitle: Text('Category: ${p.category} • State: ${p.originState}', style: AppTextStyles.caption),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${p.stockQuantity} in stock', style: const TextStyle(fontWeight: FontWeight.bold)),
-                      const SizedBox(width: AppDimensions.spaceMd),
-                      AppStatusChip(status: p.stockQuantity > 5 ? 'active' : 'low_stock'),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF3F4F6),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Icon(Icons.inventory_rounded, color: Colors.blueGrey, size: 20),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    p.name,
+                                    style: AppTextStyles.h4,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Text('${p.stockQuantity} in stock', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                              ],
+                            ),
+                            const SizedBox(height: 3),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    '${p.category} • ${p.originState}',
+                                    style: AppTextStyles.caption,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                AppStatusChip(status: p.stockQuantity > 5 ? 'active' : 'low_stock'),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 );

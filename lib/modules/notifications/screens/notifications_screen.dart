@@ -43,43 +43,66 @@ class NotificationsScreen extends GetView<NotificationsController> {
               separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final n = controller.notifications[index];
-                return ListTile(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 4),
-                  leading: CircleAvatar(
-                    backgroundColor: _typeColor(n.type).withAlpha(25),
-                    child: Icon(_typeIcon(n.type), color: _typeColor(n.type), size: 20),
-                  ),
-                  title: Row(
-                    children: [
-                      Text(n.title, style: AppTextStyles.h4),
-                      if (!n.isRead) ...[
-                        const SizedBox(width: 8),
-                        Container(
-                          width: 8,
-                          height: 8,
-                          decoration: const BoxDecoration(
-                            color: AppColors.primary,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 2),
-                      Text(n.message, style: AppTextStyles.bodyMedium),
-                      const SizedBox(height: 4),
-                      Text(Formatters.dateTime(n.createdAt), style: AppTextStyles.caption),
-                    ],
-                  ),
+                return InkWell(
                   onTap: () {
                     controller.markAsRead(n.id);
                     if (n.actionRoute != null) {
                       Get.toNamed(n.actionRoute!);
                     }
                   },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          radius: 18,
+                          backgroundColor: _typeColor(n.type).withAlpha(25),
+                          child: Icon(_typeIcon(n.type), color: _typeColor(n.type), size: 18),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      n.title,
+                                      style: AppTextStyles.h4,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  if (!n.isRead) ...[
+                                    const SizedBox(width: 6),
+                                    Container(
+                                      width: 8,
+                                      height: 8,
+                                      decoration: const BoxDecoration(
+                                        color: AppColors.primary,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                              const SizedBox(height: 3),
+                              Text(
+                                n.message,
+                                style: AppTextStyles.bodyMedium,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(Formatters.dateTime(n.createdAt), style: AppTextStyles.caption),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             ),

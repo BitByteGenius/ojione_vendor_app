@@ -27,17 +27,64 @@ class RentalPricingScreen extends GetView<RentalController> {
               separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final v = controller.vehicles[index];
-                return ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.currency_rupee_rounded, color: Colors.green),
-                  title: Text(v.displayName, style: AppTextStyles.h4),
-                  subtitle: Text('Operating City: ${v.operatingCity}', style: AppTextStyles.caption),
-                  trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${Formatters.currency(v.pricePerDay)} / day', style: const TextStyle(fontWeight: FontWeight.bold)),
-                      Text('Deposit: ${Formatters.currency(v.securityDeposit)}', style: AppTextStyles.caption),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.green.withAlpha(25),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Icon(Icons.currency_rupee_rounded, color: Colors.green, size: 20),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    v.displayName,
+                                    style: AppTextStyles.h4,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  '${Formatters.currency(v.pricePerDay)} / day',
+                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 3),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'City: ${v.operatingCity}',
+                                    style: AppTextStyles.caption,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Deposit: ${Formatters.currency(v.securityDeposit)}',
+                                  style: AppTextStyles.caption,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 );

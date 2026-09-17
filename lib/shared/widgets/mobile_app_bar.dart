@@ -121,7 +121,7 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
 
-                if (actions != null) ...actions!,
+                ...?actions,
 
                 if (showNotificationBell) ...[
                   const SizedBox(width: 4),

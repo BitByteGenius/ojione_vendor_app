@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../modules/auth/data/mock_vendor_profiles.dart';
 import '../../modules/auth/models/vendor_model.dart';
 import '../../shared/enums/service_type.dart';
 import '../../shared/enums/user_role.dart';
@@ -12,16 +13,16 @@ class AuthService extends GetxService {
   final RxBool isLoggedIn = true.obs;
   final Rx<VendorModel?> currentVendor = Rx<VendorModel?>(null);
 
-  final RxString vendorId = 'VEN-78901'.obs;
-  final RxString vendorName = 'Assam Heritage & Hospitality'.obs;
-  final RxString ownerName = 'Gunajit Sharma'.obs;
-  final RxString email = 'vendor@sewasetu.com'.obs;
-  final RxString phone = '+91 98765 43210'.obs;
-  final RxString aadhaarNumber = '7890 1234 5678'.obs;
-  final RxString city = 'Guwahati'.obs;
-  final RxString state = 'Assam'.obs;
-  final RxString pincode = '781001'.obs;
-  final RxString address = 'Plot 42, Brahmaputra View Road, Uzanbazar'.obs;
+  final RxString vendorId = MockVendorProfiles.vendorA.id.obs;
+  final RxString vendorName = MockVendorProfiles.vendorA.businessName.obs;
+  final RxString ownerName = MockVendorProfiles.vendorA.ownerName.obs;
+  final RxString email = MockVendorProfiles.vendorA.email.obs;
+  final RxString phone = MockVendorProfiles.vendorA.phone.obs;
+  final RxString aadhaarNumber = MockVendorProfiles.vendorA.aadhaarNumber.obs;
+  final RxString city = MockVendorProfiles.vendorA.city.obs;
+  final RxString state = MockVendorProfiles.vendorA.state.obs;
+  final RxString pincode = MockVendorProfiles.vendorA.pincode.obs;
+  final RxString address = MockVendorProfiles.vendorA.address.obs;
 
   final Rx<VendorVerificationStatus> verificationStatus =
       VendorVerificationStatus.verified.obs;
@@ -107,54 +108,30 @@ class AuthService extends GetxService {
     }
   }
 
+  // Apply a mock vendor profile dynamically to test service isolation
+  void applyVendorProfile(MockVendorProfile profile) {
+    vendorId.value = profile.id;
+    vendorName.value = profile.businessName;
+    ownerName.value = profile.ownerName;
+    email.value = profile.email;
+    phone.value = profile.phone;
+    aadhaarNumber.value = profile.aadhaarNumber;
+    city.value = profile.city;
+    state.value = profile.state;
+    pincode.value = profile.pincode;
+    address.value = profile.address;
+    verificationStatus.value = profile.verificationStatus;
+    accountStatus.value = profile.accountStatus;
+    assignedServices.assignAll(profile.services);
+    activeService.value = profile.activeService;
+    _syncVendorModel();
+  }
+
   // Demo profile switchers to instantly test strict service separation
-  void setDemoVendorAStayRental() {
-    vendorId.value = 'VEN-DEMO-A';
-    vendorName.value = 'Kaziranga Eco-Stay & Car Rentals';
-    ownerName.value = 'Gunajit Sharma';
-    email.value = 'gunajit@kazirangastay.in';
-    phone.value = '+91 98765 43210';
-    aadhaarNumber.value = '7890 1234 5678';
-    city.value = 'Kaziranga';
-    state.value = 'Assam';
-    pincode.value = '785609';
-    address.value = 'Kohora Range, NH-37, Kaziranga';
-    assignedServices.assignAll([ServiceType.stay, ServiceType.rental]);
-    activeService.value = ServiceType.stay;
-    _syncVendorModel();
-  }
-
-  void setDemoVendorBShopOnly() {
-    vendorId.value = 'VEN-DEMO-B';
-    vendorName.value = 'Pragjyotish Assam Silk & Craft Store';
-    ownerName.value = 'Ananya Goswami';
-    email.value = 'ananya@pragjyotishcrafts.com';
-    phone.value = '+91 94350 11223';
-    aadhaarNumber.value = '4521 8890 2341';
-    city.value = 'Guwahati';
-    state.value = 'Assam';
-    pincode.value = '781003';
-    address.value = 'Shop 14, Panbazar Market Complex, Guwahati';
-    assignedServices.assignAll([ServiceType.shop]);
-    activeService.value = ServiceType.shop;
-    _syncVendorModel();
-  }
-
-  void setDemoVendorCTripsExperiences() {
-    vendorId.value = 'VEN-DEMO-C';
-    vendorName.value = 'Brahmaputra Expeditions & Cultural Walks';
-    ownerName.value = 'Bikramjit Saikia';
-    email.value = 'bikram@brahmaputraexpeditions.in';
-    phone.value = '+91 91270 55667';
-    aadhaarNumber.value = '3344 7788 9900';
-    city.value = 'Jorhat';
-    state.value = 'Assam';
-    pincode.value = '785001';
-    address.value = 'Gar-Ali Heritage Lane, Jorhat';
-    assignedServices.assignAll([ServiceType.trips, ServiceType.localExperiences]);
-    activeService.value = ServiceType.trips;
-    _syncVendorModel();
-  }
+  void setDemoVendorAStayRental() => applyVendorProfile(MockVendorProfiles.vendorA);
+  void setDemoVendorBShopOnly() => applyVendorProfile(MockVendorProfiles.vendorB);
+  void setDemoVendorCTripsExperiences() => applyVendorProfile(MockVendorProfiles.vendorC);
+  void setDemoVendorDStayShopExperiences() => applyVendorProfile(MockVendorProfiles.vendorD);
 
   void setRole(UserRole role) {
     currentRole.value = role;

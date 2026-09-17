@@ -118,7 +118,7 @@ class StayDashboardScreen extends GetView<StayController> {
 
                 const SizedBox(height: AppDimensions.spaceLg),
 
-                // Occupancy Health Highlight Bar
+                // Occupancy Health Highlight Bar (Mobile-optimized vertical card)
                 Container(
                   padding: const EdgeInsets.all(AppDimensions.spaceMd),
                   decoration: BoxDecoration(
@@ -126,48 +126,47 @@ class StayDashboardScreen extends GetView<StayController> {
                     borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
                     border: Border.all(color: AppColors.lightBorder),
                   ),
-                  child: Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        flex: 7,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  'Current Average Occupancy Rate',
-                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                                ),
-                                Text(
-                                  '${a?.occupancyRate ?? 0}% Optimal',
-                                  style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.stayService, fontSize: 13),
-                                ),
-                              ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Average Occupancy Rate',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: AppColors.stayService.withAlpha(20),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            const SizedBox(height: 8),
-                            AppProgressBar(
-                              percentage: a?.occupancyRate ?? 0,
-                              progressColor: AppColors.stayService,
-                              height: 10,
+                            child: Text(
+                              '${a?.occupancyRate ?? 0}% Optimal',
+                              style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.stayService, fontSize: 12),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: AppDimensions.spaceLg),
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('Pending Approvals', style: TextStyle(fontSize: 11, color: Colors.grey)),
-                            Text(
-                              '${a?.pendingApproval ?? 0} Property in Review',
-                              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.warning),
-                            ),
-                          ],
-                        ),
+                      const SizedBox(height: 8),
+                      AppProgressBar(
+                        percentage: a?.occupancyRate ?? 0,
+                        progressColor: AppColors.stayService,
+                        height: 8,
+                      ),
+                      const SizedBox(height: 12),
+                      const Divider(height: 1, color: Color(0xFFF3F4F6)),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Pending Approvals', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                          Text(
+                            '${a?.pendingApproval ?? 0} Property in Review',
+                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.warning),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -415,9 +414,19 @@ class StayDashboardScreen extends GetView<StayController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(p.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                    Text(
+                      p.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     const SizedBox(height: 2),
-                    Text('${p.propertyType} • ${p.totalRooms} Rooms • ★ ${p.rating}', style: AppTextStyles.caption),
+                    Text(
+                      '${p.propertyType} • ${p.totalRooms} Rooms • ★ ${p.rating}',
+                      style: AppTextStyles.caption,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     if (!isPending) ...[
                       const SizedBox(height: 4),
                       AppProgressBar(

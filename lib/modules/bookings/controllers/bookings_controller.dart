@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../../core/services/auth_service.dart';
 import '../../../shared/enums/service_type.dart';
 import '../data/bookings_repository.dart';
 import '../models/booking_filter_model.dart';
@@ -24,7 +25,9 @@ class BookingsController extends GetxController {
       isLoading.value = true;
       final res = await _repository.getBookings(filter: filter.value);
       if (res.success && res.data != null) {
-        bookings.assignAll(res.data!);
+        final assigned = AuthService.to.assignedServices;
+        final isolated = res.data!.where((b) => assigned.contains(b.serviceType)).toList();
+        bookings.assignAll(isolated);
       }
     } catch (e) {
       Get.snackbar('Error', 'Failed to load bookings');

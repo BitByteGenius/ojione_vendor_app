@@ -87,20 +87,23 @@ class EarningsScreen extends GetView<EarningsController> {
               const SizedBox(height: AppDimensions.spaceLg),
 
               // Navigation action tabs
-              Row(
-                children: [
-                  ActionChip(
-                    avatar: const Icon(Icons.receipt_long_outlined, size: 16),
-                    label: const Text('View All Transactions'),
-                    onPressed: () => Get.toNamed('/earnings/transactions'),
-                  ),
-                  const SizedBox(width: AppDimensions.spaceSm),
-                  ActionChip(
-                    avatar: const Icon(Icons.history_rounded, size: 16),
-                    label: const Text('Payout Settlement History'),
-                    onPressed: () => Get.toNamed('/earnings/payouts'),
-                  ),
-                ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ActionChip(
+                      avatar: const Icon(Icons.receipt_long_outlined, size: 16),
+                      label: const Text('View All Transactions'),
+                      onPressed: () => Get.toNamed('/earnings/transactions'),
+                    ),
+                    const SizedBox(width: AppDimensions.spaceSm),
+                    ActionChip(
+                      avatar: const Icon(Icons.history_rounded, size: 16),
+                      label: const Text('Payout Settlement History'),
+                      onPressed: () => Get.toNamed('/earnings/payouts'),
+                    ),
+                  ],
+                ),
               ),
 
               const SizedBox(height: AppDimensions.spaceLg),
@@ -120,26 +123,58 @@ class EarningsScreen extends GetView<EarningsController> {
                   separatorBuilder: (_, index) => const Divider(),
                   itemBuilder: (context, index) {
                     final tx = controller.transactions[index];
-                    return ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: CircleAvatar(
-                        backgroundColor: tx.serviceType.bgColor,
-                        child: Icon(tx.serviceType.icon, color: tx.serviceType.color, size: 18),
-                      ),
-                      title: Text('${tx.bookingReference} (${tx.serviceType.displayName})', style: AppTextStyles.h4),
-                      subtitle: Text(
-                        'Gross: ${Formatters.currency(tx.grossAmount)} • Platform Fee (${tx.commissionRate}%): -${Formatters.currency(tx.commissionAmount)}',
-                        style: AppTextStyles.caption,
-                      ),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '+ ${Formatters.currency(tx.netAmount)}',
-                            style: AppTextStyles.h4.copyWith(color: AppColors.primary),
+                          CircleAvatar(
+                            radius: 18,
+                            backgroundColor: tx.serviceType.bgColor,
+                            child: Icon(tx.serviceType.icon, color: tx.serviceType.color, size: 16),
                           ),
-                          AppStatusChip(status: tx.status),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        '${tx.bookingReference} (${tx.serviceType.displayName})',
+                                        style: AppTextStyles.h4,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      '+ ${Formatters.currency(tx.netAmount)}',
+                                      style: AppTextStyles.h4.copyWith(color: AppColors.primary),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 3),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Gross: ${Formatters.currency(tx.grossAmount)} • Fee: -${Formatters.currency(tx.commissionAmount)}',
+                                        style: AppTextStyles.caption,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    AppStatusChip(status: tx.status),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     );
@@ -161,7 +196,7 @@ class EarningsScreen extends GetView<EarningsController> {
     required IconData icon,
   }) {
     return Container(
-      padding: const EdgeInsets.all(AppDimensions.spaceLg),
+      padding: const EdgeInsets.all(AppDimensions.spaceMd),
       decoration: BoxDecoration(
         color: color.withAlpha(15),
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
@@ -173,14 +208,31 @@ class EarningsScreen extends GetView<EarningsController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: AppTextStyles.caption.copyWith(fontWeight: FontWeight.w600)),
-              Icon(icon, color: color, size: 20),
+              Expanded(
+                child: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.caption.copyWith(fontWeight: FontWeight.w600),
+                ),
+              ),
+              const SizedBox(width: 4),
+              Icon(icon, color: color, size: 18),
             ],
           ),
-          const SizedBox(height: AppDimensions.spaceMd),
-          Text(amount, style: AppTextStyles.h2.copyWith(color: color, fontWeight: FontWeight.bold)),
+          const SizedBox(height: AppDimensions.spaceSm),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(amount, style: AppTextStyles.h2.copyWith(color: color, fontWeight: FontWeight.bold)),
+          ),
           const SizedBox(height: AppDimensions.spaceXs),
-          Text(subtitle, style: AppTextStyles.caption),
+          Text(
+            subtitle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppTextStyles.caption,
+          ),
         ],
       ),
     );

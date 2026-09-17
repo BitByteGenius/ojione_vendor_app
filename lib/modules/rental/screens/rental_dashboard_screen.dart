@@ -108,7 +108,7 @@ class RentalDashboardScreen extends GetView<RentalController> {
 
                 const SizedBox(height: AppDimensions.spaceLg),
 
-                // Vehicle Fleet Utilization Rate Bar
+                // Vehicle Fleet Utilization Rate Bar (Mobile-optimized vertical card)
                 Container(
                   padding: const EdgeInsets.all(AppDimensions.spaceMd),
                   decoration: BoxDecoration(
@@ -116,48 +116,47 @@ class RentalDashboardScreen extends GetView<RentalController> {
                     borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
                     border: Border.all(color: AppColors.lightBorder),
                   ),
-                  child: Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        flex: 7,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  'Fleet Utilization Rate (Rented / Active)',
-                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                                ),
-                                Text(
-                                  '${a?.utilizationRate ?? 0}% Utilization',
-                                  style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.rentalService, fontSize: 13),
-                                ),
-                              ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Fleet Utilization Rate',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: AppColors.rentalService.withAlpha(20),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            const SizedBox(height: 8),
-                            AppProgressBar(
-                              percentage: a?.utilizationRate ?? 0,
-                              progressColor: AppColors.rentalService,
-                              height: 10,
+                            child: Text(
+                              '${a?.utilizationRate ?? 0}% Utilization',
+                              style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.rentalService, fontSize: 12),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: AppDimensions.spaceLg),
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('Fleet Status', style: TextStyle(fontSize: 11, color: Colors.grey)),
-                            Text(
-                              '${a?.availableVehicles ?? 0} Available for Dispatch',
-                              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.success),
-                            ),
-                          ],
-                        ),
+                      const SizedBox(height: 8),
+                      AppProgressBar(
+                        percentage: a?.utilizationRate ?? 0,
+                        progressColor: AppColors.rentalService,
+                        height: 8,
+                      ),
+                      const SizedBox(height: 12),
+                      const Divider(height: 1, color: Color(0xFFF3F4F6)),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Fleet Status', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                          Text(
+                            '${a?.availableVehicles ?? 0} Available for Dispatch',
+                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.success),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -380,9 +379,19 @@ class RentalDashboardScreen extends GetView<RentalController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${v.make} ${v.modelName}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5)),
+                  Text(
+                    '${v.make} ${v.modelName}',
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   const SizedBox(height: 2),
-                  Text('${v.registrationNumber} • ${v.category} • ${v.transmission} • ${v.fuelType}', style: AppTextStyles.caption),
+                  Text(
+                    '${v.registrationNumber} • ${v.category} • ${v.transmission} • ${v.fuelType}',
+                    style: AppTextStyles.caption,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),

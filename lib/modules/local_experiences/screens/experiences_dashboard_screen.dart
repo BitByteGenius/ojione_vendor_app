@@ -338,9 +338,19 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(p.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5)),
+                  Text(
+                    p.title,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   const SizedBox(height: 2),
-                  Text('${p.category} • ★ ${p.rating} (${p.reviewsCount} reviews) • ${p.participantsCount} Participants', style: AppTextStyles.caption),
+                  Text(
+                    '${p.category} • ★ ${p.rating} (${p.reviewsCount} reviews) • ${p.participantsCount} Participants',
+                    style: AppTextStyles.caption,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),

@@ -27,12 +27,43 @@ class RentalAvailabilityScreen extends GetView<RentalController> {
               separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final v = controller.vehicles[index];
-                return ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.directions_car_rounded, color: Colors.blueAccent),
-                  title: Text(v.displayName, style: AppTextStyles.h4),
-                  subtitle: Text('City: ${v.operatingCity} • Completed Trips: ${v.tripsCompleted}', style: AppTextStyles.caption),
-                  trailing: AppStatusChip(status: v.status),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.blueAccent.withAlpha(25),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Icon(Icons.directions_car_rounded, color: Colors.blueAccent, size: 20),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              v.displayName,
+                              style: AppTextStyles.h4,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              'City: ${v.operatingCity} • Trips: ${v.tripsCompleted}',
+                              style: AppTextStyles.caption,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      AppStatusChip(status: v.status),
+                    ],
+                  ),
                 );
               },
             ),

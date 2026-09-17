@@ -307,9 +307,19 @@ class TripsDashboardScreen extends GetView<TripsController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(p.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5)),
+                  Text(
+                    p.title,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   const SizedBox(height: 2),
-                  Text('${p.duration} • ★ ${p.rating} (${p.reviewsCount} reviews) • ${p.totalBookings} Bookings', style: AppTextStyles.caption),
+                  Text(
+                    '${p.duration} • ★ ${p.rating} (${p.reviewsCount} reviews) • ${p.totalBookings} Bookings',
+                    style: AppTextStyles.caption,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),

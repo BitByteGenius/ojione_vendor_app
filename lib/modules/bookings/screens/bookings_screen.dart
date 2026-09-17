@@ -110,64 +110,92 @@ class BookingsScreen extends GetView<BookingsController> {
                     separatorBuilder: (_, index) => const Divider(),
                     itemBuilder: (context, index) {
                       final b = controller.bookings[index];
-                      return ListTile(
+                      return InkWell(
                         onTap: () => controller.selectBooking(b),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: AppDimensions.spaceLg,
-                          vertical: AppDimensions.spaceSm,
-                        ),
-                        leading: Container(
-                          padding: const EdgeInsets.all(AppDimensions.spaceSm),
-                          decoration: BoxDecoration(
-                            color: b.serviceType.bgColor,
-                            borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
-                          ),
-                          child: Icon(b.serviceType.icon, color: b.serviceType.color, size: 22),
-                        ),
-                        title: Row(
-                          children: [
-                            Text(b.bookingReference, style: AppTextStyles.h4),
-                            const SizedBox(width: AppDimensions.spaceSm),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: b.serviceType.bgColor,
-                                borderRadius: BorderRadius.circular(4),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(AppDimensions.spaceSm),
+                                decoration: BoxDecoration(
+                                  color: b.serviceType.bgColor,
+                                  borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+                                ),
+                                child: Icon(b.serviceType.icon, color: b.serviceType.color, size: 20),
                               ),
-                              child: Text(
-                                b.serviceType.displayName,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  color: b.serviceType.color,
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              Flexible(
+                                                child: Text(
+                                                  b.bookingReference,
+                                                  style: AppTextStyles.h4,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 6),
+                                              Container(
+                                                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                                                decoration: BoxDecoration(
+                                                  color: b.serviceType.bgColor,
+                                                  borderRadius: BorderRadius.circular(4),
+                                                ),
+                                                child: Text(
+                                                  b.serviceType.displayName,
+                                                  style: TextStyle(
+                                                    fontSize: 9,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: b.serviceType.color,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          Formatters.currency(b.totalAmount),
+                                          style: AppTextStyles.h4.copyWith(color: AppColors.primary),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      b.itemName,
+                                      style: AppTextStyles.bodyMedium,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            '${b.customerName} • ${Formatters.date(b.startDate)}',
+                                            style: AppTextStyles.caption,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        AppStatusChip(status: b.status.name),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 4),
-                            Text(b.itemName, style: AppTextStyles.bodyMedium),
-                            const SizedBox(height: 2),
-                            Text(
-                              'Customer: ${b.customerName} (${b.customerPhone}) • Date: ${Formatters.date(b.startDate)}',
-                              style: AppTextStyles.caption,
-                            ),
-                          ],
-                        ),
-                        trailing: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              Formatters.currency(b.totalAmount),
-                              style: AppTextStyles.h4.copyWith(color: AppColors.primary),
-                            ),
-                            const SizedBox(height: 4),
-                            AppStatusChip(status: b.status.name),
-                          ],
+                            ],
+                          ),
                         ),
                       );
                     },

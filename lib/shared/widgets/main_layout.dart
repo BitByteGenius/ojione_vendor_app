@@ -45,7 +45,7 @@ class MainLayout extends StatelessWidget {
           padding: const EdgeInsets.only(right: 6.0),
           child: trailingHeader!,
         ),
-      if (actions != null) ...actions!,
+      ...?actions,
     ];
 
     return GestureDetector(

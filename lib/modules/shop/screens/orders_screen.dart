@@ -29,23 +29,58 @@ class ShopOrdersScreen extends GetView<ShopController> {
               separatorBuilder: (_, index) => const Divider(),
               itemBuilder: (context, index) {
                 final ord = controller.orders[index];
-                return ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const CircleAvatar(
-                    backgroundColor: Color(0xFFFEF3C7),
-                    child: Icon(Icons.shopping_bag_outlined, color: Colors.amber, size: 20),
-                  ),
-                  title: Text('${ord.orderNumber} — ${ord.productName}', style: AppTextStyles.h4),
-                  subtitle: Text(
-                    'Customer: ${ord.customerName} • Qty: ${ord.quantity} • Deliver to: ${ord.shippingAddress}',
-                    style: AppTextStyles.caption,
-                  ),
-                  trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(Formatters.currency(ord.totalPrice), style: AppTextStyles.h4.copyWith(color: AppColors.primary)),
-                      AppStatusChip(status: ord.status),
+                      const CircleAvatar(
+                        radius: 18,
+                        backgroundColor: Color(0xFFFEF3C7),
+                        child: Icon(Icons.shopping_bag_outlined, color: Colors.amber, size: 18),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    '${ord.orderNumber} — ${ord.productName}',
+                                    style: AppTextStyles.h4,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  Formatters.currency(ord.totalPrice),
+                                  style: AppTextStyles.h4.copyWith(color: AppColors.primary),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 3),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    '${ord.customerName} • Qty: ${ord.quantity} • ${ord.shippingAddress}',
+                                    style: AppTextStyles.caption,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                AppStatusChip(status: ord.status),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 );

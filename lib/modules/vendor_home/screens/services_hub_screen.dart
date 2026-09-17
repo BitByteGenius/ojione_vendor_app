@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
-import '../../../core/theme/app_text_styles.dart';
 import '../../../shared/enums/service_type.dart';
 import '../../../shared/widgets/app_empty_state.dart';
 import '../controllers/vendor_home_controller.dart';

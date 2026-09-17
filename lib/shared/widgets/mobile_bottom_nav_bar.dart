@@ -104,7 +104,6 @@ class MobileBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final navItems = items;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final safeBottom = MediaQuery.of(context).padding.bottom;
 
     return Container(
       decoration: BoxDecoration(

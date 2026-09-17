@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import '../../modules/auth/auth.dart';
 import '../../modules/bookings/bookings.dart';
-import '../../modules/dashboard/dashboard.dart';
 import '../../modules/earnings/earnings.dart';
 import '../../modules/local_experiences/local_experiences.dart';
 import '../../modules/notifications/notifications.dart';

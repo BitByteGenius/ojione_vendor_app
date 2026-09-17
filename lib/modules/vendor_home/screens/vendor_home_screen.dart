@@ -3,10 +3,8 @@ import 'package:get/get.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
-import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../shared/enums/service_type.dart';
-import '../../../shared/widgets/app_card.dart';
 import '../controllers/vendor_home_controller.dart';
 import '../widgets/demo_vendor_switcher_modal.dart';
 
@@ -92,51 +90,58 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary.withAlpha(50),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: AppColors.primaryLight, width: 1.5),
-                      ),
-                      child: Center(
-                        child: Text(
-                          name.isNotEmpty ? name[0].toUpperCase() : 'V',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withAlpha(50),
+                          shape: BoxShape.circle,
+                          border: Border.all(color: AppColors.primaryLight, width: 1.5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            name.isNotEmpty ? name[0].toUpperCase() : 'V',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          controller.greeting,
-                          style: TextStyle(
-                            color: Colors.white.withAlpha(180),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              controller.greeting,
+                              style: TextStyle(
+                                color: Colors.white.withAlpha(180),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          name,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: 8),
                 // Verification pill
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -272,19 +277,22 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Your Services',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.textPrimary),
-                  ),
-                  Text(
-                    '${assigned.length} registered service${assigned.length > 1 ? 's' : ''} with independent dashboards',
-                    style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Your Services',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.textPrimary),
+                    ),
+                    Text(
+                      '${assigned.length} registered service${assigned.length > 1 ? 's' : ''} with independent dashboards',
+                      style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
@@ -312,7 +320,7 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
   }
 
   Widget _buildServiceCard(ServiceType service) {
-    final stats = _getServiceQuickStats(service);
+    final stats = controller.getServiceQuickStats(service);
 
     return Container(
       margin: const EdgeInsets.only(bottom: AppDimensions.spaceMd),
@@ -393,34 +401,42 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
 
                 // Quick stats row & open button
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: stats.map((stat) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                stat.label,
-                                style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+                    Expanded(
+                      child: Row(
+                        children: stats.map((stat) {
+                          return Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    stat.label,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+                                  ),
+                                  Text(
+                                    stat.value,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700,
+                                      color: service.color,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                stat.value,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700,
-                                  color: service.color,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                       decoration: BoxDecoration(
                         color: service.color.withAlpha(20),
                         borderRadius: BorderRadius.circular(20),
@@ -431,13 +447,13 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                           Text(
                             'Open Portal',
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 11,
                               fontWeight: FontWeight.w700,
                               color: service.color,
                             ),
                           ),
                           const SizedBox(width: 4),
-                          Icon(Icons.arrow_forward_rounded, size: 14, color: service.color),
+                          Icon(Icons.arrow_forward_rounded, size: 13, color: service.color),
                         ],
                       ),
                     ),
@@ -449,36 +465,6 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
         ),
       ),
     );
-  }
-
-  List<_QuickStat> _getServiceQuickStats(ServiceType service) {
-    switch (service) {
-      case ServiceType.stay:
-        return const [
-          _QuickStat('Active Properties', '4 Units'),
-          _QuickStat('Occupancy', '87%'),
-        ];
-      case ServiceType.rental:
-        return const [
-          _QuickStat('Fleet Size', '8 Vehicles'),
-          _QuickStat('Available', '6 Ready'),
-        ];
-      case ServiceType.shop:
-        return const [
-          _QuickStat('Total Products', '24 Items'),
-          _QuickStat('Pending Orders', '5 Orders'),
-        ];
-      case ServiceType.trips:
-        return const [
-          _QuickStat('Active Packages', '6 Tours'),
-          _QuickStat('Upcoming Trips', '9 Groups'),
-        ];
-      case ServiceType.localExperiences:
-        return const [
-          _QuickStat('Experiences', '5 Active'),
-          _QuickStat('Participants', '48 This Wk'),
-        ];
-    }
   }
 
   Widget _buildQuickActions(AuthService auth) {
@@ -613,179 +599,215 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
   }
 
   Widget _buildAccountOverview() {
-    return Container(
-      padding: const EdgeInsets.all(AppDimensions.spaceLg),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusLg),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha(6),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
+    return Obx(() {
+      return Container(
+        padding: const EdgeInsets.all(AppDimensions.spaceLg),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(AppDimensions.radiusLg),
+          border: Border.all(color: const Color(0xFFE5E7EB)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withAlpha(6),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Account Payout Summary',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                ),
+                InkWell(
+                  onTap: () => Get.toNamed('/earnings'),
+                  child: const Text(
+                    'View Financials',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.primary),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 14),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF9FAFB),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFFF3F4F6)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Settled Balance', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                        const SizedBox(height: 4),
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            Formatters.currency(controller.settledBalance),
+                            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.success),
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        const Text('Available for payout', style: TextStyle(fontSize: 10, color: Colors.grey)),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF9FAFB),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFFF3F4F6)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Next Settlement', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                        const SizedBox(height: 4),
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            Formatters.currency(controller.nextSettlement),
+                            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.secondary),
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(controller.settlementCycle, style: const TextStyle(fontSize: 10, color: Colors.grey)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  Widget _buildRecentActivitySection() {
+    return Obx(() {
+      final activities = controller.activities;
+
+      return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Account Payout Summary',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                'Recent Activity',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
               ),
-              InkWell(
-                onTap: () => Get.toNamed('/earnings'),
+              Text(
+                'Active Services Only',
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey[500]),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppDimensions.spaceMd),
+
+          if (activities.isEmpty)
+            Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: const Color(0xFFE5E7EB)),
+              ),
+              child: const Center(
                 child: Text(
-                  'View Financials',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.primary),
+                  'No recent updates for your services',
+                  style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF9FAFB),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFFF3F4F6)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Settled Balance', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
-                      const SizedBox(height: 4),
-                      Text(
-                        Formatters.currency(148500),
-                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.success),
+            )
+          else
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(AppDimensions.radiusLg),
+                border: Border.all(color: const Color(0xFFE5E7EB)),
+              ),
+              child: ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: activities.length,
+                separatorBuilder: (context, index) => const Divider(height: 1, color: Color(0xFFF3F4F6)),
+                itemBuilder: (context, index) {
+                  final a = activities[index];
+                  return InkWell(
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusLg),
+                    onTap: () => controller.openServiceDashboard(a.service),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: a.color.withAlpha(25),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(a.icon, color: a.color, size: 20),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        a.title,
+                                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Text(
+                                      a.time,
+                                      style: const TextStyle(fontSize: 11, color: Colors.grey),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 3),
+                                Text(
+                                  a.description,
+                                  style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 2),
-                      const Text('Available for payout', style: TextStyle(fontSize: 10, color: Colors.grey)),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF9FAFB),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFFF3F4F6)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Next Settlement', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
-                      const SizedBox(height: 4),
-                      Text(
-                        Formatters.currency(34200),
-                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.secondary),
-                      ),
-                      const SizedBox(height: 2),
-                      const Text('Cycle: Friday', style: TextStyle(fontSize: 10, color: Colors.grey)),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRecentActivitySection() {
-    final activities = controller.activities;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Recent Activity',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
-            ),
-            Text(
-              'Active Services Only',
-              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey[500]),
-            ),
-          ],
-        ),
-        const SizedBox(height: AppDimensions.spaceMd),
-
-        if (activities.isEmpty)
-          Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFFE5E7EB)),
-            ),
-            child: const Center(
-              child: Text(
-                'No recent updates for your services',
-                style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
-              ),
-            ),
-          )
-        else
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(AppDimensions.radiusLg),
-              border: Border.all(color: const Color(0xFFE5E7EB)),
-            ),
-            child: ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: activities.length,
-              separatorBuilder: (context, index) => const Divider(height: 1, color: Color(0xFFF3F4F6)),
-              itemBuilder: (context, index) {
-                final a = activities[index];
-                return ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-                  leading: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: a.color.withAlpha(25),
-                      shape: BoxShape.circle,
                     ),
-                    child: Icon(a.icon, color: a.color, size: 20),
-                  ),
-                  title: Text(
-                    a.title,
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-                  ),
-                  subtitle: Text(
-                    a.description,
-                    style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
-                  ),
-                  trailing: Text(
-                    a.time,
-                    style: const TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
-      ],
-    );
+        ],
+      );
+    });
   }
-}
-
-class _QuickStat {
-  final String label;
-  final String value;
-  const _QuickStat(this.label, this.value);
 }
