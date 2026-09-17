@@ -21,9 +21,14 @@ class AuthLayout extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: isDark ? AppColors.darkBackground : AppColors.lightBackground,
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppDimensions.spaceLg),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.spaceMd,
+              vertical: AppDimensions.spaceSm,
+            ),
           child: Container(
             constraints: const BoxConstraints(maxWidth: 480),
             padding: const EdgeInsets.all(AppDimensions.space2xl),
