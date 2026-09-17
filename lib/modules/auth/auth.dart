@@ -7,4 +7,6 @@ export 'screens/register_screen.dart';
 export 'screens/otp_screen.dart';
 export 'screens/forgot_password_screen.dart';
 export 'screens/registration_success_screen.dart';
+export 'screens/registration_status_screen.dart';
+export 'screens/splash_screen.dart';
 export 'data/auth_repository.dart';

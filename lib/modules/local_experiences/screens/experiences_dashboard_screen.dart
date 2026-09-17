@@ -53,7 +53,7 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                   builder: (context, constraints) {
                     final isWide = constraints.maxWidth > 1100;
                     final isMedium = constraints.maxWidth > 700;
-                    final crossAxisCount = isWide ? 4 : (isMedium ? 2 : 1);
+                    final crossAxisCount = isWide ? 4 : (isMedium ? 3 : 2);
 
                     return GridView.count(
                       crossAxisCount: crossAxisCount,
@@ -61,7 +61,7 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                       mainAxisSpacing: AppDimensions.spaceMd,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      childAspectRatio: isWide ? 1.6 : (isMedium ? 1.8 : 2.2),
+                      childAspectRatio: isWide ? 1.6 : (isMedium ? 1.5 : 1.3),
                       children: [
                         AppKpiCard(
                           title: 'Total Experiences',

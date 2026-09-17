@@ -10,6 +10,7 @@ import '../../modules/settings/settings.dart';
 import '../../modules/stay/stay.dart';
 import '../../modules/shop/shop.dart';
 import '../../modules/trips/trips.dart';
+import '../../modules/vendor_home/vendor_home.dart';
 import '../../modules/vendor_profile/vendor_profile.dart';
 import '../../shared/enums/service_type.dart';
 import 'app_routes.dart';
@@ -18,9 +19,15 @@ import 'service_guard_middleware.dart';
 class AppPages {
   AppPages._();
 
-  static const initial = AppRoutes.dashboard;
+  static const initial = AppRoutes.splash;
 
   static final routes = <GetPage>[
+    // Splash & Onboarding
+    GetPage(
+      name: AppRoutes.splash,
+      page: () => const SplashScreen(),
+    ),
+
     // Auth
     GetPage(
       name: AppRoutes.login,
@@ -38,6 +45,11 @@ class AppPages {
       binding: AuthBinding(),
     ),
     GetPage(
+      name: AppRoutes.registrationStatus,
+      page: () => const RegistrationStatusScreen(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
       name: AppRoutes.otp,
       page: () => const OtpScreen(),
       binding: AuthBinding(),
@@ -48,16 +60,31 @@ class AppPages {
       binding: AuthBinding(),
     ),
 
-    // Dashboard
+    // Mobile Core Shell & Vendor Home
     GetPage(
       name: AppRoutes.root,
-      page: () => const DashboardScreen(),
-      binding: DashboardBinding(),
+      page: () => const VendorShellScreen(),
+      binding: VendorHomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.vendorShell,
+      page: () => const VendorShellScreen(),
+      binding: VendorHomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.vendorHome,
+      page: () => const VendorHomeScreen(),
+      binding: VendorHomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.servicesHub,
+      page: () => const ServicesHubScreen(),
+      binding: VendorHomeBinding(),
     ),
     GetPage(
       name: AppRoutes.dashboard,
-      page: () => const DashboardScreen(),
-      binding: DashboardBinding(),
+      page: () => const VendorShellScreen(),
+      binding: VendorHomeBinding(),
     ),
 
     // Vendor Profile
