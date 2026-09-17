@@ -203,28 +203,22 @@ class RegisterScreen extends GetView<AuthController> {
           prefixIcon: const Icon(Icons.badge_outlined, size: 18),
         ),
         const SizedBox(height: AppDimensions.spaceMd),
-        Row(
-          children: [
-            Expanded(
-              child: AppTextField(
-                label: 'Phone Number',
-                hint: '9876543210',
-                controller: controller.phoneController,
-                validator: Validators.phone,
-                prefixIcon: const Icon(Icons.phone_outlined, size: 18),
-              ),
-            ),
-            const SizedBox(width: AppDimensions.spaceMd),
-            Expanded(
-              child: AppTextField(
-                label: 'Gmail / Email Address',
-                hint: 'vendor@gmail.com',
-                controller: controller.emailController,
-                validator: Validators.email,
-                prefixIcon: const Icon(Icons.mail_outline_rounded, size: 18),
-              ),
-            ),
-          ],
+        AppTextField(
+          label: 'Phone Number',
+          hint: '9876543210',
+          controller: controller.phoneController,
+          validator: Validators.phone,
+          keyboardType: TextInputType.phone,
+          prefixIcon: const Icon(Icons.phone_outlined, size: 18),
+        ),
+        const SizedBox(height: AppDimensions.spaceMd),
+        AppTextField(
+          label: 'Gmail / Email Address',
+          hint: 'vendor@gmail.com',
+          controller: controller.emailController,
+          validator: Validators.email,
+          keyboardType: TextInputType.emailAddress,
+          prefixIcon: const Icon(Icons.mail_outline_rounded, size: 18),
         ),
       ],
     );
@@ -245,18 +239,16 @@ class RegisterScreen extends GetView<AuthController> {
           style: AppTextStyles.caption,
         ),
         const SizedBox(height: AppDimensions.spaceMd),
+        AppTextField(
+          label: 'City / District',
+          hint: 'e.g. Guwahati',
+          controller: controller.cityController,
+          validator: Validators.required,
+          prefixIcon: const Icon(Icons.location_city_outlined, size: 18),
+        ),
+        const SizedBox(height: AppDimensions.spaceMd),
         Row(
           children: [
-            Expanded(
-              child: AppTextField(
-                label: 'City / District',
-                hint: 'e.g. Guwahati',
-                controller: controller.cityController,
-                validator: Validators.required,
-                prefixIcon: const Icon(Icons.location_city_outlined, size: 18),
-              ),
-            ),
-            const SizedBox(width: AppDimensions.spaceMd),
             Expanded(
               child: AppTextField(
                 label: 'State',
@@ -273,6 +265,7 @@ class RegisterScreen extends GetView<AuthController> {
                 hint: 'e.g. 781001',
                 controller: controller.pincodeController,
                 validator: Validators.required,
+                keyboardType: TextInputType.number,
                 prefixIcon: const Icon(Icons.pin_drop_outlined, size: 18),
               ),
             ),

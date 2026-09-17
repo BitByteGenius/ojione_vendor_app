@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../app/routes/app_routes.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../shared/enums/service_type.dart';
 import '../data/auth_repository.dart';
@@ -124,7 +125,7 @@ class AuthController extends GetxController {
       if (res.success && res.data != null) {
         // Activate vendor in AuthService
         AuthService.to.setRegisteredVendor(res.data!);
-        Get.toNamed('/registration-success', arguments: res.data);
+        Get.toNamed(AppRoutes.registrationStatus, arguments: res.data);
       } else {
         Get.snackbar('Registration Failed', res.message);
       }
@@ -154,7 +155,7 @@ class AuthController extends GetxController {
       if (response.success && response.data != null) {
         final data = response.data!;
         AuthService.to.setRegisteredVendor(data.vendor);
-        Get.offAllNamed('/dashboard');
+        Get.offAllNamed(AppRoutes.vendorShell);
       } else {
         Get.snackbar('Login Failed', response.message);
       }
