@@ -62,7 +62,7 @@ class StayDashboardScreen extends GetView<StayController> {
                       mainAxisSpacing: AppDimensions.spaceMd,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      childAspectRatio: isWide ? 1.5 : (isMedium ? 1.7 : 2.0),
+                      childAspectRatio: isWide ? 1.6 : (isMedium ? 1.5 : 1.3),
                       children: [
                         AppKpiCard(
                           title: 'Total Properties',
