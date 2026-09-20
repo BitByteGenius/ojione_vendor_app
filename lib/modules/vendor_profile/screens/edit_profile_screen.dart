@@ -46,45 +46,43 @@ class EditProfileScreen extends GetView<VendorProfileController> {
                   controller: emailCtrl,
                 ),
                 const SizedBox(height: AppDimensions.spaceMd),
-                Row(
-                  children: [
-                    Expanded(
-                      child: AppTextField(
-                        label: 'Primary Phone',
-                        controller: phoneCtrl,
-                      ),
-                    ),
-                    const SizedBox(width: AppDimensions.spaceMd),
-                    Expanded(
-                      child: AppTextField(
-                        label: 'Alternate Phone',
-                        controller: altPhoneCtrl,
-                      ),
-                    ),
-                  ],
+                AppTextField(
+                  label: 'Primary Phone',
+                  controller: phoneCtrl,
+                  keyboardType: TextInputType.phone,
+                ),
+                const SizedBox(height: AppDimensions.spaceMd),
+                AppTextField(
+                  label: 'Alternate Phone',
+                  controller: altPhoneCtrl,
+                  keyboardType: TextInputType.phone,
                 ),
                 const SizedBox(height: AppDimensions.spaceXl),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    AppButton(
-                      text: 'Cancel',
-                      type: AppButtonType.text,
-                      onPressed: () => Get.back(),
+                    Expanded(
+                      child: AppButton(
+                        text: 'Cancel',
+                        type: AppButtonType.text,
+                        onPressed: () => Get.back(),
+                      ),
                     ),
                     const SizedBox(width: AppDimensions.spaceSm),
-                    AppButton(
-                      text: 'Save Changes',
-                      onPressed: () {
-                        controller.saveProfile({
-                          'business_name': businessNameCtrl.text,
-                          'owner_name': ownerNameCtrl.text,
-                          'email': emailCtrl.text,
-                          'phone': phoneCtrl.text,
-                          'alternate_phone': altPhoneCtrl.text,
-                        });
-                        Get.back();
-                      },
+                    Expanded(
+                      flex: 2,
+                      child: AppButton(
+                        text: 'Save Changes',
+                        onPressed: () {
+                          controller.saveProfile({
+                            'business_name': businessNameCtrl.text,
+                            'owner_name': ownerNameCtrl.text,
+                            'email': emailCtrl.text,
+                            'phone': phoneCtrl.text,
+                            'alternate_phone': altPhoneCtrl.text,
+                          });
+                          Get.back();
+                        },
+                      ),
                     ),
                   ],
                 ),

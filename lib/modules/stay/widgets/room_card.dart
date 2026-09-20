@@ -34,23 +34,34 @@ class RoomCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(room.name, style: AppTextStyles.h4),
+                Text(
+                  room.name,
+                  style: AppTextStyles.h4,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 const SizedBox(height: 2),
                 Text(
                   '${room.roomType} • Max ${room.maxOccupancy} Guests • ${room.totalRooms} Total Units',
                   style: AppTextStyles.caption,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
           ),
+          const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                '${Formatters.currency(room.basePricePerNight)} / night',
-                style: AppTextStyles.bodyMedium.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primary,
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  '${Formatters.currency(room.basePricePerNight)} / night',
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                  ),
                 ),
               ),
               if (onEdit != null)

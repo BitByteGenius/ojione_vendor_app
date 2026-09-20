@@ -40,17 +40,15 @@ class StayPricingScreen extends GetView<StayController> {
                 ),
               ),
               const SizedBox(height: AppDimensions.spaceLg),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  AppButton(
-                    text: 'Adjust Rates',
-                    icon: Icons.tune_rounded,
-                    onPressed: () {
-                      Get.snackbar('Pricing', 'Rates adjustment dialog');
-                    },
-                  ),
-                ],
+              SizedBox(
+                width: double.infinity,
+                child: AppButton(
+                  text: 'Adjust Rates',
+                  icon: Icons.tune_rounded,
+                  onPressed: () {
+                    Get.snackbar('Pricing', 'Rates adjustment dialog');
+                  },
+                ),
               ),
             ],
           ),
@@ -65,7 +63,10 @@ class StayPricingScreen extends GetView<StayController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(fontSize: 14)),
+          Expanded(
+            child: Text(label, style: const TextStyle(fontSize: 14)),
+          ),
+          const SizedBox(width: 12),
           Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
         ],
       ),

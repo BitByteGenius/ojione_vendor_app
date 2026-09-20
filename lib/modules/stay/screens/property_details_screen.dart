@@ -47,12 +47,29 @@ class PropertyDetailsScreen extends GetView<StayController> {
                   Text(prop.description, style: AppTextStyles.bodyLarge),
                   const SizedBox(height: AppDimensions.spaceMd),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Icon(Icons.location_on_outlined, size: 16, color: AppColors.lightTextMuted),
                       const SizedBox(width: 6),
-                      Text('${prop.address}, ${prop.city}, ${prop.state} - ${prop.pincode}', style: AppTextStyles.bodyMedium),
-                      const Spacer(),
-                      Text('Check-in: ${prop.checkInTime} • Check-out: ${prop.checkOutTime}', style: AppTextStyles.caption),
+                      Expanded(
+                        child: Text(
+                          '${prop.address}, ${prop.city}, ${prop.state} - ${prop.pincode}',
+                          style: AppTextStyles.bodyMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      const Icon(Icons.access_time_rounded, size: 16, color: AppColors.lightTextMuted),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          'Check-in: ${prop.checkInTime} • Check-out: ${prop.checkOutTime}',
+                          style: AppTextStyles.caption,
+                        ),
+                      ),
                     ],
                   ),
                 ],

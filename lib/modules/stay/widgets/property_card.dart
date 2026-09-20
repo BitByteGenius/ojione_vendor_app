@@ -51,6 +51,7 @@ class PropertyCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
+                        const SizedBox(width: 8),
                         PropertyStatusChip(status: property.status),
                       ],
                     ),
@@ -58,19 +59,30 @@ class PropertyCard extends StatelessWidget {
                     Text(
                       '${property.propertyType} • ${property.city}, ${property.state}',
                       style: AppTextStyles.caption,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 6),
                     Row(
                       children: [
                         const Icon(Icons.star_rounded, color: Colors.amber, size: 16),
                         const SizedBox(width: 4),
-                        Text('${property.rating} (${property.reviewsCount})', style: AppTextStyles.caption),
-                        const Spacer(),
-                        Text(
-                          '${Formatters.currency(property.basePricePerNight)} / night',
-                          style: AppTextStyles.bodyMedium.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primary,
+                        Flexible(
+                          child: Text(
+                            '${property.rating} (${property.reviewsCount})',
+                            style: AppTextStyles.caption,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            '${Formatters.currency(property.basePricePerNight)} / night',
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primary,
+                            ),
                           ),
                         ),
                       ],

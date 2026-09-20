@@ -247,29 +247,21 @@ class RegisterScreen extends GetView<AuthController> {
           prefixIcon: const Icon(Icons.location_city_outlined, size: 18),
         ),
         const SizedBox(height: AppDimensions.spaceMd),
-        Row(
-          children: [
-            Expanded(
-              child: AppTextField(
-                label: 'State',
-                hint: 'e.g. Assam',
-                controller: controller.stateController,
-                validator: Validators.required,
-                prefixIcon: const Icon(Icons.map_outlined, size: 18),
-              ),
-            ),
-            const SizedBox(width: AppDimensions.spaceMd),
-            Expanded(
-              child: AppTextField(
-                label: 'Pincode',
-                hint: 'e.g. 781001',
-                controller: controller.pincodeController,
-                validator: Validators.required,
-                keyboardType: TextInputType.number,
-                prefixIcon: const Icon(Icons.pin_drop_outlined, size: 18),
-              ),
-            ),
-          ],
+        AppTextField(
+          label: 'State',
+          hint: 'e.g. Assam',
+          controller: controller.stateController,
+          validator: Validators.required,
+          prefixIcon: const Icon(Icons.map_outlined, size: 18),
+        ),
+        const SizedBox(height: AppDimensions.spaceMd),
+        AppTextField(
+          label: 'Pincode',
+          hint: 'e.g. 781001',
+          controller: controller.pincodeController,
+          validator: Validators.required,
+          keyboardType: TextInputType.number,
+          prefixIcon: const Icon(Icons.pin_drop_outlined, size: 18),
         ),
         const SizedBox(height: AppDimensions.spaceMd),
         AppTextField(
@@ -483,11 +475,13 @@ class RegisterScreen extends GetView<AuthController> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: 130,
+          Expanded(
+            flex: 2,
             child: Text(label, style: const TextStyle(fontSize: 12, color: Color(0xFF64748B), fontWeight: FontWeight.w500)),
           ),
+          const SizedBox(width: 8),
           Expanded(
+            flex: 3,
             child: Text(
               value.isNotEmpty ? value : '-',
               style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF0F172A)),

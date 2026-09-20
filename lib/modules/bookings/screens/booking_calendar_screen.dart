@@ -31,19 +31,56 @@ class BookingCalendarScreen extends GetView<BookingsController> {
                   separatorBuilder: (_, index) => const Divider(),
                   itemBuilder: (context, index) {
                     final b = controller.bookings[index];
-                    return ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: CircleAvatar(
-                        backgroundColor: b.serviceType.bgColor,
-                        child: Icon(b.serviceType.icon, color: b.serviceType.color, size: 20),
-                      ),
-                      title: Text('${b.itemName} — ${b.customerName}', style: AppTextStyles.h4),
-                      subtitle: Text(
-                        'Scheduled: ${Formatters.dateTime(b.startDate)} to ${Formatters.dateTime(b.endDate)}',
-                        style: AppTextStyles.caption,
-                      ),
-                      trailing: AppStatusChip(status: b.status.name),
+                    return InkWell(
                       onTap: () => controller.selectBooking(b),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(AppDimensions.spaceSm),
+                              decoration: BoxDecoration(
+                                color: b.serviceType.bgColor,
+                                borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+                              ),
+                              child: Icon(b.serviceType.icon, color: b.serviceType.color, size: 20),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          '${b.itemName} — ${b.customerName}',
+                                          style: AppTextStyles.h4,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      AppStatusChip(status: b.status.name),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'Scheduled: ${Formatters.dateTime(b.startDate)} to ${Formatters.dateTime(b.endDate)}',
+                                    style: AppTextStyles.caption,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     );
                   },
                 );

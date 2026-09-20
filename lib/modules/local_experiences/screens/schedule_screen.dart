@@ -34,13 +34,65 @@ class ScheduleScreen extends GetView<LocalExperiencesController> {
                             separatorBuilder: (_, index) => const Divider(),
                             itemBuilder: (context, index) {
                               final sch = exp.schedules[index];
-                              return ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                leading: const Icon(Icons.access_time_rounded, color: Colors.teal),
-                                title: Text('${sch.startTime} - ${sch.endTime}', style: AppTextStyles.h4),
-                                subtitle: Text('Days: ${sch.daysOfWeek.join(", ")}', style: AppTextStyles.caption),
-                                trailing: Chip(
-                                  label: Text('${sch.availableSeats} / ${sch.maxCapacity} Seats Open'),
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: Colors.teal.withAlpha(25),
+                                        borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+                                      ),
+                                      child: const Icon(Icons.access_time_rounded, color: Colors.teal, size: 20),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  '${sch.startTime} - ${sch.endTime}',
+                                                  style: AppTextStyles.h4,
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Container(
+                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.teal.withAlpha(25),
+                                                  borderRadius: BorderRadius.circular(12),
+                                                ),
+                                                child: Text(
+                                                  '${sch.availableSeats}/${sch.maxCapacity} Seats',
+                                                  style: const TextStyle(
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.teal,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            'Days: ${sch.daysOfWeek.join(", ")}',
+                                            style: AppTextStyles.caption,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               );
                             },
