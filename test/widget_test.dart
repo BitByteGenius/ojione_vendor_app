@@ -8,6 +8,8 @@ import 'package:sewasetu_vendor/modules/rental/screens/add_vehicle_screen.dart';
 import 'package:sewasetu_vendor/modules/settings/controllers/settings_controller.dart';
 import 'package:sewasetu_vendor/modules/settings/screens/settings_screen.dart';
 import 'package:sewasetu_vendor/modules/vendor_home/widgets/demo_vendor_switcher_modal.dart';
+import 'package:sewasetu_vendor/modules/stay/controllers/stay_controller.dart';
+import 'package:sewasetu_vendor/modules/stay/screens/add_property_screen.dart';
 import 'package:sewasetu_vendor/shared/enums/service_type.dart';
 import 'package:sewasetu_vendor/shared/widgets/mobile_bottom_nav_bar.dart';
 
@@ -131,7 +133,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Switch Demo Profile'), findsOneWidget);
+    expect(find.text('Switch Vendor Profile'), findsOneWidget);
     expect(find.text('Select a vendor account persona to test dynamic service isolation:'), findsOneWidget);
     expect(find.text('Vendor A — Stay & Rental'), findsOneWidget);
     expect(find.text('Vendor B — Assam Craft Emporium'), findsOneWidget);
@@ -181,6 +183,45 @@ void main() {
     expect(find.text('Add Vehicle to Rental Fleet'), findsOneWidget);
     expect(find.text('Manufacturer / Make'), findsOneWidget);
     expect(find.text('Add to Fleet'), findsOneWidget);
+  });
+
+  testWidgets('AddPropertyScreen renders all 5 property creation sections without error', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1024, 768);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    Get.put(AuthService(), permanent: true);
+    Get.put(StayController());
+
+    await tester.pumpWidget(
+      const GetMaterialApp(
+        home: AddPropertyScreen(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // Verify all 5 user requested sections are present
+    expect(find.text('1. Media & Files (Uploads)'), findsOneWidget);
+    expect(find.text('2. Basic Information'), findsOneWidget);
+    expect(find.text('3. Location Details'), findsOneWidget);
+    expect(find.text('4. Pricing & Availability'), findsOneWidget);
+    expect(find.text('5. Amenities & Features'), findsOneWidget);
+
+    // Verify key fields
+    expect(find.text('Host Profile Picture'), findsOneWidget);
+    expect(find.text('Property Photos (images)'), findsOneWidget);
+    expect(find.text('Listing Title (title)'), findsOneWidget);
+    expect(find.text('Stay Type (stayType)'), findsOneWidget);
+    expect(find.text('Room Configuration (roomConfiguration)'), findsOneWidget);
+    expect(find.text('Street Address (address)'), findsOneWidget);
+    expect(find.text('City (city)'), findsOneWidget);
+    expect(find.text('Price Per Night (pricePerNight) *'), findsOneWidget);
+    expect(find.text('Price Per Month (pricePerMonth)'), findsOneWidget);
+    expect(find.text('Available Units / Rooms (availableRooms)'), findsOneWidget);
+
+    // Verify submission action button
+    expect(find.text('Submit Property for Approval'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }
