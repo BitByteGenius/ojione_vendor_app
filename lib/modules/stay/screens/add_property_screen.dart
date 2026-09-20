@@ -787,10 +787,11 @@ class AddPropertyScreen extends GetView<StayController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isNarrow = constraints.maxWidth < 540;
+                    final headerInfo = Row(
+                      mainAxisSize: isNarrow ? MainAxisSize.max : MainAxisSize.min,
                       children: [
                         Container(
                           padding: const EdgeInsets.all(6),
@@ -801,22 +802,27 @@ class AddPropertyScreen extends GetView<StayController> {
                           child: const Icon(Icons.map_rounded, color: AppColors.primary, size: 20),
                         ),
                         const SizedBox(width: 8),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Location Pin / Coordinates (latitude & longitude)',
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                            ),
-                            Text(
-                              'Captured via Map Picker widget for guest navigation',
-                              style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
-                            ),
-                          ],
+                        Expanded(
+                          flex: isNarrow ? 1 : 0,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text(
+                                'Location Pin / Coordinates',
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                              ),
+                              Text(
+                                'Captured via Map Picker widget for guest navigation',
+                                style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
-                    ),
-                    ElevatedButton.icon(
+                    );
+
+                    final pinBtn = ElevatedButton.icon(
                       onPressed: () => _openMapPicker(context),
                       icon: const Icon(Icons.edit_location_alt_rounded, size: 16),
                       label: const Text('Adjust on Map'),
@@ -826,8 +832,27 @@ class AddPropertyScreen extends GetView<StayController> {
                         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       ),
-                    ),
-                  ],
+                    );
+
+                    if (isNarrow) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          headerInfo,
+                          const SizedBox(height: AppDimensions.spaceSm),
+                          pinBtn,
+                        ],
+                      );
+                    }
+
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        headerInfo,
+                        pinBtn,
+                      ],
+                    );
+                  },
                 ),
                 const SizedBox(height: AppDimensions.spaceMd),
 
@@ -977,10 +1002,10 @@ class AddPropertyScreen extends GetView<StayController> {
               borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
               border: Border.all(color: isDark ? AppColors.darkBorder : AppColors.lightBorder),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isNarrow = constraints.maxWidth < 500;
+                final textDesc = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
@@ -993,36 +1018,57 @@ class AddPropertyScreen extends GetView<StayController> {
                       style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
                     ),
                   ],
-                ),
-                Obx(() => Row(
-                      children: [
-                        IconButton(
-                          onPressed: controller.decrementRooms,
-                          icon: const Icon(Icons.remove_circle_outline_rounded),
-                          color: AppColors.primary,
-                          tooltip: 'Decrease Units',
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: isDark ? AppColors.darkBackground : Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: isDark ? AppColors.darkBorder : AppColors.lightBorder),
-                          ),
-                          child: Text(
-                            '${controller.availableRooms.value}',
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: controller.incrementRooms,
-                          icon: const Icon(Icons.add_circle_outline_rounded),
-                          color: AppColors.primary,
-                          tooltip: 'Increase Units',
-                        ),
-                      ],
-                    )),
-              ],
+                );
+
+                final stepper = Obx(() => Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      onPressed: controller.decrementRooms,
+                      icon: const Icon(Icons.remove_circle_outline_rounded),
+                      color: AppColors.primary,
+                      tooltip: 'Decrease Units',
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: isDark ? AppColors.darkBackground : Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: isDark ? AppColors.darkBorder : AppColors.lightBorder),
+                      ),
+                      child: Text(
+                        '${controller.availableRooms.value}',
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: controller.incrementRooms,
+                      icon: const Icon(Icons.add_circle_outline_rounded),
+                      color: AppColors.primary,
+                      tooltip: 'Increase Units',
+                    ),
+                  ],
+                ));
+
+                if (isNarrow) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      textDesc,
+                      const SizedBox(height: AppDimensions.spaceSm),
+                      stepper,
+                    ],
+                  );
+                }
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(child: textDesc),
+                    stepper,
+                  ],
+                );
+              },
             ),
           ),
         ],

@@ -199,6 +199,7 @@ void main() {
         home: AddPropertyScreen(),
       ),
     );
+    await tester.pump(const Duration(milliseconds: 500));
     await tester.pumpAndSettle();
 
     // Verify all 5 user requested sections are present
