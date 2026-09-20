@@ -176,67 +176,70 @@ class AddPropertyScreen extends GetView<StayController> {
               borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
               border: Border.all(color: isDark ? AppColors.darkBorder : AppColors.lightBorder),
             ),
-            child: Row(
-              children: [
-                Obx(() => Stack(
-                      children: [
-                        CircleAvatar(
-                          radius: 34,
-                          backgroundColor: AppColors.primaryLight,
-                          backgroundImage: NetworkImage(controller.hostAvatarUrl.value),
-                          onBackgroundImageError: (exception, stackTrace) {},
-                          child: controller.hostAvatarUrl.value.isEmpty
-                              ? const Icon(Icons.person, size: 36, color: AppColors.primary)
-                              : null,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isNarrow = constraints.maxWidth < 520;
+                final avatarWidget = Obx(() => Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 34,
+                      backgroundColor: AppColors.primaryLight,
+                      backgroundImage: NetworkImage(controller.hostAvatarUrl.value),
+                      onBackgroundImageError: (exception, stackTrace) {},
+                      child: controller.hostAvatarUrl.value.isEmpty
+                          ? const Icon(Icons.person, size: 36, color: AppColors.primary)
+                          : null,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: AppColors.primary,
+                          shape: BoxShape.circle,
                         ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
-                              color: AppColors.primary,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(Icons.verified_user_rounded, color: Colors.white, size: 14),
+                        child: const Icon(Icons.verified_user_rounded, color: Colors.white, size: 14),
+                      ),
+                    ),
+                  ],
+                ));
+
+                final textDetails = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 6,
+                      runSpacing: 2,
+                      children: [
+                        const Text(
+                          'Host Profile Picture',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: AppColors.successLight,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: const Text(
+                            'Pre-filled from account',
+                            style: TextStyle(fontSize: 10, color: AppColors.success, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
-                    )),
-                const SizedBox(width: AppDimensions.spaceMd),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Text(
-                            'Host Profile Picture',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                          ),
-                          const SizedBox(width: 6),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: AppColors.successLight,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Text(
-                              'Pre-filled from account',
-                              style: TextStyle(fontSize: 10, color: AppColors.success, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 2),
-                      Obx(() => Text(
-                            'Host: ${controller.hostName.value} (Visible to incoming guests)',
-                            style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
-                          )),
-                    ],
-                  ),
-                ),
-                OutlinedButton.icon(
+                    ),
+                    const SizedBox(height: 2),
+                    Obx(() => Text(
+                          'Host: ${controller.hostName.value} (Visible to incoming guests)',
+                          style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+                        )),
+                  ],
+                );
+
+                final actionBtn = OutlinedButton.icon(
                   onPressed: () => _showChangeAvatarDialog(context),
                   icon: const Icon(Icons.photo_camera_outlined, size: 16),
                   label: const Text('Change Photo'),
@@ -245,17 +248,43 @@ class AddPropertyScreen extends GetView<StayController> {
                     side: const BorderSide(color: AppColors.primary),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),
-                ),
-              ],
+                );
+
+                if (isNarrow) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          avatarWidget,
+                          const SizedBox(width: AppDimensions.spaceMd),
+                          Expanded(child: textDetails),
+                        ],
+                      ),
+                      const SizedBox(height: AppDimensions.spaceSm),
+                      actionBtn,
+                    ],
+                  );
+                }
+
+                return Row(
+                  children: [
+                    avatarWidget,
+                    const SizedBox(width: AppDimensions.spaceMd),
+                    Expanded(child: textDetails),
+                    actionBtn,
+                  ],
+                );
+              },
             ),
           ),
           const SizedBox(height: AppDimensions.spaceLg),
 
           // Property Photos Upload Area
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final isNarrow = constraints.maxWidth < 500;
+              final headerTexts = Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
@@ -268,8 +297,8 @@ class AddPropertyScreen extends GetView<StayController> {
                     style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
                   ),
                 ],
-              ),
-              ElevatedButton.icon(
+              );
+              final addBtn = ElevatedButton.icon(
                 onPressed: () => _showAddPhotoDialog(context),
                 icon: const Icon(Icons.cloud_upload_outlined, size: 16),
                 label: const Text('Add Photo'),
@@ -278,8 +307,26 @@ class AddPropertyScreen extends GetView<StayController> {
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
-              ),
-            ],
+              );
+
+              if (isNarrow) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    headerTexts,
+                    const SizedBox(height: AppDimensions.spaceSm),
+                    addBtn,
+                  ],
+                );
+              }
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  headerTexts,
+                  addBtn,
+                ],
+              );
+            },
           ),
           const SizedBox(height: AppDimensions.spaceMd),
 
