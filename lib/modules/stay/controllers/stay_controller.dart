@@ -835,6 +835,43 @@ class StayController extends GetxController {
     }
   }
 
+  void togglePropertyStatus(PropertyModel property) {
+    final index = properties.indexWhere((p) => p.id == property.id);
+    if (index != -1) {
+      final isCurrentlyActive =
+          property.status == 'published' || property.status == 'active';
+      final newStatus = isCurrentlyActive ? 'inactive' : 'published';
+      properties[index] = property.copyWith(status: newStatus);
+      if (selectedProperty.value?.id == property.id) {
+        selectedProperty.value = properties[index];
+      }
+      Get.snackbar(
+        'Property Status Updated',
+        '${property.name} is now ${isCurrentlyActive ? 'Deactivated' : 'Active & Published'}',
+        snackPosition: SnackPosition.BOTTOM,
+        duration: const Duration(seconds: 2),
+      );
+    }
+  }
+
+  void deleteProperty(String propertyId) {
+    final target = properties.firstWhereOrNull((p) => p.id == propertyId);
+    if (target != null) {
+      properties.removeWhere((p) => p.id == propertyId);
+      if (selectedProperty.value?.id == propertyId) {
+        selectedProperty.value = properties.isNotEmpty
+            ? properties.first
+            : null;
+      }
+      Get.snackbar(
+        'Property Deleted',
+        '${target.name} has been removed from your catalog',
+        snackPosition: SnackPosition.BOTTOM,
+        duration: const Duration(seconds: 2),
+      );
+    }
+  }
+
   @override
   void onClose() {
     titleController.dispose();

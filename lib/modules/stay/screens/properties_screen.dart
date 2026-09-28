@@ -14,12 +14,7 @@ class PropertiesScreen extends GetView<StayController> {
   Widget build(BuildContext context) {
     return MainLayout(
       title: 'Properties & Accommodations',
-      trailingHeader: AppButton(
-        text: '+ Add Property',
-        icon: Icons.add_rounded,
-        height: AppDimensions.buttonHeightSm,
-        onPressed: () => Get.toNamed('/stay/properties/add'),
-      ),
+      
       body: Obx(() {
         if (controller.isLoading.value && controller.properties.isEmpty) {
           return const AppLoader(message: 'Loading properties...');

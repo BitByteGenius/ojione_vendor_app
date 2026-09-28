@@ -26,12 +26,6 @@ class StayDashboardScreen extends GetView<StayController> {
       subtitle: 'Vendor Management Portal',
       showBackButton: true,
       showNotificationBell: true,
-      trailingHeader: AppButton(
-        text: 'Add Property',
-        icon: Icons.add_rounded,
-        height: 36,
-        onPressed: () => Get.toNamed('/stay/properties/add'),
-      ),
       body: Obx(() {
         if (controller.isLoading.value && controller.analytics.value == null) {
           return const AppLoader(

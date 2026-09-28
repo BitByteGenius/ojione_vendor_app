@@ -5,6 +5,7 @@ import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/formatters.dart';
 import '../../../../shared/widgets/app_card.dart';
+import '../controllers/stay_controller.dart';
 import '../models/property_model.dart';
 import 'property_status_chip.dart';
 
@@ -16,6 +17,10 @@ class PropertyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<StayController>();
+    final isActive =
+        property.status == 'published' || property.status == 'active';
+
     return AppCard(
       onTap:
           onTap ??
@@ -24,18 +29,21 @@ class PropertyCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 width: 72,
                 height: 72,
                 decoration: BoxDecoration(
-                  color: AppColors.stayServiceBg,
+                  color: isActive
+                      ? AppColors.stayServiceBg
+                      : const Color(0xFFF3F4F6),
                   borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.hotel_rounded,
                   size: 36,
-                  color: AppColors.stayService,
+                  color: isActive ? AppColors.stayService : Colors.grey,
                 ),
               ),
               const SizedBox(width: AppDimensions.spaceMd),
@@ -97,6 +105,77 @@ class PropertyCard extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 12),
+          const Divider(height: 1, color: Color(0xFFF3F4F6)),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Transform.scale(
+                    scale: 0.8,
+                    child: Switch.adaptive(
+                      value: isActive,
+                      activeTrackColor: AppColors.stayService,
+                      onChanged: (_) {
+                        controller.togglePropertyStatus(property);
+                      },
+                    ),
+                  ),
+                  Text(
+                    isActive ? 'Active' : 'Inactive',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: isActive
+                          ? AppColors.stayService
+                          : Colors.grey[600],
+                    ),
+                  ),
+                ],
+              ),
+              IconButton(
+                icon: const Icon(
+                  Icons.delete_outline_rounded,
+                  color: AppColors.error,
+                  size: 20,
+                ),
+                tooltip: 'Delete Property',
+                onPressed: () => _confirmDelete(context, controller, property),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _confirmDelete(
+    BuildContext context,
+    StayController controller,
+    PropertyModel prop,
+  ) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Delete Property'),
+        content: Text(
+          'Are you sure you want to delete "${prop.name}"? This action cannot be undone.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
+            onPressed: () {
+              Navigator.pop(ctx);
+              controller.deleteProperty(prop.id);
+            },
+            child: const Text('Delete', style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
