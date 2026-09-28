@@ -6,7 +6,6 @@ import '../../../core/theme/app_dimensions.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../shared/enums/service_type.dart';
 import '../controllers/vendor_home_controller.dart';
-import '../widgets/demo_vendor_switcher_modal.dart';
 
 class VendorHomeScreen extends GetView<VendorHomeController> {
   const VendorHomeScreen({super.key});
@@ -32,10 +31,6 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
               children: [
                 // 1. Vendor Greeting & Account Status Header
                 _buildHeader(context, auth),
-                const SizedBox(height: AppDimensions.spaceMd),
-
-                // 2. Demo Switcher Banner (For test verification of multi-service isolation)
-                _buildDemoSwitcherBanner(context),
                 const SizedBox(height: AppDimensions.spaceLg),
 
                 // 3. Your Services (Independent Service Cards)
@@ -216,56 +211,6 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
     });
   }
 
-  Widget _buildDemoSwitcherBanner(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        onTap: () => DemoVendorSwitcherModal.show(context),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-          decoration: BoxDecoration(
-            color: const Color(0xFFEFF6FF),
-            borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-            border: Border.all(color: const Color(0xFFBFDBFE), width: 1),
-          ),
-          child: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF2563EB),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(Icons.tune_rounded, color: Colors.white, size: 16),
-              ),
-              const SizedBox(width: 10),
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Multi-Service Demo Switcher',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF1E40AF),
-                      ),
-                    ),
-                    Text(
-                      'Tap to switch between Vendor A, B, C, D to test isolation',
-                      style: TextStyle(fontSize: 11, color: Color(0xFF3B82F6)),
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Color(0xFF2563EB)),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget _buildServicesSection(AuthService auth) {
     return Obx(() {

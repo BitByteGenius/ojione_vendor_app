@@ -13,7 +13,6 @@ import '../../stay/screens/stay_dashboard_screen.dart';
 import '../../trips/screens/trips_dashboard_screen.dart';
 import '../../vendor_profile/screens/profile_screen.dart';
 import '../controllers/vendor_home_controller.dart';
-import '../widgets/demo_vendor_switcher_modal.dart';
 import 'services_hub_screen.dart';
 import 'vendor_home_screen.dart';
 
@@ -63,13 +62,6 @@ class VendorShellScreen extends GetView<VendorHomeController> {
           subtitle: activeIndex == 0 ? auth.vendorName.value : null,
           showVendorBadge: activeIndex == 0,
           showNotificationBell: true,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.swap_horiz_rounded, size: 22),
-              tooltip: 'Demo Profile Switcher',
-              onPressed: () => DemoVendorSwitcherModal.show(context),
-            ),
-          ],
         ),
         body: IndexedStack(
           index: activeIndex,

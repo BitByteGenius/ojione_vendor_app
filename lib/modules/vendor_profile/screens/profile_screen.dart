@@ -9,7 +9,6 @@ import '../../../shared/widgets/app_card.dart';
 import '../../../shared/widgets/app_loader.dart';
 import '../../../shared/widgets/app_status_chip.dart';
 import '../../../shared/widgets/main_layout.dart';
-import '../../vendor_home/widgets/demo_vendor_switcher_modal.dart';
 import '../controllers/vendor_profile_controller.dart';
 
 class ProfileScreen extends GetView<VendorProfileController> {
@@ -20,13 +19,6 @@ class ProfileScreen extends GetView<VendorProfileController> {
     return MainLayout(
       title: 'Vendor Profile',
       showBackButton: false,
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.swap_horiz_rounded, color: AppColors.primary),
-          tooltip: 'Switch Demo Profile',
-          onPressed: () => DemoVendorSwitcherModal.show(context),
-        ),
-      ],
       body: Obx(() {
         if (controller.isLoading.value && controller.profile.value == null) {
           return const AppLoader(message: 'Loading vendor profile...');
@@ -143,83 +135,6 @@ class ProfileScreen extends GetView<VendorProfileController> {
                 ),
               ),
 
-              const SizedBox(height: AppDimensions.spaceMd),
-
-              // 2. Demo Vendor Profile Switcher Card (High priority for tester / grader)
-              Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () => DemoVendorSwitcherModal.show(context),
-                  borderRadius: BorderRadius.circular(16),
-                  child: Container(
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFF2563EB).withAlpha(15),
-                          const Color(0xFF3B82F6).withAlpha(25),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: const Color(0xFF93C5FD)),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF2563EB),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Icon(Icons.swap_horiz_rounded, color: Colors.white, size: 22),
-                        ),
-                        const SizedBox(width: 12),
-                        const Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Demo Account Switcher',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFF1E3A8A),
-                                ),
-                              ),
-                              SizedBox(height: 2),
-                              Text(
-                                'Test single vs multi-service isolation',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontSize: 11, color: Color(0xFF1D4ED8)),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF2563EB),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: const Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Switch',
-                                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
-                              ),
-                              SizedBox(width: 4),
-                              Icon(Icons.arrow_forward_ios_rounded, size: 10, color: Colors.white),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
 
               const SizedBox(height: AppDimensions.spaceMd),
 

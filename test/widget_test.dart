@@ -7,7 +7,6 @@ import 'package:sewasetu_vendor/modules/rental/controllers/rental_controller.dar
 import 'package:sewasetu_vendor/modules/rental/screens/add_vehicle_screen.dart';
 import 'package:sewasetu_vendor/modules/settings/controllers/settings_controller.dart';
 import 'package:sewasetu_vendor/modules/settings/screens/settings_screen.dart';
-import 'package:sewasetu_vendor/modules/vendor_home/widgets/demo_vendor_switcher_modal.dart';
 import 'package:sewasetu_vendor/modules/stay/controllers/stay_controller.dart';
 import 'package:sewasetu_vendor/modules/stay/screens/add_property_screen.dart';
 import 'package:sewasetu_vendor/shared/enums/service_type.dart';
@@ -116,31 +115,6 @@ void main() {
     expect(find.text('Profile'), findsOneWidget);
   });
 
-  testWidgets('DemoVendorSwitcherModal renders without overflow on narrow mobile viewport (320px)', (WidgetTester tester) async {
-    tester.view.physicalSize = const Size(320, 640);
-    tester.view.devicePixelRatio = 1.0;
-    addTearDown(tester.view.resetPhysicalSize);
-    addTearDown(tester.view.resetDevicePixelRatio);
-
-    Get.put(AuthService(), permanent: true);
-
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: DemoVendorSwitcherModal(),
-        ),
-      ),
-    );
-    await tester.pumpAndSettle();
-
-    expect(find.text('Switch Vendor Profile'), findsOneWidget);
-    expect(find.text('Select a vendor account persona to test dynamic service isolation:'), findsOneWidget);
-    expect(find.text('Vendor A — Stay & Rental'), findsOneWidget);
-    expect(find.text('Vendor B — Assam Craft Emporium'), findsOneWidget);
-    expect(find.text('Vendor C — Brahmaputra Expeditions'), findsOneWidget);
-    expect(find.text('Vendor D — Northeast Multi-Enterprise'), findsOneWidget);
-    expect(tester.takeException(), isNull);
-  });
 
   testWidgets('SettingsScreen renders without overflow on narrow mobile viewport (320px)', (WidgetTester tester) async {
     tester.view.physicalSize = const Size(320, 640);

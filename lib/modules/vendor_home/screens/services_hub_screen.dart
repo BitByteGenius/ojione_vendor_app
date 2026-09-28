@@ -6,7 +6,6 @@ import '../../../core/theme/app_dimensions.dart';
 import '../../../shared/enums/service_type.dart';
 import '../../../shared/widgets/app_empty_state.dart';
 import '../controllers/vendor_home_controller.dart';
-import '../widgets/demo_vendor_switcher_modal.dart';
 
 class ServicesHubScreen extends GetView<VendorHomeController> {
   const ServicesHubScreen({super.key});
@@ -24,13 +23,6 @@ class ServicesHubScreen extends GetView<VendorHomeController> {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.swap_horiz_rounded, color: AppColors.primary),
-            tooltip: 'Switch Demo Vendor',
-            onPressed: () => DemoVendorSwitcherModal.show(context),
-          ),
-        ],
       ),
       body: SafeArea(
         child: Obx(() {
