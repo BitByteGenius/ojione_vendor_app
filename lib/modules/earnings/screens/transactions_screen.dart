@@ -24,7 +24,8 @@ class TransactionsScreen extends GetView<EarningsController> {
           padding: const EdgeInsets.all(AppDimensions.spaceLg),
           child: AppCard(
             title: 'Full Transaction Log',
-            subtitle: 'Real-time calculation of platform commission and net credit per order',
+            subtitle:
+                'Real-time calculation of platform commission and net credit per order',
             child: ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -38,14 +39,21 @@ class TransactionsScreen extends GetView<EarningsController> {
                     children: [
                       CircleAvatar(
                         backgroundColor: tx.serviceType.bgColor,
-                        child: Icon(tx.serviceType.icon, color: tx.serviceType.color, size: 20),
+                        child: Icon(
+                          tx.serviceType.icon,
+                          color: tx.serviceType.color,
+                          size: 20,
+                        ),
                       ),
                       const SizedBox(width: AppDimensions.spaceMd),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('${tx.transactionId} • ${tx.bookingReference}', style: AppTextStyles.h4),
+                            Text(
+                              '${tx.transactionId} • ${tx.bookingReference}',
+                              style: AppTextStyles.h4,
+                            ),
                             const SizedBox(height: 2),
                             Text(
                               'Service: ${tx.serviceType.displayName} • Date: ${Formatters.date(tx.createdAt)}',
@@ -57,10 +65,24 @@ class TransactionsScreen extends GetView<EarningsController> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text('Gross: ${Formatters.currency(tx.grossAmount)}', style: AppTextStyles.caption),
-                          Text('Fee: -${Formatters.currency(tx.commissionAmount)} (${tx.commissionRate}%)', style: AppTextStyles.caption.copyWith(color: AppColors.error)),
+                          Text(
+                            'Gross: ${Formatters.currency(tx.grossAmount)}',
+                            style: AppTextStyles.caption,
+                          ),
+                          Text(
+                            'Fee: -${Formatters.currency(tx.commissionAmount)} (${tx.commissionRate}%)',
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.error,
+                            ),
+                          ),
                           const SizedBox(height: 2),
-                          Text('Net: ${Formatters.currency(tx.netAmount)}', style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.bold, color: AppColors.primary)),
+                          Text(
+                            'Net: ${Formatters.currency(tx.netAmount)}',
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primary,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(width: AppDimensions.spaceMd),

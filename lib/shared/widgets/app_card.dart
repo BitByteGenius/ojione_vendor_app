@@ -30,7 +30,9 @@ class AppCard extends StatelessWidget {
 
     Widget content = Container(
       decoration: BoxDecoration(
-        color: backgroundColor ?? (isDark ? AppColors.darkSurface : AppColors.lightSurface),
+        color:
+            backgroundColor ??
+            (isDark ? AppColors.darkSurface : AppColors.lightSurface),
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
         border: Border.all(
           color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
@@ -50,17 +52,10 @@ class AppCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (title != null)
-                        Text(
-                          title!,
-                          style: AppTextStyles.h4,
-                        ),
+                      if (title != null) Text(title!, style: AppTextStyles.h4),
                       if (subtitle != null) ...[
                         const SizedBox(height: AppDimensions.space2xs),
-                        Text(
-                          subtitle!,
-                          style: AppTextStyles.bodySmall,
-                        ),
+                        Text(subtitle!, style: AppTextStyles.bodySmall),
                       ],
                     ],
                   ),

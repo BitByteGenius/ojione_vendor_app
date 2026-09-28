@@ -20,10 +20,14 @@ class ApiResponse<T> {
     T Function(dynamic json)? fromJsonT,
   ) {
     return ApiResponse<T>(
-      success: json['success'] ?? (json['statusCode'] != null && json['statusCode'] < 400),
+      success:
+          json['success'] ??
+          (json['statusCode'] != null && json['statusCode'] < 400),
       statusCode: json['statusCode'] ?? 200,
       message: json['message'] ?? '',
-      data: json['data'] != null && fromJsonT != null ? fromJsonT(json['data']) : json['data'] as T?,
+      data: json['data'] != null && fromJsonT != null
+          ? fromJsonT(json['data'])
+          : json['data'] as T?,
       errors: json['errors'] as Map<String, dynamic>?,
       meta: json['meta'] != null ? PaginationMeta.fromJson(json['meta']) : null,
     );

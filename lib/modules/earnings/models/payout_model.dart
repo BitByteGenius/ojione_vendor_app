@@ -30,8 +30,12 @@ class PayoutModel {
       accountNumber: json['account_number'] ?? '',
       utrNumber: json['utr_number'] ?? '',
       status: json['status'] ?? 'completed',
-      requestedAt: json['requested_at'] != null ? DateTime.parse(json['requested_at']) : DateTime.now(),
-      processedAt: json['processed_at'] != null ? DateTime.parse(json['processed_at']) : null,
+      requestedAt: json['requested_at'] != null
+          ? DateTime.parse(json['requested_at'])
+          : DateTime.now(),
+      processedAt: json['processed_at'] != null
+          ? DateTime.parse(json['processed_at'])
+          : null,
     );
   }
 }

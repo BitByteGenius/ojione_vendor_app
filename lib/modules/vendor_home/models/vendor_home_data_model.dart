@@ -5,10 +5,7 @@ class ServiceQuickStat {
   final String label;
   final String value;
 
-  const ServiceQuickStat({
-    required this.label,
-    required this.value,
-  });
+  const ServiceQuickStat({required this.label, required this.value});
 }
 
 class VendorActivityItem {

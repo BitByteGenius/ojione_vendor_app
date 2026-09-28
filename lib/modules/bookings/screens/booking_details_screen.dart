@@ -49,9 +49,15 @@ class BookingDetailsScreen extends GetView<BookingsController> {
                     padding: const EdgeInsets.all(AppDimensions.spaceMd),
                     decoration: BoxDecoration(
                       color: b.serviceType.bgColor,
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+                      borderRadius: BorderRadius.circular(
+                        AppDimensions.radiusSm,
+                      ),
                     ),
-                    child: Icon(b.serviceType.icon, color: b.serviceType.color, size: 28),
+                    child: Icon(
+                      b.serviceType.icon,
+                      color: b.serviceType.color,
+                      size: 28,
+                    ),
                   ),
                   const SizedBox(width: AppDimensions.spaceLg),
                   Expanded(
@@ -88,7 +94,8 @@ class BookingDetailsScreen extends GetView<BookingsController> {
                         _info('Email', b.customerEmail),
                         _info('Mobile Phone', b.customerPhone),
                         _info('Guests / Units', '${b.guestsOrUnits}'),
-                        if (b.specialRequests != null) _info('Special Notes', b.specialRequests!),
+                        if (b.specialRequests != null)
+                          _info('Special Notes', b.specialRequests!),
                       ],
                     ),
                   ),
@@ -100,10 +107,20 @@ class BookingDetailsScreen extends GetView<BookingsController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _info('Total Booking Value', Formatters.currency(b.totalAmount)),
-                        _info('SewaSetu Platform Commission', '- ${Formatters.currency(b.commissionAmount)}'),
+                        _info(
+                          'Total Booking Value',
+                          Formatters.currency(b.totalAmount),
+                        ),
+                        _info(
+                          'SewaSetu Platform Commission',
+                          '- ${Formatters.currency(b.commissionAmount)}',
+                        ),
                         const Divider(),
-                        _info('Net Vendor Payout', Formatters.currency(b.vendorEarnings), isHighlight: true),
+                        _info(
+                          'Net Vendor Payout',
+                          Formatters.currency(b.vendorEarnings),
+                          isHighlight: true,
+                        ),
                         _info('Payment Mode / Status', b.paymentStatus),
                       ],
                     ),
@@ -122,27 +139,31 @@ class BookingDetailsScreen extends GetView<BookingsController> {
                   AppButton(
                     text: 'Decline Booking',
                     type: AppButtonType.danger,
-                    onPressed: () => controller.updateStatus(b.id, BookingStatus.cancelled),
+                    onPressed: () =>
+                        controller.updateStatus(b.id, BookingStatus.cancelled),
                   ),
                   const SizedBox(width: AppDimensions.spaceMd),
                   AppButton(
                     text: 'Confirm Booking',
                     type: AppButtonType.primary,
-                    onPressed: () => controller.updateStatus(b.id, BookingStatus.confirmed),
+                    onPressed: () =>
+                        controller.updateStatus(b.id, BookingStatus.confirmed),
                   ),
                 ],
                 if (b.status == BookingStatus.confirmed) ...[
                   AppButton(
                     text: 'Mark In-Progress / Checked In',
                     type: AppButtonType.primary,
-                    onPressed: () => controller.updateStatus(b.id, BookingStatus.checkedIn),
+                    onPressed: () =>
+                        controller.updateStatus(b.id, BookingStatus.checkedIn),
                   ),
                 ],
                 if (b.status == BookingStatus.checkedIn) ...[
                   AppButton(
                     text: 'Complete Booking',
                     type: AppButtonType.primary,
-                    onPressed: () => controller.updateStatus(b.id, BookingStatus.completed),
+                    onPressed: () =>
+                        controller.updateStatus(b.id, BookingStatus.completed),
                   ),
                 ],
               ],
@@ -164,7 +185,9 @@ class BookingDetailsScreen extends GetView<BookingsController> {
             value,
             style: isHighlight
                 ? AppTextStyles.h4.copyWith(color: AppColors.primary)
-                : AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.w600),
+                : AppTextStyles.bodyMedium.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
           ),
         ],
       ),

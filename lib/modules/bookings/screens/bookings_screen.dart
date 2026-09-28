@@ -46,18 +46,23 @@ class BookingsScreen extends GetView<BookingsController> {
                     ),
                     const SizedBox(width: AppDimensions.spaceSm),
                     ...ServiceType.values
-                        .where((s) => s != ServiceType.shop && auth.hasService(s))
+                        .where(
+                          (s) => s != ServiceType.shop && auth.hasService(s),
+                        )
                         .map((s) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: AppDimensions.spaceSm),
-                        child: ChoiceChip(
-                          avatar: Icon(s.icon, size: 16, color: s.color),
-                          label: Text(s.displayName),
-                          selected: controller.filter.value.serviceType == s,
-                          onSelected: (_) => controller.filterByService(s),
-                        ),
-                      );
-                    }),
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              right: AppDimensions.spaceSm,
+                            ),
+                            child: ChoiceChip(
+                              avatar: Icon(s.icon, size: 16, color: s.color),
+                              label: Text(s.displayName),
+                              selected:
+                                  controller.filter.value.serviceType == s,
+                              onSelected: (_) => controller.filterByService(s),
+                            ),
+                          );
+                        }),
                   ],
                 ),
               ),
@@ -77,7 +82,9 @@ class BookingsScreen extends GetView<BookingsController> {
                     const SizedBox(width: AppDimensions.spaceSm),
                     ...BookingStatus.values.map((st) {
                       return Padding(
-                        padding: const EdgeInsets.only(right: AppDimensions.spaceSm),
+                        padding: const EdgeInsets.only(
+                          right: AppDimensions.spaceSm,
+                        ),
                         child: FilterChip(
                           label: Text(st.label),
                           selected: controller.filter.value.status == st,
@@ -98,7 +105,8 @@ class BookingsScreen extends GetView<BookingsController> {
                 const AppEmptyState(
                   icon: Icons.calendar_today_outlined,
                   title: 'No Bookings Found',
-                  message: 'No reservations match your current filter settings.',
+                  message:
+                      'No reservations match your current filter settings.',
                 )
               else
                 AppCard(
@@ -113,17 +121,28 @@ class BookingsScreen extends GetView<BookingsController> {
                       return InkWell(
                         onTap: () => controller.selectBooking(b),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 12,
+                          ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                padding: const EdgeInsets.all(AppDimensions.spaceSm),
+                                padding: const EdgeInsets.all(
+                                  AppDimensions.spaceSm,
+                                ),
                                 decoration: BoxDecoration(
                                   color: b.serviceType.bgColor,
-                                  borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+                                  borderRadius: BorderRadius.circular(
+                                    AppDimensions.radiusSm,
+                                  ),
                                 ),
-                                child: Icon(b.serviceType.icon, color: b.serviceType.color, size: 20),
+                                child: Icon(
+                                  b.serviceType.icon,
+                                  color: b.serviceType.color,
+                                  size: 20,
+                                ),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -139,15 +158,21 @@ class BookingsScreen extends GetView<BookingsController> {
                                                 child: Text(
                                                   b.bookingReference,
                                                   style: AppTextStyles.h4,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
                                               const SizedBox(width: 6),
                                               Container(
-                                                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 5,
+                                                      vertical: 1.5,
+                                                    ),
                                                 decoration: BoxDecoration(
                                                   color: b.serviceType.bgColor,
-                                                  borderRadius: BorderRadius.circular(4),
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
                                                 ),
                                                 child: Text(
                                                   b.serviceType.displayName,
@@ -164,7 +189,9 @@ class BookingsScreen extends GetView<BookingsController> {
                                         const SizedBox(width: 8),
                                         Text(
                                           Formatters.currency(b.totalAmount),
-                                          style: AppTextStyles.h4.copyWith(color: AppColors.primary),
+                                          style: AppTextStyles.h4.copyWith(
+                                            color: AppColors.primary,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -177,7 +204,8 @@ class BookingsScreen extends GetView<BookingsController> {
                                     ),
                                     const SizedBox(height: 4),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           child: Text(

@@ -27,15 +27,34 @@ class StayPricingScreen extends GetView<StayController> {
             children: [
               AppCard(
                 title: 'Seasonal & Weekend Rate Rules',
-                subtitle: 'Configure automated pricing multipliers for weekends and peak dates',
+                subtitle:
+                    'Configure automated pricing multipliers for weekends and peak dates',
                 child: Column(
                   children: [
-                    _rateRow('Weekday Base Tariff', Formatters.currency(pr?.weekdayBasePrice ?? 0)),
-                    _rateRow('Weekend Base Tariff (Fri-Sat)', Formatters.currency(pr?.weekendBasePrice ?? 0)),
-                    _rateRow('Extra Adult Guest Charge', Formatters.currency(pr?.extraAdultPrice ?? 0)),
-                    _rateRow('Cleaning Fee', Formatters.currency(pr?.cleaningFee ?? 0)),
-                    _rateRow('Weekly Stay Discount', '${pr?.discountWeekly ?? 10}%'),
-                    _rateRow('Monthly Long-term Discount', '${pr?.discountMonthly ?? 25}%'),
+                    _rateRow(
+                      'Weekday Base Tariff',
+                      Formatters.currency(pr?.weekdayBasePrice ?? 0),
+                    ),
+                    _rateRow(
+                      'Weekend Base Tariff (Fri-Sat)',
+                      Formatters.currency(pr?.weekendBasePrice ?? 0),
+                    ),
+                    _rateRow(
+                      'Extra Adult Guest Charge',
+                      Formatters.currency(pr?.extraAdultPrice ?? 0),
+                    ),
+                    _rateRow(
+                      'Cleaning Fee',
+                      Formatters.currency(pr?.cleaningFee ?? 0),
+                    ),
+                    _rateRow(
+                      'Weekly Stay Discount',
+                      '${pr?.discountWeekly ?? 10}%',
+                    ),
+                    _rateRow(
+                      'Monthly Long-term Discount',
+                      '${pr?.discountMonthly ?? 25}%',
+                    ),
                   ],
                 ),
               ),
@@ -63,11 +82,12 @@ class StayPricingScreen extends GetView<StayController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
-            child: Text(label, style: const TextStyle(fontSize: 14)),
-          ),
+          Expanded(child: Text(label, style: const TextStyle(fontSize: 14))),
           const SizedBox(width: 12),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+          Text(
+            value,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+          ),
         ],
       ),
     );

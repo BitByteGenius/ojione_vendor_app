@@ -24,9 +24,12 @@ class ScheduleScreen extends GetView<LocalExperiencesController> {
                   padding: const EdgeInsets.only(bottom: AppDimensions.spaceLg),
                   child: AppCard(
                     title: exp.title,
-                    subtitle: 'City: ${exp.city} • Capacity: ${exp.maxCapacity} Guests per session',
+                    subtitle:
+                        'City: ${exp.city} • Capacity: ${exp.maxCapacity} Guests per session',
                     child: exp.schedules.isEmpty
-                        ? const Text('No active scheduled slots for this experience.')
+                        ? const Text(
+                            'No active scheduled slots for this experience.',
+                          )
                         : ListView.separated(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
@@ -35,7 +38,9 @@ class ScheduleScreen extends GetView<LocalExperiencesController> {
                             itemBuilder: (context, index) {
                               final sch = exp.schedules[index];
                               return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                ),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -43,33 +48,50 @@ class ScheduleScreen extends GetView<LocalExperiencesController> {
                                       padding: const EdgeInsets.all(8),
                                       decoration: BoxDecoration(
                                         color: Colors.teal.withAlpha(25),
-                                        borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+                                        borderRadius: BorderRadius.circular(
+                                          AppDimensions.radiusSm,
+                                        ),
                                       ),
-                                      child: const Icon(Icons.access_time_rounded, color: Colors.teal, size: 20),
+                                      child: const Icon(
+                                        Icons.access_time_rounded,
+                                        color: Colors.teal,
+                                        size: 20,
+                                      ),
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Expanded(
                                                 child: Text(
                                                   '${sch.startTime} - ${sch.endTime}',
                                                   style: AppTextStyles.h4,
                                                   maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
                                               const SizedBox(width: 8),
                                               Container(
-                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 3,
+                                                    ),
                                                 decoration: BoxDecoration(
-                                                  color: Colors.teal.withAlpha(25),
-                                                  borderRadius: BorderRadius.circular(12),
+                                                  color: Colors.teal.withAlpha(
+                                                    25,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
                                                 ),
                                                 child: Text(
                                                   '${sch.availableSeats}/${sch.maxCapacity} Seats',

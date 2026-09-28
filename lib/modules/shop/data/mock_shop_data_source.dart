@@ -39,10 +39,30 @@ class MockShopDataSource implements ShopDataSource {
         BarGroupDataModel(x: 6, label: 'Sun', value: 31),
       ],
       orderStatusBreakdown: const [
-        PieSliceDataModel(label: 'Delivered', value: 198, color: Color(0xFF10B981), displayValue: '198 (61%)'),
-        PieSliceDataModel(label: 'Shipped', value: 68, color: Color(0xFF2563EB), displayValue: '68 (21%)'),
-        PieSliceDataModel(label: 'Processing', value: 44, color: AppColors.shopService, displayValue: '44 (13%)'),
-        PieSliceDataModel(label: 'Returned / Cancelled', value: 16, color: Color(0xFFEF4444), displayValue: '16 (5%)'),
+        PieSliceDataModel(
+          label: 'Delivered',
+          value: 198,
+          color: Color(0xFF10B981),
+          displayValue: '198 (61%)',
+        ),
+        PieSliceDataModel(
+          label: 'Shipped',
+          value: 68,
+          color: Color(0xFF2563EB),
+          displayValue: '68 (21%)',
+        ),
+        PieSliceDataModel(
+          label: 'Processing',
+          value: 44,
+          color: AppColors.shopService,
+          displayValue: '44 (13%)',
+        ),
+        PieSliceDataModel(
+          label: 'Returned / Cancelled',
+          value: 16,
+          color: Color(0xFFEF4444),
+          displayValue: '16 (5%)',
+        ),
       ],
       categoryPerformances: const [
         CategorySalesModel(
@@ -128,7 +148,8 @@ class MockShopDataSource implements ShopDataSource {
       ProductModel(
         id: 'prd-001',
         name: 'Assam Authentic Bell Metal Kahi-Bati Set',
-        description: 'Traditional handcrafted brass & bell metal dining utensils forged by Sarthebari artisans.',
+        description:
+            'Traditional handcrafted brass & bell metal dining utensils forged by Sarthebari artisans.',
         originState: 'Assam',
         category: 'Handicrafts & Bell Metal',
         basePrice: 3800,
@@ -140,7 +161,8 @@ class MockShopDataSource implements ShopDataSource {
       ProductModel(
         id: 'prd-002',
         name: 'Handwoven Muga Silk Mekhela Sador with Traditional Motifs',
-        description: 'Golden Muga silk traditional attire handwoven in Sualkuchi, the Manchester of Assam.',
+        description:
+            'Golden Muga silk traditional attire handwoven in Sualkuchi, the Manchester of Assam.',
         originState: 'Assam',
         category: 'Handloom & Textiles',
         basePrice: 18500,
@@ -152,7 +174,8 @@ class MockShopDataSource implements ShopDataSource {
       ProductModel(
         id: 'prd-003',
         name: 'Original Handpainted Madhubani Canvas Painting',
-        description: 'Folk art depicting Tree of Life created with natural dyes and nib pens by Mithila artisans.',
+        description:
+            'Folk art depicting Tree of Life created with natural dyes and nib pens by Mithila artisans.',
         originState: 'Bihar',
         category: 'Traditional Art & Paintings',
         basePrice: 2400,
@@ -164,7 +187,8 @@ class MockShopDataSource implements ShopDataSource {
       ProductModel(
         id: 'prd-004',
         name: 'Premium Organic Phool Makhana (Fox Nuts)',
-        description: 'Naturally harvested GI-tagged Mithila Makhana processed with traditional roasting methods.',
+        description:
+            'Naturally harvested GI-tagged Mithila Makhana processed with traditional roasting methods.',
         originState: 'Bihar',
         category: 'Indigenous Organic Foods',
         basePrice: 450,
@@ -210,6 +234,9 @@ class MockShopDataSource implements ShopDataSource {
   @override
   Future<ApiResponse<bool>> createProduct(Map<String, dynamic> data) async {
     await Future.delayed(const Duration(milliseconds: 300));
-    return ApiResponse.success(data: true, message: 'Product added successfully');
+    return ApiResponse.success(
+      data: true,
+      message: 'Product added successfully',
+    );
   }
 }

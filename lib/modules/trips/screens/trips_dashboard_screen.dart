@@ -66,7 +66,8 @@ class TripsDashboardScreen extends GetView<TripsController> {
                         AppKpiCard(
                           title: 'Total Tour Packages',
                           value: '${a?.totalPackages ?? 0}',
-                          subtitle: '${a?.activePackages ?? 0} Live • ${a?.pendingApproval ?? 0} In Review',
+                          subtitle:
+                              '${a?.activePackages ?? 0} Live • ${a?.pendingApproval ?? 0} In Review',
                           icon: Icons.luggage_rounded,
                           color: AppColors.tripsService,
                           trendBadge: 'Catalog',
@@ -91,7 +92,8 @@ class TripsDashboardScreen extends GetView<TripsController> {
                         AppKpiCard(
                           title: 'Package Gross Revenue',
                           value: Formatters.currency(a?.totalRevenue ?? 0),
-                          subtitle: 'Pending payout: ${Formatters.currency(a?.pendingPayouts ?? 0)}',
+                          subtitle:
+                              'Pending payout: ${Formatters.currency(a?.pendingPayouts ?? 0)}',
                           icon: Icons.account_balance_wallet_rounded,
                           color: AppColors.secondary,
                           trendBadge: '+16.8%',
@@ -201,12 +203,15 @@ class TripsDashboardScreen extends GetView<TripsController> {
                 // Package Performance List
                 AppCard(
                   title: 'Package Performance & Popularity',
-                  subtitle: 'Passenger booking volume and revenue generated per package',
+                  subtitle:
+                      'Passenger booking volume and revenue generated per package',
                   trailing: TextButton(
                     onPressed: () => Get.toNamed('/trips/packages'),
                     child: const Text('Manage Packages'),
                   ),
-                  child: _buildPackagePerformanceList(a?.packagePerformances ?? []),
+                  child: _buildPackagePerformanceList(
+                    a?.packagePerformances ?? [],
+                  ),
                 ),
               ],
             ),
@@ -222,19 +227,31 @@ class TripsDashboardScreen extends GetView<TripsController> {
       child: Row(
         children: [
           ActionChip(
-            avatar: const Icon(Icons.luggage_rounded, size: 16, color: AppColors.tripsService),
+            avatar: const Icon(
+              Icons.luggage_rounded,
+              size: 16,
+              color: AppColors.tripsService,
+            ),
             label: const Text('Trip Packages Catalog'),
             onPressed: () => Get.toNamed('/trips/packages'),
           ),
           const SizedBox(width: AppDimensions.spaceSm),
           ActionChip(
-            avatar: const Icon(Icons.map_rounded, size: 16, color: AppColors.tripsService),
+            avatar: const Icon(
+              Icons.map_rounded,
+              size: 16,
+              color: AppColors.tripsService,
+            ),
             label: const Text('Covered Destinations'),
             onPressed: () => Get.toNamed('/trips/destinations'),
           ),
           const SizedBox(width: AppDimensions.spaceSm),
           ActionChip(
-            avatar: const Icon(Icons.timeline_rounded, size: 16, color: AppColors.tripsService),
+            avatar: const Icon(
+              Icons.timeline_rounded,
+              size: 16,
+              color: AppColors.tripsService,
+            ),
             label: const Text('Day-wise Itineraries'),
             onPressed: () => Get.toNamed('/trips/itinerary'),
           ),
@@ -245,7 +262,10 @@ class TripsDashboardScreen extends GetView<TripsController> {
 
   Widget _buildRecentBookingsTable(List<TripBookingItemModel> bookings) {
     if (bookings.isEmpty) {
-      return const Padding(padding: EdgeInsets.all(16), child: Text('No trip bookings found.'));
+      return const Padding(
+        padding: EdgeInsets.all(16),
+        child: Text('No trip bookings found.'),
+      );
     }
 
     return SingleChildScrollView(
@@ -253,23 +273,75 @@ class TripsDashboardScreen extends GetView<TripsController> {
       child: DataTable(
         headingRowColor: WidgetStateProperty.all(const Color(0xFFF8FAFC)),
         columns: const [
-          DataColumn(label: Text('BOOKING ID', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('CUSTOMER', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('TOUR PACKAGE', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('DEPARTURE', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('PASSENGERS', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('AMOUNT', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('STATUS', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
+          DataColumn(
+            label: Text(
+              'BOOKING ID',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'CUSTOMER',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'TOUR PACKAGE',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'DEPARTURE',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'PASSENGERS',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'AMOUNT',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'STATUS',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
         ],
         rows: bookings.map((b) {
           return DataRow(
             cells: [
-              DataCell(Text(b.id, style: const TextStyle(fontWeight: FontWeight.bold))),
+              DataCell(
+                Text(b.id, style: const TextStyle(fontWeight: FontWeight.bold)),
+              ),
               DataCell(Text(b.customerName)),
-              DataCell(Text(b.packageTitle, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5))),
-              DataCell(Text(b.departureDate, style: const TextStyle(fontSize: 12))),
+              DataCell(
+                Text(
+                  b.packageTitle,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12.5,
+                  ),
+                ),
+              ),
+              DataCell(
+                Text(b.departureDate, style: const TextStyle(fontSize: 12)),
+              ),
               DataCell(Text('${b.travelersCount} Travelers')),
-              DataCell(Text(Formatters.currency(b.amount), style: const TextStyle(fontWeight: FontWeight.bold))),
+              DataCell(
+                Text(
+                  Formatters.currency(b.amount),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
               DataCell(AppStatusChip(status: b.status.name)),
             ],
           );
@@ -278,7 +350,9 @@ class TripsDashboardScreen extends GetView<TripsController> {
     );
   }
 
-  Widget _buildPackagePerformanceList(List<PackagePerformanceModel> performances) {
+  Widget _buildPackagePerformanceList(
+    List<PackagePerformanceModel> performances,
+  ) {
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -294,7 +368,9 @@ class TripsDashboardScreen extends GetView<TripsController> {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: isPending ? AppColors.warningLight : AppColors.tripsServiceBg,
+                color: isPending
+                    ? AppColors.warningLight
+                    : AppColors.tripsServiceBg,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
@@ -309,7 +385,10 @@ class TripsDashboardScreen extends GetView<TripsController> {
                 children: [
                   Text(
                     p.title,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13.5,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -330,12 +409,21 @@ class TripsDashboardScreen extends GetView<TripsController> {
                 if (!isPending)
                   Text(
                     Formatters.currency(p.revenue),
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.tripsService),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: AppColors.tripsService,
+                    ),
                   ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
-                    color: isPending ? AppColors.warningLight : AppColors.successLight,
+                    color: isPending
+                        ? AppColors.warningLight
+                        : AppColors.successLight,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(

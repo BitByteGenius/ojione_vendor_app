@@ -44,15 +44,19 @@ class MobileBottomNavBar extends StatelessWidget {
 
     if (hasSingleService && singleService != null) {
       // Single service adaptive tab (e.g. Shop, Stay, Rental, Trips, Experiences)
-      navItems.add(MobileNavItem(
-        label: singleService.displayName,
-        icon: singleService.icon,
-        activeIcon: singleService.icon,
-        route: singleService.routePath,
-      ));
+      navItems.add(
+        MobileNavItem(
+          label: singleService.displayName,
+          icon: singleService.icon,
+          activeIcon: singleService.icon,
+          route: singleService.routePath,
+        ),
+      );
 
       // If shop, label is 'Orders', otherwise 'Bookings'
-      final bookingsLabel = singleService == ServiceType.shop ? 'Orders' : 'Bookings';
+      final bookingsLabel = singleService == ServiceType.shop
+          ? 'Orders'
+          : 'Bookings';
       final bookingsIcon = singleService == ServiceType.shop
           ? Icons.shopping_bag_outlined
           : Icons.calendar_today_outlined;
@@ -60,42 +64,52 @@ class MobileBottomNavBar extends StatelessWidget {
           ? Icons.shopping_bag_rounded
           : Icons.calendar_today_rounded;
 
-      navItems.add(MobileNavItem(
-        label: bookingsLabel,
-        icon: bookingsIcon,
-        activeIcon: bookingsActiveIcon,
-        route: '/bookings',
-      ));
+      navItems.add(
+        MobileNavItem(
+          label: bookingsLabel,
+          icon: bookingsIcon,
+          activeIcon: bookingsActiveIcon,
+          route: '/bookings',
+        ),
+      );
     } else {
       // Multiple services: 'Services' hub tab + 'Bookings' tab
-      navItems.add(const MobileNavItem(
-        label: 'Services',
-        icon: Icons.grid_view_outlined,
-        activeIcon: Icons.grid_view_rounded,
-        route: '/services-hub',
-      ));
+      navItems.add(
+        const MobileNavItem(
+          label: 'Services',
+          icon: Icons.grid_view_outlined,
+          activeIcon: Icons.grid_view_rounded,
+          route: '/services-hub',
+        ),
+      );
 
-      navItems.add(const MobileNavItem(
-        label: 'Bookings',
-        icon: Icons.calendar_today_outlined,
-        activeIcon: Icons.calendar_today_rounded,
-        route: '/bookings',
-      ));
+      navItems.add(
+        const MobileNavItem(
+          label: 'Bookings',
+          icon: Icons.calendar_today_outlined,
+          activeIcon: Icons.calendar_today_rounded,
+          route: '/bookings',
+        ),
+      );
     }
 
-    navItems.add(const MobileNavItem(
-      label: 'Earnings',
-      icon: Icons.account_balance_wallet_outlined,
-      activeIcon: Icons.account_balance_wallet_rounded,
-      route: '/earnings',
-    ));
+    navItems.add(
+      const MobileNavItem(
+        label: 'Earnings',
+        icon: Icons.account_balance_wallet_outlined,
+        activeIcon: Icons.account_balance_wallet_rounded,
+        route: '/earnings',
+      ),
+    );
 
-    navItems.add(const MobileNavItem(
-      label: 'Profile',
-      icon: Icons.person_outline_rounded,
-      activeIcon: Icons.person_rounded,
-      route: '/profile',
-    ));
+    navItems.add(
+      const MobileNavItem(
+        label: 'Profile',
+        icon: Icons.person_outline_rounded,
+        activeIcon: Icons.person_rounded,
+        route: '/profile',
+      ),
+    );
 
     return navItems;
   }
@@ -126,7 +140,9 @@ class MobileBottomNavBar extends StatelessWidget {
         top: false,
         child: Container(
           height: 60,
-          padding: const EdgeInsets.symmetric(horizontal: AppDimensions.spaceSm),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.spaceSm,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(navItems.length, (index) {
@@ -148,7 +164,10 @@ class MobileBottomNavBar extends StatelessWidget {
                           AnimatedContainer(
                             duration: const Duration(milliseconds: 200),
                             curve: Curves.easeOut,
-                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 3,
+                            ),
                             decoration: BoxDecoration(
                               color: isSelected
                                   ? AppColors.primary.withAlpha(25)
@@ -158,7 +177,9 @@ class MobileBottomNavBar extends StatelessWidget {
                             child: Icon(
                               isSelected ? item.activeIcon : item.icon,
                               size: 22,
-                              color: isSelected ? AppColors.primary : AppColors.textSecondary,
+                              color: isSelected
+                                  ? AppColors.primary
+                                  : AppColors.textSecondary,
                             ),
                           ),
                           const SizedBox(height: 2),
@@ -168,8 +189,12 @@ class MobileBottomNavBar extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 11,
-                              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                              color: isSelected ? AppColors.primary : AppColors.textSecondary,
+                              fontWeight: isSelected
+                                  ? FontWeight.w700
+                                  : FontWeight.w500,
+                              color: isSelected
+                                  ? AppColors.primary
+                                  : AppColors.textSecondary,
                             ),
                           ),
                         ],

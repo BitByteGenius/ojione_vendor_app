@@ -18,7 +18,8 @@ class RegistrationStatusScreen extends StatelessWidget {
 
     return AuthLayout(
       title: 'Registration Status',
-      subtitle: 'Your partner application has been recorded in the SewaSetu network.',
+      subtitle:
+          'Your partner application has been recorded in the SewaSetu network.',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -30,7 +31,10 @@ class RegistrationStatusScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.successLight,
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColors.success.withAlpha(80), width: 2),
+                border: Border.all(
+                  color: AppColors.success.withAlpha(80),
+                  width: 2,
+                ),
               ),
               child: const Icon(
                 Icons.verified_user_rounded,
@@ -53,11 +57,15 @@ class RegistrationStatusScreen extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Center(
-            child: Obx(() => Text(
-                  'Hello, ${auth.ownerName.value}! Your vendor registration is provisioned. Your isolated service workspace is ready for setup.',
-                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.lightTextSecondary),
-                  textAlign: TextAlign.center,
-                )),
+            child: Obx(
+              () => Text(
+                'Hello, ${auth.ownerName.value}! Your vendor registration is provisioned. Your isolated service workspace is ready for setup.',
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.lightTextSecondary,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
           const SizedBox(height: AppDimensions.spaceLg),
 
@@ -73,18 +81,31 @@ class RegistrationStatusScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('KYC Verification', style: TextStyle(color: Colors.grey, fontSize: 13)),
+                    const Text(
+                      'KYC Verification',
+                      style: TextStyle(color: Colors.grey, fontSize: 13),
+                    ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFFEF3C7),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFFF59E0B), width: 0.8),
+                        border: Border.all(
+                          color: const Color(0xFFF59E0B),
+                          width: 0.8,
+                        ),
                       ),
                       child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.hourglass_top_rounded, size: 12, color: Color(0xFFB45309)),
+                          Icon(
+                            Icons.hourglass_top_rounded,
+                            size: 12,
+                            color: Color(0xFFB45309),
+                          ),
                           SizedBox(width: 4),
                           Text(
                             'Documents In Review',
@@ -103,18 +124,31 @@ class RegistrationStatusScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Portal Access', style: TextStyle(color: Colors.grey, fontSize: 13)),
+                    const Text(
+                      'Portal Access',
+                      style: TextStyle(color: Colors.grey, fontSize: 13),
+                    ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFDCFCE7),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFF22C55E), width: 0.8),
+                        border: Border.all(
+                          color: const Color(0xFF22C55E),
+                          width: 0.8,
+                        ),
                       ),
                       child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.check_circle_rounded, size: 12, color: Color(0xFF15803D)),
+                          Icon(
+                            Icons.check_circle_rounded,
+                            size: 12,
+                            color: Color(0xFF15803D),
+                          ),
                           SizedBox(width: 4),
                           Text(
                             'Active & Ready',
@@ -144,11 +178,17 @@ class RegistrationStatusScreen extends StatelessWidget {
                     runSpacing: 8,
                     children: services.map((service) {
                       return Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
                           color: service.bgColor,
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: service.color.withAlpha(120), width: 1),
+                          border: Border.all(
+                            color: service.color.withAlpha(120),
+                            width: 1,
+                          ),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,

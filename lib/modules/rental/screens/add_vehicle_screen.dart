@@ -19,7 +19,8 @@ class AddVehicleScreen extends GetView<RentalController> {
         padding: const EdgeInsets.all(AppDimensions.spaceLg),
         child: AppCard(
           title: 'Vehicle Registration & Details',
-          subtitle: 'Provide vehicle specifications and select the authorized operating city',
+          subtitle:
+              'Provide vehicle specifications and select the authorized operating city',
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -47,16 +48,24 @@ class AddVehicleScreen extends GetView<RentalController> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Operating City (Backend-Driven)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                  const Text(
+                    'Operating City (Backend-Driven)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
                   const SizedBox(height: 6),
-                  Obx(() => DropdownButtonFormField<String>(
-                        initialValue: controller.selectedCity.value,
-                        decoration: const InputDecoration(),
-                        items: controller.cities
-                            .map((c) => DropdownMenuItem(value: c, child: Text(c)))
-                            .toList(),
-                        onChanged: (v) => controller.selectedCity.value = v ?? 'Guwahati',
-                      )),
+                  Obx(
+                    () => DropdownButtonFormField<String>(
+                      initialValue: controller.selectedCity.value,
+                      decoration: const InputDecoration(),
+                      items: controller.cities
+                          .map(
+                            (c) => DropdownMenuItem(value: c, child: Text(c)),
+                          )
+                          .toList(),
+                      onChanged: (v) =>
+                          controller.selectedCity.value = v ?? 'Guwahati',
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: AppDimensions.spaceMd),
@@ -71,18 +80,33 @@ class AddVehicleScreen extends GetView<RentalController> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Rental Type', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                  const Text(
+                    'Rental Type',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
                   const SizedBox(height: 6),
-                  Obx(() => DropdownButtonFormField<String>(
-                        initialValue: controller.selectedRentalType.value,
-                        decoration: const InputDecoration(),
-                        items: const [
-                          DropdownMenuItem(value: 'Both', child: Text('Self-Drive & Chauffeur')),
-                          DropdownMenuItem(value: 'Self-Drive', child: Text('Self-Drive Only')),
-                          DropdownMenuItem(value: 'Chauffeur Driven', child: Text('With Chauffeur Only')),
-                        ],
-                        onChanged: (v) => controller.selectedRentalType.value = v ?? 'Both',
-                      )),
+                  Obx(
+                    () => DropdownButtonFormField<String>(
+                      initialValue: controller.selectedRentalType.value,
+                      decoration: const InputDecoration(),
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'Both',
+                          child: Text('Self-Drive & Chauffeur'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Self-Drive',
+                          child: Text('Self-Drive Only'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Chauffeur Driven',
+                          child: Text('With Chauffeur Only'),
+                        ),
+                      ],
+                      onChanged: (v) =>
+                          controller.selectedRentalType.value = v ?? 'Both',
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: AppDimensions.spaceXl),

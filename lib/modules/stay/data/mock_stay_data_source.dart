@@ -46,10 +46,30 @@ class MockStayDataSource implements StayDataSource {
         BarGroupDataModel(x: 6, label: 'Sun', value: 26),
       ],
       bookingStatusBreakdown: const [
-        PieSliceDataModel(label: 'Confirmed', value: 98, color: AppColors.primary, displayValue: '98 (53%)'),
-        PieSliceDataModel(label: 'Completed', value: 62, color: Color(0xFF2563EB), displayValue: '62 (34%)'),
-        PieSliceDataModel(label: 'Pending Check-in', value: 16, color: Color(0xFFD97706), displayValue: '16 (9%)'),
-        PieSliceDataModel(label: 'Cancelled', value: 8, color: Color(0xFFDC2626), displayValue: '8 (4%)'),
+        PieSliceDataModel(
+          label: 'Confirmed',
+          value: 98,
+          color: AppColors.primary,
+          displayValue: '98 (53%)',
+        ),
+        PieSliceDataModel(
+          label: 'Completed',
+          value: 62,
+          color: Color(0xFF2563EB),
+          displayValue: '62 (34%)',
+        ),
+        PieSliceDataModel(
+          label: 'Pending Check-in',
+          value: 16,
+          color: Color(0xFFD97706),
+          displayValue: '16 (9%)',
+        ),
+        PieSliceDataModel(
+          label: 'Cancelled',
+          value: 8,
+          color: Color(0xFFDC2626),
+          displayValue: '8 (4%)',
+        ),
       ],
       propertyPerformances: const [
         PropertyPerformanceModel(
@@ -148,14 +168,16 @@ class MockStayDataSource implements StayDataSource {
           guestName: 'Arjun Sen',
           propertyName: 'Kaziranga Eco-Lodge',
           rating: 5.0,
-          comment: 'Outstanding Assamese food, serene cottages right beside the tea bushes. Will visit again!',
+          comment:
+              'Outstanding Assamese food, serene cottages right beside the tea bushes. Will visit again!',
           date: 'Yesterday',
         ),
         StayReviewModel(
           guestName: 'Pooja Hegde',
           propertyName: 'Brahmaputra Riverside Stay',
           rating: 4.8,
-          comment: 'Spectacular sunset view over the river and very welcoming staff.',
+          comment:
+              'Spectacular sunset view over the river and very welcoming staff.',
           date: '3 days ago',
         ),
       ],
@@ -171,7 +193,8 @@ class MockStayDataSource implements StayDataSource {
       PropertyModel(
         id: 'prop-001',
         name: 'Kaziranga Eco-Lodge & Heritage Retreat',
-        description: 'Serene forest lodge overlooking tea gardens with authentic Assamese cottages.',
+        description:
+            'Serene forest lodge overlooking tea gardens with authentic Assamese cottages.',
         propertyType: 'Resort',
         address: 'Kohora Range, Kaziranga National Park',
         city: 'Kaziranga',
@@ -191,8 +214,18 @@ class MockStayDataSource implements StayDataSource {
             totalRooms: 6,
             basePricePerNight: 4500,
             amenities: [
-              AmenityModel(id: 'a1', name: 'King Bed', icon: 'bed', category: 'Bedroom'),
-              AmenityModel(id: 'a2', name: 'Air Conditioning', icon: 'ac_unit', category: 'Climate'),
+              AmenityModel(
+                id: 'a1',
+                name: 'King Bed',
+                icon: 'bed',
+                category: 'Bedroom',
+              ),
+              AmenityModel(
+                id: 'a2',
+                name: 'Air Conditioning',
+                icon: 'ac_unit',
+                category: 'Climate',
+              ),
             ],
             images: [],
           ),
@@ -205,24 +238,44 @@ class MockStayDataSource implements StayDataSource {
             totalRooms: 6,
             basePricePerNight: 6800,
             amenities: [
-              AmenityModel(id: 'a1', name: 'King Bed', icon: 'bed', category: 'Bedroom'),
+              AmenityModel(
+                id: 'a1',
+                name: 'King Bed',
+                icon: 'bed',
+                category: 'Bedroom',
+              ),
             ],
             images: [],
           ),
         ],
         amenities: [
-          AmenityModel(id: 'a1', name: 'Free WiFi', icon: 'wifi', category: 'Internet'),
-          AmenityModel(id: 'a2', name: 'Free Parking', icon: 'local_parking', category: 'Parking'),
+          AmenityModel(
+            id: 'a1',
+            name: 'Free WiFi',
+            icon: 'wifi',
+            category: 'Internet',
+          ),
+          AmenityModel(
+            id: 'a2',
+            name: 'Free Parking',
+            icon: 'local_parking',
+            category: 'Parking',
+          ),
         ],
         images: [
-          PropertyImageModel(id: 'img1', url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945', isFeatured: true),
+          PropertyImageModel(
+            id: 'img1',
+            url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945',
+            isFeatured: true,
+          ),
         ],
         createdAt: DateTime.now().subtract(const Duration(days: 45)),
       ),
       PropertyModel(
         id: 'prop-002',
         name: 'Brahmaputra Riverside Boutique Homestay',
-        description: 'Peaceful riverside stay offering home-cooked ethnic meals and sunset boat rides.',
+        description:
+            'Peaceful riverside stay offering home-cooked ethnic meals and sunset boat rides.',
         propertyType: 'Homestay',
         address: 'Uzanbazar Ghat Road',
         city: 'Guwahati',
@@ -259,7 +312,9 @@ class MockStayDataSource implements StayDataSource {
   }
 
   @override
-  Future<ApiResponse<List<StayAvailabilityModel>>> getAvailability(String propertyId) async {
+  Future<ApiResponse<List<StayAvailabilityModel>>> getAvailability(
+    String propertyId,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 200));
     final now = DateTime.now();
     final list = List.generate(
@@ -279,6 +334,9 @@ class MockStayDataSource implements StayDataSource {
   @override
   Future<ApiResponse<bool>> createProperty(Map<String, dynamic> data) async {
     await Future.delayed(const Duration(milliseconds: 300));
-    return ApiResponse.success(data: true, message: 'Property submitted for approval');
+    return ApiResponse.success(
+      data: true,
+      message: 'Property submitted for approval',
+    );
   }
 }

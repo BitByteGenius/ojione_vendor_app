@@ -11,7 +11,7 @@ class VendorHomeController extends GetxController {
   final auth = AuthService.to;
 
   VendorHomeController({VendorHomeRepository? repository})
-      : repository = repository ?? VendorHomeRepository();
+    : repository = repository ?? VendorHomeRepository();
 
   // Bottom navigation tab index
   final currentTabIndex = 0.obs;
@@ -62,7 +62,8 @@ class VendorHomeController extends GetxController {
 
   double get settledBalance => summary.value?.settledBalance ?? 0.0;
   double get nextSettlement => summary.value?.nextSettlement ?? 0.0;
-  String get settlementCycle => summary.value?.settlementCycle ?? 'Cycle: Friday';
+  String get settlementCycle =>
+      summary.value?.settlementCycle ?? 'Cycle: Friday';
 
   List<VendorActivityItem> get activities {
     return summary.value?.activities ?? [];

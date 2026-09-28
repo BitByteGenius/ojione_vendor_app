@@ -1,7 +1,10 @@
 class Validators {
   Validators._();
 
-  static String? required(String? value, {String message = 'This field is required'}) {
+  static String? required(
+    String? value, {
+    String message = 'This field is required',
+  }) {
     if (value == null || value.trim().isEmpty) {
       return message;
     }
@@ -40,7 +43,10 @@ class Validators {
     return null;
   }
 
-  static String? numeric(String? value, {String message = 'Please enter a valid number'}) {
+  static String? numeric(
+    String? value, {
+    String message = 'Please enter a valid number',
+  }) {
     if (value == null || value.trim().isEmpty) {
       return null;
     }

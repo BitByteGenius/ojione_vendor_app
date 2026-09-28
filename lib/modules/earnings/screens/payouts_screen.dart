@@ -23,7 +23,8 @@ class PayoutsScreen extends GetView<EarningsController> {
           padding: const EdgeInsets.all(AppDimensions.spaceLg),
           child: AppCard(
             title: 'Completed Bank Disbursements',
-            subtitle: 'Direct NEFT/RTGS bank transfers processed into your verified account',
+            subtitle:
+                'Direct NEFT/RTGS bank transfers processed into your verified account',
             child: ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -35,13 +36,20 @@ class PayoutsScreen extends GetView<EarningsController> {
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Row(
                     children: [
-                      const Icon(Icons.account_balance_rounded, color: Colors.teal, size: 24),
+                      const Icon(
+                        Icons.account_balance_rounded,
+                        color: Colors.teal,
+                        size: 24,
+                      ),
                       const SizedBox(width: AppDimensions.spaceMd),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('${po.payoutReference} — ${po.bankName}', style: AppTextStyles.h4),
+                            Text(
+                              '${po.payoutReference} — ${po.bankName}',
+                              style: AppTextStyles.h4,
+                            ),
                             const SizedBox(height: 2),
                             Text(
                               'Account: ${po.accountNumber} • UTR: ${po.utrNumber} • Settled: ${Formatters.date(po.processedAt)}',
@@ -52,7 +60,9 @@ class PayoutsScreen extends GetView<EarningsController> {
                       ),
                       Text(
                         Formatters.currency(po.amount),
-                        style: AppTextStyles.h4.copyWith(fontWeight: FontWeight.bold),
+                        style: AppTextStyles.h4.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(width: AppDimensions.spaceMd),
                       AppStatusChip(status: po.status),

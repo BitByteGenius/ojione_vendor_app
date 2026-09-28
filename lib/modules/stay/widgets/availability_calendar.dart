@@ -27,10 +27,18 @@ class StayAvailabilityCalendarWidget extends StatelessWidget {
             margin: const EdgeInsets.only(right: AppDimensions.spaceSm),
             padding: const EdgeInsets.all(AppDimensions.spaceSm),
             decoration: BoxDecoration(
-              color: isBlocked ? AppColors.errorLight.withAlpha(50) : (available == 0 ? Colors.grey.shade100 : AppColors.successLight.withAlpha(50)),
+              color: isBlocked
+                  ? AppColors.errorLight.withAlpha(50)
+                  : (available == 0
+                        ? Colors.grey.shade100
+                        : AppColors.successLight.withAlpha(50)),
               borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
               border: Border.all(
-                color: isBlocked ? AppColors.error.withAlpha(100) : (available == 0 ? Colors.grey.shade300 : AppColors.success.withAlpha(100)),
+                color: isBlocked
+                    ? AppColors.error.withAlpha(100)
+                    : (available == 0
+                          ? Colors.grey.shade300
+                          : AppColors.success.withAlpha(100)),
                 width: 1,
               ),
             ),
@@ -39,7 +47,9 @@ class StayAvailabilityCalendarWidget extends StatelessWidget {
               children: [
                 Text(
                   Formatters.date(av.date, format: 'EEE, dd MMM'),
-                  style: AppTextStyles.caption.copyWith(fontWeight: FontWeight.bold),
+                  style: AppTextStyles.caption.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 Text(
@@ -51,10 +61,7 @@ class StayAvailabilityCalendarWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 2),
-                Text(
-                  '${av.bookedUnits} Booked',
-                  style: AppTextStyles.caption,
-                ),
+                Text('${av.bookedUnits} Booked', style: AppTextStyles.caption),
               ],
             ),
           );

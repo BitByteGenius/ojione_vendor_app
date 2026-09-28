@@ -4,7 +4,8 @@ class ExperienceModel {
   final String id;
   final String title;
   final String description;
-  final String category; // 'Cooking Class', 'Village Experience', 'Craft Workshop', etc.
+  final String
+  category; // 'Cooking Class', 'Village Experience', 'Craft Workshop', etc.
   final String city;
   final String meetingPoint;
   final double durationHours;
@@ -49,20 +50,26 @@ class ExperienceModel {
       category: json['category'] ?? 'Cultural Experience',
       city: json['city'] ?? 'Guwahati',
       meetingPoint: json['meeting_point'] ?? json['meetingPoint'] ?? '',
-      durationHours: (json['duration_hours'] ?? json['durationHours'] ?? 2.5).toDouble(),
+      durationHours: (json['duration_hours'] ?? json['durationHours'] ?? 2.5)
+          .toDouble(),
       maxCapacity: json['max_capacity'] ?? json['maxCapacity'] ?? 10,
-      pricePerPerson: (json['price_per_person'] ?? json['pricePerPerson'] ?? 0).toDouble(),
+      pricePerPerson: (json['price_per_person'] ?? json['pricePerPerson'] ?? 0)
+          .toDouble(),
       whatsIncluded: List<String>.from(json['whats_included'] ?? []),
       whatsNotIncluded: List<String>.from(json['whats_not_included'] ?? []),
       requirements: json['requirements'] ?? 'Comfortable walking shoes',
-      cancellationPolicy: json['cancellation_policy'] ?? 'Free cancellation up to 24 hours before start time',
+      cancellationPolicy:
+          json['cancellation_policy'] ??
+          'Free cancellation up to 24 hours before start time',
       status: json['status'] ?? 'draft',
       rating: (json['rating'] ?? 4.9).toDouble(),
       reviewsCount: json['reviews_count'] ?? 0,
       schedules: (json['schedules'] as List<dynamic>? ?? [])
           .map((s) => ExperienceScheduleModel.fromJson(s))
           .toList(),
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : DateTime.now(),
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
     );
   }
 

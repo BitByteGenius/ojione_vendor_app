@@ -10,11 +10,7 @@ class RoomCard extends StatelessWidget {
   final RoomModel room;
   final VoidCallback? onEdit;
 
-  const RoomCard({
-    super.key,
-    required this.room,
-    this.onEdit,
-  });
+  const RoomCard({super.key, required this.room, this.onEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +23,11 @@ class RoomCard extends StatelessWidget {
               color: AppColors.stayServiceBg,
               borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
             ),
-            child: const Icon(Icons.bed_rounded, color: AppColors.stayService, size: 24),
+            child: const Icon(
+              Icons.bed_rounded,
+              color: AppColors.stayService,
+              size: 24,
+            ),
           ),
           const SizedBox(width: AppDimensions.spaceMd),
           Expanded(

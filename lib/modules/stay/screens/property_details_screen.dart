@@ -17,9 +17,12 @@ class PropertyDetailsScreen extends GetView<StayController> {
 
   @override
   Widget build(BuildContext context) {
-    final PropertyModel prop = Get.arguments as PropertyModel? ??
+    final PropertyModel prop =
+        Get.arguments as PropertyModel? ??
         controller.selectedProperty.value ??
-        (controller.properties.isNotEmpty ? controller.properties.first : _fallbackProperty());
+        (controller.properties.isNotEmpty
+            ? controller.properties.first
+            : _fallbackProperty());
 
     return MainLayout(
       title: prop.name,
@@ -77,27 +80,45 @@ class PropertyDetailsScreen extends GetView<StayController> {
                           children: [
                             Text(
                               prop.name,
-                              style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Text(
                               '${prop.propertyType} • ${prop.city}, ${prop.state}',
-                              style: const TextStyle(color: Colors.white70, fontSize: 12),
+                              style: const TextStyle(
+                                color: Colors.white70,
+                                fontSize: 12,
+                              ),
                             ),
                           ],
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.black.withValues(alpha: 0.6),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Row(
                             children: [
-                              const Icon(Icons.photo_library_outlined, color: Colors.white, size: 14),
+                              const Icon(
+                                Icons.photo_library_outlined,
+                                color: Colors.white,
+                                size: 14,
+                              ),
                               const SizedBox(width: 4),
                               Text(
                                 '${prop.images.length} Photos',
-                                style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ],
                           ),
@@ -121,7 +142,11 @@ class PropertyDetailsScreen extends GetView<StayController> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(Icons.location_on_outlined, size: 18, color: AppColors.primary),
+                      const Icon(
+                        Icons.location_on_outlined,
+                        size: 18,
+                        color: AppColors.primary,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -134,7 +159,11 @@ class PropertyDetailsScreen extends GetView<StayController> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(Icons.access_time_rounded, size: 18, color: AppColors.primary),
+                      const Icon(
+                        Icons.access_time_rounded,
+                        size: 18,
+                        color: AppColors.primary,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -161,7 +190,8 @@ class PropertyDetailsScreen extends GetView<StayController> {
                     '${Formatters.currency(prop.basePricePerNight)} / night',
                     Icons.payments_rounded,
                   ),
-                  if (prop.pricePerMonth != null || prop.displayPricePerMonth > 0)
+                  if (prop.pricePerMonth != null ||
+                      prop.displayPricePerMonth > 0)
                     _buildDetailBadge(
                       'Monthly Rent',
                       '${Formatters.currency(prop.displayPricePerMonth)} / month',
@@ -202,15 +232,28 @@ class PropertyDetailsScreen extends GetView<StayController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (prop.amenities.isNotEmpty) ...[
-                      const Text('Amenities:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                      const Text(
+                        'Amenities:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
+                      ),
                       const SizedBox(height: 8),
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
                         children: prop.amenities.map((a) {
                           return Chip(
-                            avatar: const Icon(Icons.check_circle_rounded, size: 14, color: AppColors.primary),
-                            label: Text(a.name, style: const TextStyle(fontSize: 12)),
+                            avatar: const Icon(
+                              Icons.check_circle_rounded,
+                              size: 14,
+                              color: AppColors.primary,
+                            ),
+                            label: Text(
+                              a.name,
+                              style: const TextStyle(fontSize: 12),
+                            ),
                             backgroundColor: AppColors.primaryLight,
                           );
                         }).toList(),
@@ -218,15 +261,28 @@ class PropertyDetailsScreen extends GetView<StayController> {
                       const SizedBox(height: 16),
                     ],
                     if (prop.houseRules.isNotEmpty) ...[
-                      const Text('House Rules & Policies:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                      const Text(
+                        'House Rules & Policies:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
+                      ),
                       const SizedBox(height: 8),
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
                         children: prop.houseRules.map((rule) {
                           return Chip(
-                            avatar: const Icon(Icons.rule_rounded, size: 14, color: Colors.indigo),
-                            label: Text(rule, style: const TextStyle(fontSize: 12)),
+                            avatar: const Icon(
+                              Icons.rule_rounded,
+                              size: 14,
+                              color: Colors.indigo,
+                            ),
+                            label: Text(
+                              rule,
+                              style: const TextStyle(fontSize: 12),
+                            ),
                             backgroundColor: Colors.indigo.shade50,
                           );
                         }).toList(),
@@ -249,13 +305,16 @@ class PropertyDetailsScreen extends GetView<StayController> {
               child: prop.rooms.isEmpty
                   ? const Padding(
                       padding: EdgeInsets.symmetric(vertical: 16),
-                      child: Text('No room sub-units defined. Listing operates as a single inventory unit.'),
+                      child: Text(
+                        'No room sub-units defined. Listing operates as a single inventory unit.',
+                      ),
                     )
                   : ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: prop.rooms.length,
-                      separatorBuilder: (_, index) => const SizedBox(height: AppDimensions.spaceSm),
+                      separatorBuilder: (_, index) =>
+                          const SizedBox(height: AppDimensions.spaceSm),
                       itemBuilder: (context, index) {
                         return RoomCard(room: prop.rooms[index]);
                       },
@@ -283,8 +342,14 @@ class PropertyDetailsScreen extends GetView<StayController> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
-            Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+            Text(
+              label,
+              style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+            ),
+            Text(
+              value,
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ],

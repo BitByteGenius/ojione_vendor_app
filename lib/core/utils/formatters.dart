@@ -4,7 +4,10 @@ import '../constants/app_constants.dart';
 class Formatters {
   Formatters._();
 
-  static String currency(num amount, {String symbol = AppConstants.currencySymbol}) {
+  static String currency(
+    num amount, {
+    String symbol = AppConstants.currencySymbol,
+  }) {
     final formatter = NumberFormat.currency(
       locale: 'en_IN',
       symbol: '$symbol ',

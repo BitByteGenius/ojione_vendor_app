@@ -42,7 +42,9 @@ class MapPickerDialog extends StatefulWidget {
       context: context,
       barrierDismissible: true,
       builder: (ctx) => Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusLg)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.radiusLg),
+        ),
         clipBehavior: Clip.antiAlias,
         insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: ConstrainedBox(
@@ -61,7 +63,8 @@ class MapPickerDialog extends StatefulWidget {
   State<MapPickerDialog> createState() => _MapPickerDialogState();
 }
 
-class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProviderStateMixin {
+class _MapPickerDialogState extends State<MapPickerDialog>
+    with SingleTickerProviderStateMixin {
   late double _latitude;
   late double _longitude;
   late TextEditingController _searchController;
@@ -103,7 +106,9 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
     super.initState();
     _latitude = widget.initialLatitude;
     _longitude = widget.initialLongitude;
-    _selectedLocality = widget.initialAddress.isNotEmpty ? widget.initialAddress : 'Pinpoint on Map';
+    _selectedLocality = widget.initialAddress.isNotEmpty
+        ? widget.initialAddress
+        : 'Pinpoint on Map';
     _searchController = TextEditingController(text: widget.initialAddress);
     _latController = TextEditingController(text: _latitude.toStringAsFixed(5));
     _lngController = TextEditingController(text: _longitude.toStringAsFixed(5));
@@ -138,15 +143,18 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
     setState(() {
       _pinOffset = details.localPosition;
       // Calculate delta from center to simulate coordinate adjustments
-      final dx = (details.localPosition.dx - (size.width / 2)) / (size.width / 2);
-      final dy = (details.localPosition.dy - (size.height / 2)) / (size.height / 2);
+      final dx =
+          (details.localPosition.dx - (size.width / 2)) / (size.width / 2);
+      final dy =
+          (details.localPosition.dy - (size.height / 2)) / (size.height / 2);
 
       _latitude = math.max(-90.0, math.min(90.0, _latitude - (dy * 0.008)));
       _longitude = math.max(-180.0, math.min(180.0, _longitude + (dx * 0.008)));
 
       _latController.text = _latitude.toStringAsFixed(5);
       _lngController.text = _longitude.toStringAsFixed(5);
-      _selectedLocality = 'Selected Pin (${_latitude.toStringAsFixed(4)}, ${_longitude.toStringAsFixed(4)})';
+      _selectedLocality =
+          'Selected Pin (${_latitude.toStringAsFixed(4)}, ${_longitude.toStringAsFixed(4)})';
     });
   }
 
@@ -161,10 +169,17 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
       children: [
         // Header
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: AppDimensions.spaceLg, vertical: AppDimensions.spaceMd),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.spaceLg,
+            vertical: AppDimensions.spaceMd,
+          ),
           decoration: BoxDecoration(
             color: isDark ? AppColors.darkSurface : Colors.white,
-            border: Border(bottom: BorderSide(color: isDark ? AppColors.darkBorder : AppColors.lightBorder)),
+            border: Border(
+              bottom: BorderSide(
+                color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+              ),
+            ),
           ),
           child: Row(
             children: [
@@ -174,18 +189,27 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                   color: AppColors.primaryLight,
                   borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
                 ),
-                child: const Icon(Icons.location_on_rounded, color: AppColors.primary, size: 22),
+                child: const Icon(
+                  Icons.location_on_rounded,
+                  color: AppColors.primary,
+                  size: 22,
+                ),
               ),
               const SizedBox(width: AppDimensions.spaceSm),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Select Property Location Pin', style: AppTextStyles.h4),
+                    Text(
+                      'Select Property Location Pin',
+                      style: AppTextStyles.h4,
+                    ),
                     const SizedBox(height: 2),
                     Text(
                       'Tap or drag anywhere on the map to set exact coordinates',
-                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.textMuted),
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.textMuted,
+                      ),
                     ),
                   ],
                 ),
@@ -200,7 +224,12 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
 
         // Quick Search & Presets
         Padding(
-          padding: const EdgeInsets.fromLTRB(AppDimensions.spaceLg, AppDimensions.spaceMd, AppDimensions.spaceLg, 8),
+          padding: const EdgeInsets.fromLTRB(
+            AppDimensions.spaceLg,
+            AppDimensions.spaceMd,
+            AppDimensions.spaceLg,
+            8,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -208,16 +237,28 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                 controller: _searchController,
                 decoration: InputDecoration(
                   hintText: 'Search locality, street, or landmark...',
-                  prefixIcon: const Icon(Icons.search_rounded, color: AppColors.primary),
+                  prefixIcon: const Icon(
+                    Icons.search_rounded,
+                    color: AppColors.primary,
+                  ),
                   suffixIcon: IconButton(
-                    icon: const Icon(Icons.my_location_rounded, color: AppColors.primary),
+                    icon: const Icon(
+                      Icons.my_location_rounded,
+                      color: AppColors.primary,
+                    ),
                     tooltip: 'Current GPS Location',
                     onPressed: () {
                       _applyPreset(_presets[0]);
-                      Get.snackbar('GPS', 'Acquired current vendor coordinates');
+                      Get.snackbar(
+                        'GPS',
+                        'Acquired current vendor coordinates',
+                      );
                     },
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                 ),
                 onSubmitted: (query) {
                   if (query.isNotEmpty) {
@@ -245,13 +286,25 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                           preset['name'],
                           style: TextStyle(
                             fontSize: 12,
-                            fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                            color: isSelected ? Colors.white : AppColors.textPrimary,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.w500,
+                            color: isSelected
+                                ? Colors.white
+                                : AppColors.textPrimary,
                           ),
                         ),
-                        backgroundColor: isSelected ? AppColors.primary : (isDark ? AppColors.darkSurface : AppColors.lightBackground),
+                        backgroundColor: isSelected
+                            ? AppColors.primary
+                            : (isDark
+                                  ? AppColors.darkSurface
+                                  : AppColors.lightBackground),
                         side: BorderSide(
-                          color: isSelected ? AppColors.primary : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
+                          color: isSelected
+                              ? AppColors.primary
+                              : (isDark
+                                    ? AppColors.darkBorder
+                                    : AppColors.lightBorder),
                         ),
                         onPressed: () => _applyPreset(preset),
                       ),
@@ -266,14 +319,20 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
         // Map Canvas Area
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppDimensions.spaceLg, vertical: 6),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.spaceLg,
+              vertical: 6,
+            ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
               child: Stack(
                 children: [
                   LayoutBuilder(
                     builder: (context, constraints) {
-                      final size = Size(constraints.maxWidth, constraints.maxHeight);
+                      final size = Size(
+                        constraints.maxWidth,
+                        constraints.maxHeight,
+                      );
                       return GestureDetector(
                         onTapDown: (details) => _onMapTap(details, size),
                         child: CustomPaint(
@@ -293,7 +352,10 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.black.withValues(alpha: 0.85),
                               borderRadius: BorderRadius.circular(12),
@@ -308,7 +370,11 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Icon(Icons.place_rounded, color: Colors.amber, size: 14),
+                                const Icon(
+                                  Icons.place_rounded,
+                                  color: Colors.amber,
+                                  size: 14,
+                                ),
                                 const SizedBox(width: 4),
                                 Text(
                                   '${_latitude.toStringAsFixed(4)}, ${_longitude.toStringAsFixed(4)}',
@@ -333,16 +399,25 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                                   decoration: BoxDecoration(
                                     color: AppColors.primary,
                                     shape: BoxShape.circle,
-                                    border: Border.all(color: Colors.white, width: 3),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 3,
+                                    ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: AppColors.primary.withValues(alpha: 0.4),
+                                        color: AppColors.primary.withValues(
+                                          alpha: 0.4,
+                                        ),
                                         blurRadius: 10,
                                         spreadRadius: 2,
                                       ),
                                     ],
                                   ),
-                                  child: const Icon(Icons.home_work_rounded, color: Colors.white, size: 24),
+                                  child: const Icon(
+                                    Icons.home_work_rounded,
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
                                 ),
                               );
                             },
@@ -372,7 +447,10 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                     top: 12,
                     left: 12,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.95),
                         borderRadius: BorderRadius.circular(20),
@@ -386,7 +464,11 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.touch_app_rounded, size: 14, color: AppColors.primary),
+                          const Icon(
+                            Icons.touch_app_rounded,
+                            size: 14,
+                            color: AppColors.primary,
+                          ),
                           const SizedBox(width: 6),
                           Text(
                             'Click map to reposition pin',
@@ -407,11 +489,19 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                     child: Column(
                       children: [
                         _buildZoomButton(Icons.add, () {
-                          Get.snackbar('Zoom', 'Zoomed in (+1)', duration: const Duration(seconds: 1));
+                          Get.snackbar(
+                            'Zoom',
+                            'Zoomed in (+1)',
+                            duration: const Duration(seconds: 1),
+                          );
                         }),
                         const SizedBox(height: 4),
                         _buildZoomButton(Icons.remove, () {
-                          Get.snackbar('Zoom', 'Zoomed out (-1)', duration: const Duration(seconds: 1));
+                          Get.snackbar(
+                            'Zoom',
+                            'Zoomed out (-1)',
+                            duration: const Duration(seconds: 1),
+                          );
                         }),
                       ],
                     ),
@@ -427,7 +517,11 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
           padding: const EdgeInsets.all(AppDimensions.spaceLg),
           decoration: BoxDecoration(
             color: isDark ? AppColors.darkSurface : Colors.white,
-            border: Border(top: BorderSide(color: isDark ? AppColors.darkBorder : AppColors.lightBorder)),
+            border: Border(
+              top: BorderSide(
+                color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+              ),
+            ),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -438,19 +532,32 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Latitude', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                        const Text(
+                          'Latitude',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         const SizedBox(height: 4),
                         TextField(
                           controller: _latController,
-                          keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+                          keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true,
+                            signed: true,
+                          ),
                           decoration: const InputDecoration(
                             isDense: true,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 8,
+                            ),
                             prefixIcon: Icon(Icons.explore_outlined, size: 16),
                           ),
                           onChanged: (v) {
                             final parsed = double.tryParse(v);
-                            if (parsed != null) setState(() => _latitude = parsed);
+                            if (parsed != null)
+                              setState(() => _latitude = parsed);
                           },
                         ),
                       ],
@@ -461,19 +568,32 @@ class _MapPickerDialogState extends State<MapPickerDialog> with SingleTickerProv
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Longitude', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                        const Text(
+                          'Longitude',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         const SizedBox(height: 4),
                         TextField(
                           controller: _lngController,
-                          keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+                          keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true,
+                            signed: true,
+                          ),
                           decoration: const InputDecoration(
                             isDense: true,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 8,
+                            ),
                             prefixIcon: Icon(Icons.explore_outlined, size: 16),
                           ),
                           onChanged: (v) {
                             final parsed = double.tryParse(v);
-                            if (parsed != null) setState(() => _longitude = parsed);
+                            if (parsed != null)
+                              setState(() => _longitude = parsed);
                           },
                         ),
                       ],
@@ -549,17 +669,35 @@ class _MapCanvasPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // Background terrain
-    final bgPaint = Paint()..color = isDark ? const Color(0xFF1E293B) : const Color(0xFFE8ECEF);
+    final bgPaint = Paint()
+      ..color = isDark ? const Color(0xFF1E293B) : const Color(0xFFE8ECEF);
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), bgPaint);
 
     // Parks / Green spaces
-    final greenPaint = Paint()..color = isDark ? const Color(0xFF1E3A2F) : const Color(0xFFD1E7DD);
+    final greenPaint = Paint()
+      ..color = isDark ? const Color(0xFF1E3A2F) : const Color(0xFFD1E7DD);
     canvas.drawRRect(
-      RRect.fromRectAndRadius(Rect.fromLTWH(size.width * 0.1, size.height * 0.15, size.width * 0.3, size.height * 0.25), const Radius.circular(16)),
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(
+          size.width * 0.1,
+          size.height * 0.15,
+          size.width * 0.3,
+          size.height * 0.25,
+        ),
+        const Radius.circular(16),
+      ),
       greenPaint,
     );
     canvas.drawRRect(
-      RRect.fromRectAndRadius(Rect.fromLTWH(size.width * 0.65, size.height * 0.55, size.width * 0.28, size.height * 0.32), const Radius.circular(20)),
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(
+          size.width * 0.65,
+          size.height * 0.55,
+          size.width * 0.28,
+          size.height * 0.32,
+        ),
+        const Radius.circular(20),
+      ),
       greenPaint,
     );
 
@@ -572,7 +710,12 @@ class _MapCanvasPainter extends CustomPainter {
 
     final waterPath = Path();
     waterPath.moveTo(0, size.height * 0.75);
-    waterPath.quadraticBezierTo(size.width * 0.4, size.height * 0.85, size.width, size.height * 0.45);
+    waterPath.quadraticBezierTo(
+      size.width * 0.4,
+      size.height * 0.85,
+      size.width,
+      size.height * 0.45,
+    );
     canvas.drawPath(waterPath, waterPaint);
 
     // Major Highways / Roads
@@ -610,14 +753,24 @@ class _MapCanvasPainter extends CustomPainter {
 
     textPainter.text = TextSpan(
       text: 'NH-37 / EXPRESSWAY',
-      style: TextStyle(color: labelColor, fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 1.5),
+      style: TextStyle(
+        color: labelColor,
+        fontSize: 9,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 1.5,
+      ),
     );
     textPainter.layout();
     textPainter.paint(canvas, Offset(size.width * 0.15, size.height * 0.36));
 
     textPainter.text = TextSpan(
       text: 'METRO STATION & TECH PARK',
-      style: TextStyle(color: labelColor, fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+      style: TextStyle(
+        color: labelColor,
+        fontSize: 9,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 1.2,
+      ),
     );
     textPainter.layout();
     textPainter.paint(canvas, Offset(size.width * 0.54, size.height * 0.12));

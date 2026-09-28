@@ -43,22 +43,33 @@ class BookingModel {
   factory BookingModel.fromJson(Map<String, dynamic> json) {
     return BookingModel(
       id: json['id'] ?? '',
-      bookingReference: json['booking_reference'] ?? json['bookingReference'] ?? '',
+      bookingReference:
+          json['booking_reference'] ?? json['bookingReference'] ?? '',
       serviceType: ServiceType.fromString(json['service_type'] ?? 'stay'),
       itemName: json['item_name'] ?? json['itemName'] ?? '',
       customerName: json['customer_name'] ?? json['customerName'] ?? '',
       customerEmail: json['customer_email'] ?? json['customerEmail'] ?? '',
       customerPhone: json['customer_phone'] ?? json['customerPhone'] ?? '',
-      startDate: json['start_date'] != null ? DateTime.parse(json['start_date']) : DateTime.now(),
-      endDate: json['end_date'] != null ? DateTime.parse(json['end_date']) : DateTime.now(),
+      startDate: json['start_date'] != null
+          ? DateTime.parse(json['start_date'])
+          : DateTime.now(),
+      endDate: json['end_date'] != null
+          ? DateTime.parse(json['end_date'])
+          : DateTime.now(),
       guestsOrUnits: json['guests_or_units'] ?? json['guestsOrUnits'] ?? 1,
-      totalAmount: (json['total_amount'] ?? json['totalAmount'] ?? 0).toDouble(),
-      commissionAmount: (json['commission_amount'] ?? json['commissionAmount'] ?? 0).toDouble(),
-      vendorEarnings: (json['vendor_earnings'] ?? json['vendorEarnings'] ?? 0).toDouble(),
+      totalAmount: (json['total_amount'] ?? json['totalAmount'] ?? 0)
+          .toDouble(),
+      commissionAmount:
+          (json['commission_amount'] ?? json['commissionAmount'] ?? 0)
+              .toDouble(),
+      vendorEarnings: (json['vendor_earnings'] ?? json['vendorEarnings'] ?? 0)
+          .toDouble(),
       status: BookingStatus.fromString(json['status'] ?? 'pending'),
       paymentStatus: json['payment_status'] ?? 'paid',
       specialRequests: json['special_requests'],
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : DateTime.now(),
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
     );
   }
 

@@ -1,7 +1,13 @@
 enum UserRole {
   vendor('Vendor', 'Full ownership of vendor account and assigned services'),
-  vendorManager('Vendor Manager', 'Can manage listings, inventory, and bookings'),
-  vendorStaff('Vendor Staff', 'Can view bookings and update check-in/execution statuses');
+  vendorManager(
+    'Vendor Manager',
+    'Can manage listings, inventory, and bookings',
+  ),
+  vendorStaff(
+    'Vendor Staff',
+    'Can view bookings and update check-in/execution statuses',
+  );
 
   final String label;
   final String description;

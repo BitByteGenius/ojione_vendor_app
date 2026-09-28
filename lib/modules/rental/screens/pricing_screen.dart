@@ -38,7 +38,11 @@ class RentalPricingScreen extends GetView<RentalController> {
                           color: Colors.green.withAlpha(25),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Icon(Icons.currency_rupee_rounded, color: Colors.green, size: 20),
+                        child: const Icon(
+                          Icons.currency_rupee_rounded,
+                          color: Colors.green,
+                          size: 20,
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
@@ -59,7 +63,10 @@ class RentalPricingScreen extends GetView<RentalController> {
                                 const SizedBox(width: 8),
                                 Text(
                                   '${Formatters.currency(v.pricePerDay)} / day',
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                  ),
                                 ),
                               ],
                             ),

@@ -72,7 +72,9 @@ class MockVendorHomeDataSource implements VendorHomeDataSource {
   ];
 
   @override
-  Future<VendorHomeSummary> getHomeSummary({required List<ServiceType> assignedServices}) async {
+  Future<VendorHomeSummary> getHomeSummary({
+    required List<ServiceType> assignedServices,
+  }) async {
     // Simulate slight async network/database delay
     await Future.delayed(const Duration(milliseconds: 150));
 
@@ -121,7 +123,9 @@ class MockVendorHomeDataSource implements VendorHomeDataSource {
   }
 
   @override
-  Future<List<VendorActivityItem>> getRecentActivities({required List<ServiceType> assignedServices}) async {
+  Future<List<VendorActivityItem>> getRecentActivities({
+    required List<ServiceType> assignedServices,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 50));
     return _allActivities
         .where((a) => assignedServices.contains(a.service))
@@ -129,7 +133,9 @@ class MockVendorHomeDataSource implements VendorHomeDataSource {
   }
 
   @override
-  Future<List<ServiceQuickStat>> getServiceQuickStats(ServiceType service) async {
+  Future<List<ServiceQuickStat>> getServiceQuickStats(
+    ServiceType service,
+  ) async {
     return _allServiceStats[service] ?? const [];
   }
 }

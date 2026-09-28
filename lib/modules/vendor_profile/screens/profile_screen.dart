@@ -60,8 +60,14 @@ class ProfileScreen extends GetView<VendorProfileController> {
                           radius: 30,
                           backgroundColor: AppColors.primary,
                           child: Text(
-                            p.businessName.isNotEmpty ? p.businessName.substring(0, 1).toUpperCase() : 'V',
-                            style: const TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),
+                            p.businessName.isNotEmpty
+                                ? p.businessName.substring(0, 1).toUpperCase()
+                                : 'V',
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         const SizedBox(width: 14),
@@ -78,24 +84,34 @@ class ProfileScreen extends GetView<VendorProfileController> {
                               const SizedBox(height: 3),
                               Text(
                                 'Authorized: ${auth.ownerName.value}',
-                                style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: AppColors.textSecondary,
+                                ),
                               ),
                               const SizedBox(height: 6),
-                               Wrap(
+                              Wrap(
                                 spacing: 8,
                                 runSpacing: 4,
                                 crossAxisAlignment: WrapCrossAlignment.center,
                                 children: [
                                   AppStatusChip(status: p.verificationStatus),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 6,
+                                      vertical: 2,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: const Color(0xFFF3F4F6),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(
                                       auth.vendorId.value,
-                                      style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.grey),
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -135,7 +151,6 @@ class ProfileScreen extends GetView<VendorProfileController> {
                 ),
               ),
 
-
               const SizedBox(height: AppDimensions.spaceMd),
 
               // 3. Active Marketplace Services (Always visible on mobile!)
@@ -150,11 +165,17 @@ class ProfileScreen extends GetView<VendorProfileController> {
                       runSpacing: 8,
                       children: auth.assignedServices.map((s) {
                         return Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
                           decoration: BoxDecoration(
                             color: s.bgColor,
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: s.color.withAlpha(120), width: 1),
+                            border: Border.all(
+                              color: s.color.withAlpha(120),
+                              width: 1,
+                            ),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -185,17 +206,41 @@ class ProfileScreen extends GetView<VendorProfileController> {
                 title: 'Identity & Address Details',
                 child: Column(
                   children: [
-                    _infoRow('Full Name', auth.ownerName.value, Icons.badge_outlined),
+                    _infoRow(
+                      'Full Name',
+                      auth.ownerName.value,
+                      Icons.badge_outlined,
+                    ),
                     const Divider(height: 14),
-                    _infoRow('Aadhaar Number', auth.aadhaarNumber.value, Icons.fingerprint_rounded),
+                    _infoRow(
+                      'Aadhaar Number',
+                      auth.aadhaarNumber.value,
+                      Icons.fingerprint_rounded,
+                    ),
                     const Divider(height: 14),
-                    _infoRow('Primary Phone', auth.phone.value, Icons.phone_outlined),
+                    _infoRow(
+                      'Primary Phone',
+                      auth.phone.value,
+                      Icons.phone_outlined,
+                    ),
                     const Divider(height: 14),
-                    _infoRow('Gmail / Email', auth.email.value, Icons.email_outlined),
+                    _infoRow(
+                      'Gmail / Email',
+                      auth.email.value,
+                      Icons.email_outlined,
+                    ),
                     const Divider(height: 14),
-                    _infoRow('City & State', '${auth.city.value}, ${auth.state.value} - ${auth.pincode.value}', Icons.location_on_outlined),
+                    _infoRow(
+                      'City & State',
+                      '${auth.city.value}, ${auth.state.value} - ${auth.pincode.value}',
+                      Icons.location_on_outlined,
+                    ),
                     const Divider(height: 14),
-                    _infoRow('Commercial Address', auth.address.value, Icons.home_work_outlined),
+                    _infoRow(
+                      'Commercial Address',
+                      auth.address.value,
+                      Icons.home_work_outlined,
+                    ),
                   ],
                 ),
               ),
@@ -227,11 +272,21 @@ class ProfileScreen extends GetView<VendorProfileController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: AppColors.textSecondary,
+                ),
+              ),
               const SizedBox(height: 2),
               Text(
                 value,
-                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textPrimary,
+                ),
               ),
             ],
           ),
@@ -245,7 +300,9 @@ class ProfileScreen extends GetView<VendorProfileController> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Confirm Logout'),
-        content: const Text('Are you sure you want to log out of your vendor account?'),
+        content: const Text(
+          'Are you sure you want to log out of your vendor account?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),

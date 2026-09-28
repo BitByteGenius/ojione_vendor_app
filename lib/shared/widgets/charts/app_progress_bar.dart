@@ -22,7 +22,9 @@ class AppProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bgTrack = trackColor ?? (isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0));
+    final bgTrack =
+        trackColor ??
+        (isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0));
     final clampedFraction = (percentage / 100.0).clamp(0.0, 1.0);
 
     return Column(
@@ -35,12 +37,18 @@ class AppProgressBar extends StatelessWidget {
               if (label != null)
                 Text(
                   label!,
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               if (trailingText != null)
                 Text(
                   trailingText!,
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
             ],
           ),

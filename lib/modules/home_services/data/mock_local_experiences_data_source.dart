@@ -11,7 +11,8 @@ import 'local_experiences_data_source.dart';
 
 class MockLocalExperiencesDataSource implements LocalExperiencesDataSource {
   @override
-  Future<ApiResponse<LocalExperiencesDashboardAnalytics>> getExperiencesAnalytics() async {
+  Future<ApiResponse<LocalExperiencesDashboardAnalytics>>
+  getExperiencesAnalytics() async {
     await Future.delayed(const Duration(milliseconds: 300));
 
     final analytics = LocalExperiencesDashboardAnalytics(
@@ -41,10 +42,30 @@ class MockLocalExperiencesDataSource implements LocalExperiencesDataSource {
         BarGroupDataModel(x: 6, label: 'Sun', value: 34),
       ],
       bookingStatusBreakdown: const [
-        PieSliceDataModel(label: 'Confirmed', value: 68, color: AppColors.localExpService, displayValue: '68 (58%)'),
-        PieSliceDataModel(label: 'Completed', value: 38, color: Color(0xFF0284C7), displayValue: '38 (32%)'),
-        PieSliceDataModel(label: 'Pending Slots', value: 8, color: Color(0xFFF59E0B), displayValue: '8 (7%)'),
-        PieSliceDataModel(label: 'Cancelled', value: 4, color: Color(0xFFEF4444), displayValue: '4 (3%)'),
+        PieSliceDataModel(
+          label: 'Confirmed',
+          value: 68,
+          color: AppColors.localExpService,
+          displayValue: '68 (58%)',
+        ),
+        PieSliceDataModel(
+          label: 'Completed',
+          value: 38,
+          color: Color(0xFF0284C7),
+          displayValue: '38 (32%)',
+        ),
+        PieSliceDataModel(
+          label: 'Pending Slots',
+          value: 8,
+          color: Color(0xFFF59E0B),
+          displayValue: '8 (7%)',
+        ),
+        PieSliceDataModel(
+          label: 'Cancelled',
+          value: 4,
+          color: Color(0xFFEF4444),
+          displayValue: '4 (3%)',
+        ),
       ],
       experiencePerformances: const [
         ExperiencePerformanceModel(
@@ -142,14 +163,20 @@ class MockLocalExperiencesDataSource implements LocalExperiencesDataSource {
       ExperienceModel(
         id: 'exp-01',
         title: 'Assam Traditional Tea Tasting & Garden Walk',
-        description: 'Guided tour of an organic tea estate, tea leaf plucking session, and tasting 6 rare orthodox and CTC specialty flushes.',
+        description:
+            'Guided tour of an organic tea estate, tea leaf plucking session, and tasting 6 rare orthodox and CTC specialty flushes.',
         category: 'Local Food Experience',
         city: 'Jorhat',
         meetingPoint: 'Toklai Experimental Tea Research Station Gate',
         durationHours: 2.5,
         maxCapacity: 12,
         pricePerPerson: 850,
-        whatsIncluded: ['Tea expert guide', 'Sampling of 6 teas', 'Traditional Assamese pitha snacks', 'Take-home sample pack'],
+        whatsIncluded: [
+          'Tea expert guide',
+          'Sampling of 6 teas',
+          'Traditional Assamese pitha snacks',
+          'Take-home sample pack',
+        ],
         whatsNotIncluded: ['Transport to meeting point'],
         requirements: 'Comfortable outdoor footwear and sun hat',
         cancellationPolicy: 'Full refund up to 24h before',
@@ -172,14 +199,19 @@ class MockLocalExperiencesDataSource implements LocalExperiencesDataSource {
       ExperienceModel(
         id: 'exp-02',
         title: 'Sarthebari Bell-Metal Craft & Blacksmithing Workshop',
-        description: 'Hands-on artisan session learning ancestral hammering and engraving techniques of heritage bell-metal bell craft.',
+        description:
+            'Hands-on artisan session learning ancestral hammering and engraving techniques of heritage bell-metal bell craft.',
         category: 'Craft Workshop',
         city: 'Barpeta',
         meetingPoint: 'Sarthebari Heritage Guild Pavilion',
         durationHours: 3.0,
         maxCapacity: 8,
         pricePerPerson: 1200,
-        whatsIncluded: ['Master artisan instruction', 'Safety gear & raw brass sheet', 'Keep your engraved bowl artifact'],
+        whatsIncluded: [
+          'Master artisan instruction',
+          'Safety gear & raw brass sheet',
+          'Keep your engraved bowl artifact',
+        ],
         whatsNotIncluded: ['Lunch'],
         requirements: 'Minimum age 14 years',
         cancellationPolicy: '48 hours cancellation window',
@@ -197,17 +229,61 @@ class MockLocalExperiencesDataSource implements LocalExperiencesDataSource {
   Future<ApiResponse<List<ExperienceCategoryModel>>> getCategories() async {
     await Future.delayed(const Duration(milliseconds: 150));
     final categories = [
-      ExperienceCategoryModel(id: 'cat-1', name: 'Local Food Experience', icon: 'restaurant_rounded'),
-      ExperienceCategoryModel(id: 'cat-2', name: 'Cooking Class', icon: 'soup_kitchen_rounded'),
-      ExperienceCategoryModel(id: 'cat-3', name: 'Cultural Experience', icon: 'museum_rounded'),
-      ExperienceCategoryModel(id: 'cat-4', name: 'Village Experience', icon: 'cottage_rounded'),
-      ExperienceCategoryModel(id: 'cat-5', name: 'Photography Walk', icon: 'camera_alt_rounded'),
-      ExperienceCategoryModel(id: 'cat-6', name: 'Local Market Tour', icon: 'store_rounded'),
-      ExperienceCategoryModel(id: 'cat-7', name: 'Adventure Activity', icon: 'kayaking_rounded'),
-      ExperienceCategoryModel(id: 'cat-8', name: 'Craft Workshop', icon: 'handyman_rounded'),
-      ExperienceCategoryModel(id: 'cat-9', name: 'Traditional Art Experience', icon: 'palette_rounded'),
-      ExperienceCategoryModel(id: 'cat-10', name: 'Festival Experience', icon: 'celebration_rounded'),
-      ExperienceCategoryModel(id: 'cat-11', name: 'Nature Experience', icon: 'forest_rounded'),
+      ExperienceCategoryModel(
+        id: 'cat-1',
+        name: 'Local Food Experience',
+        icon: 'restaurant_rounded',
+      ),
+      ExperienceCategoryModel(
+        id: 'cat-2',
+        name: 'Cooking Class',
+        icon: 'soup_kitchen_rounded',
+      ),
+      ExperienceCategoryModel(
+        id: 'cat-3',
+        name: 'Cultural Experience',
+        icon: 'museum_rounded',
+      ),
+      ExperienceCategoryModel(
+        id: 'cat-4',
+        name: 'Village Experience',
+        icon: 'cottage_rounded',
+      ),
+      ExperienceCategoryModel(
+        id: 'cat-5',
+        name: 'Photography Walk',
+        icon: 'camera_alt_rounded',
+      ),
+      ExperienceCategoryModel(
+        id: 'cat-6',
+        name: 'Local Market Tour',
+        icon: 'store_rounded',
+      ),
+      ExperienceCategoryModel(
+        id: 'cat-7',
+        name: 'Adventure Activity',
+        icon: 'kayaking_rounded',
+      ),
+      ExperienceCategoryModel(
+        id: 'cat-8',
+        name: 'Craft Workshop',
+        icon: 'handyman_rounded',
+      ),
+      ExperienceCategoryModel(
+        id: 'cat-9',
+        name: 'Traditional Art Experience',
+        icon: 'palette_rounded',
+      ),
+      ExperienceCategoryModel(
+        id: 'cat-10',
+        name: 'Festival Experience',
+        icon: 'celebration_rounded',
+      ),
+      ExperienceCategoryModel(
+        id: 'cat-11',
+        name: 'Nature Experience',
+        icon: 'forest_rounded',
+      ),
     ];
     return ApiResponse.success(data: categories);
   }
@@ -215,6 +291,9 @@ class MockLocalExperiencesDataSource implements LocalExperiencesDataSource {
   @override
   Future<ApiResponse<bool>> createExperience(Map<String, dynamic> data) async {
     await Future.delayed(const Duration(milliseconds: 300));
-    return ApiResponse.success(data: true, message: 'Experience created and submitted for verification');
+    return ApiResponse.success(
+      data: true,
+      message: 'Experience created and submitted for verification',
+    );
   }
 }

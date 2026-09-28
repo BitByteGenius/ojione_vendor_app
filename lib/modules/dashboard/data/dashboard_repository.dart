@@ -8,7 +8,7 @@ class DashboardRepository {
   final DashboardDataSource _dataSource;
 
   DashboardRepository({DashboardDataSource? dataSource})
-      : _dataSource = dataSource ?? MockDashboardDataSource();
+    : _dataSource = dataSource ?? MockDashboardDataSource();
 
   Future<ApiResponse<VendorCoreDashboardModel>> getCoreDashboardData({
     required List<ServiceType> assignedServices,

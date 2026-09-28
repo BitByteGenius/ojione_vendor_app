@@ -21,7 +21,8 @@ class ApiEndpoints {
 
   // Dashboard & Analytics
   static const String dashboardMetrics = '/vendor/dashboard/metrics';
-  static const String dashboardRecentBookings = '/vendor/dashboard/recent-bookings';
+  static const String dashboardRecentBookings =
+      '/vendor/dashboard/recent-bookings';
 
   // Stay Service Endpoints
   static const String stays = '/vendor/stays';

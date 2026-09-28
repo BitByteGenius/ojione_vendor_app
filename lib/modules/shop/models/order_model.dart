@@ -31,7 +31,9 @@ class ShopOrderModel {
       quantity: json['quantity'] ?? 1,
       totalPrice: (json['total_price'] ?? 0).toDouble(),
       status: json['status'] ?? 'processing',
-      orderDate: json['order_date'] != null ? DateTime.parse(json['order_date']) : DateTime.now(),
+      orderDate: json['order_date'] != null
+          ? DateTime.parse(json['order_date'])
+          : DateTime.now(),
     );
   }
 

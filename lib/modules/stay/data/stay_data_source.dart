@@ -8,6 +8,8 @@ abstract class StayDataSource {
   Future<ApiResponse<StayDashboardAnalytics>> getStayAnalytics();
   Future<ApiResponse<List<PropertyModel>>> getProperties();
   Future<ApiResponse<StayPricingModel>> getPricing(String propertyId);
-  Future<ApiResponse<List<StayAvailabilityModel>>> getAvailability(String propertyId);
+  Future<ApiResponse<List<StayAvailabilityModel>>> getAvailability(
+    String propertyId,
+  );
   Future<ApiResponse<bool>> createProperty(Map<String, dynamic> data);
 }

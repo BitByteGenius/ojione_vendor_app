@@ -41,11 +41,7 @@ class AppEmptyState extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppDimensions.spaceMd),
-            Text(
-              title,
-              style: AppTextStyles.h3,
-              textAlign: TextAlign.center,
-            ),
+            Text(title, style: AppTextStyles.h3, textAlign: TextAlign.center),
             const SizedBox(height: AppDimensions.spaceXs),
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 360),

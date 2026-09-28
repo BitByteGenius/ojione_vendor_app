@@ -41,10 +41,7 @@ class EditProfileScreen extends GetView<VendorProfileController> {
                   controller: ownerNameCtrl,
                 ),
                 const SizedBox(height: AppDimensions.spaceMd),
-                AppTextField(
-                  label: 'Email Address',
-                  controller: emailCtrl,
-                ),
+                AppTextField(label: 'Email Address', controller: emailCtrl),
                 const SizedBox(height: AppDimensions.spaceMd),
                 AppTextField(
                   label: 'Primary Phone',

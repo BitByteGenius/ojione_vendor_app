@@ -12,16 +12,14 @@ class PropertyCard extends StatelessWidget {
   final PropertyModel property;
   final VoidCallback? onTap;
 
-  const PropertyCard({
-    super.key,
-    required this.property,
-    this.onTap,
-  });
+  const PropertyCard({super.key, required this.property, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      onTap: onTap ?? () => Get.toNamed('/stay/properties/details', arguments: property),
+      onTap:
+          onTap ??
+          () => Get.toNamed('/stay/properties/details', arguments: property),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,7 +32,11 @@ class PropertyCard extends StatelessWidget {
                   color: AppColors.stayServiceBg,
                   borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
                 ),
-                child: const Icon(Icons.hotel_rounded, size: 36, color: AppColors.stayService),
+                child: const Icon(
+                  Icons.hotel_rounded,
+                  size: 36,
+                  color: AppColors.stayService,
+                ),
               ),
               const SizedBox(width: AppDimensions.spaceMd),
               Expanded(
@@ -65,7 +67,11 @@ class PropertyCard extends StatelessWidget {
                     const SizedBox(height: 6),
                     Row(
                       children: [
-                        const Icon(Icons.star_rounded, color: Colors.amber, size: 16),
+                        const Icon(
+                          Icons.star_rounded,
+                          color: Colors.amber,
+                          size: 16,
+                        ),
                         const SizedBox(width: 4),
                         Flexible(
                           child: Text(

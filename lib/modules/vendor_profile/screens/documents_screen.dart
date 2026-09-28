@@ -28,13 +28,17 @@ class DocumentsScreen extends GetView<VendorProfileController> {
             children: [
               AppCard(
                 title: 'Uploaded Documents',
-                subtitle: 'Government recognized identity & tourism credentials',
+                subtitle:
+                    'Government recognized identity & tourism credentials',
                 trailing: AppButton(
                   text: '+ Upload Document',
                   icon: Icons.upload_file_rounded,
                   height: AppDimensions.buttonHeightSm,
                   onPressed: () {
-                    Get.snackbar('Upload', 'Select a file to upload verification document');
+                    Get.snackbar(
+                      'Upload',
+                      'Select a file to upload verification document',
+                    );
                   },
                 ),
                 child: ListView.separated(
@@ -48,7 +52,11 @@ class DocumentsScreen extends GetView<VendorProfileController> {
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Row(
                         children: [
-                          const Icon(Icons.picture_as_pdf_outlined, color: Colors.redAccent, size: 28),
+                          const Icon(
+                            Icons.picture_as_pdf_outlined,
+                            color: Colors.redAccent,
+                            size: 28,
+                          ),
                           const SizedBox(width: AppDimensions.spaceMd),
                           Expanded(
                             child: Column(

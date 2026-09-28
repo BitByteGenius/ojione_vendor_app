@@ -94,7 +94,10 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                         decoration: BoxDecoration(
                           color: AppColors.primary.withAlpha(50),
                           shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.primaryLight, width: 1.5),
+                          border: Border.all(
+                            color: AppColors.primaryLight,
+                            width: 1.5,
+                          ),
                         ),
                         child: Center(
                           child: Text(
@@ -139,14 +142,19 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                 const SizedBox(width: 8),
                 // Verification pill
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: isVerified
                         ? const Color(0xFF10B981).withAlpha(40)
                         : const Color(0xFFF59E0B).withAlpha(40),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: isVerified ? const Color(0xFF10B981) : const Color(0xFFF59E0B),
+                      color: isVerified
+                          ? const Color(0xFF10B981)
+                          : const Color(0xFFF59E0B),
                       width: 1,
                     ),
                   ),
@@ -154,15 +162,21 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
-                        isVerified ? Icons.check_circle_rounded : Icons.hourglass_empty_rounded,
+                        isVerified
+                            ? Icons.check_circle_rounded
+                            : Icons.hourglass_empty_rounded,
                         size: 13,
-                        color: isVerified ? const Color(0xFF34D399) : const Color(0xFFFBBF24),
+                        color: isVerified
+                            ? const Color(0xFF34D399)
+                            : const Color(0xFFFBBF24),
                       ),
                       const SizedBox(width: 4),
                       Text(
                         isVerified ? 'Verified' : 'Under Review',
                         style: TextStyle(
-                          color: isVerified ? const Color(0xFF34D399) : const Color(0xFFFBBF24),
+                          color: isVerified
+                              ? const Color(0xFF34D399)
+                              : const Color(0xFFFBBF24),
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
                         ),
@@ -181,25 +195,40 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.storefront_rounded, color: Colors.white70, size: 16),
+                  const Icon(
+                    Icons.storefront_rounded,
+                    color: Colors.white70,
+                    size: 16,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       business,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFF10B981),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: const Text(
                       'ACTIVE',
-                      style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -210,7 +239,6 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
       );
     });
   }
-
 
   Widget _buildServicesSection(AuthService auth) {
     return Obx(() {
@@ -228,11 +256,18 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                   children: [
                     const Text(
                       'Your Services',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.textPrimary),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.textPrimary,
+                      ),
                     ),
                     Text(
                       '${assigned.length} registered service${assigned.length > 1 ? 's' : ''} with independent dashboards',
-                      style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -332,12 +367,19 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                             service.description,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppColors.textSecondary,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.grey[400]),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 16,
+                      color: Colors.grey[400],
+                    ),
                   ],
                 ),
                 const SizedBox(height: 14),
@@ -360,7 +402,10 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                                     stat.label,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                      color: AppColors.textSecondary,
+                                    ),
                                   ),
                                   Text(
                                     stat.value,
@@ -381,7 +426,10 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                     ),
                     const SizedBox(width: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: service.color.withAlpha(20),
                         borderRadius: BorderRadius.circular(20),
@@ -398,7 +446,11 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                             ),
                           ),
                           const SizedBox(width: 4),
-                          Icon(Icons.arrow_forward_rounded, size: 13, color: service.color),
+                          Icon(
+                            Icons.arrow_forward_rounded,
+                            size: 13,
+                            color: service.color,
+                          ),
                         ],
                       ),
                     ),
@@ -421,7 +473,11 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
         children: [
           const Text(
             'Quick Actions',
-            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textPrimary,
+            ),
           ),
           const SizedBox(height: AppDimensions.spaceMd),
 
@@ -567,13 +623,21 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
               children: [
                 const Text(
                   'Account Payout Summary',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textPrimary,
+                  ),
                 ),
                 InkWell(
                   onTap: () => Get.toNamed('/earnings'),
                   child: const Text(
                     'View Financials',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.primary),
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.primary,
+                    ),
                   ),
                 ),
               ],
@@ -592,18 +656,31 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Settled Balance', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                        const Text(
+                          'Settled Balance',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
                         const SizedBox(height: 4),
                         FittedBox(
                           fit: BoxFit.scaleDown,
                           alignment: Alignment.centerLeft,
                           child: Text(
                             Formatters.currency(controller.settledBalance),
-                            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.success),
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.success,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 2),
-                        const Text('Available for payout', style: TextStyle(fontSize: 10, color: Colors.grey)),
+                        const Text(
+                          'Available for payout',
+                          style: TextStyle(fontSize: 10, color: Colors.grey),
+                        ),
                       ],
                     ),
                   ),
@@ -620,18 +697,34 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Next Settlement', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                        const Text(
+                          'Next Settlement',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
                         const SizedBox(height: 4),
                         FittedBox(
                           fit: BoxFit.scaleDown,
                           alignment: Alignment.centerLeft,
                           child: Text(
                             Formatters.currency(controller.nextSettlement),
-                            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.secondary),
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.secondary,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 2),
-                        Text(controller.settlementCycle, style: const TextStyle(fontSize: 10, color: Colors.grey)),
+                        Text(
+                          controller.settlementCycle,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.grey,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -656,11 +749,19 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
             children: [
               const Text(
                 'Recent Activity',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.textPrimary,
+                ),
               ),
               Text(
                 'Active Services Only',
-                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey[500]),
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[500],
+                ),
               ),
             ],
           ),
@@ -677,7 +778,10 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
               child: const Center(
                 child: Text(
                   'No recent updates for your services',
-                  style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 13,
+                  ),
                 ),
               ),
             )
@@ -692,14 +796,18 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: activities.length,
-                separatorBuilder: (context, index) => const Divider(height: 1, color: Color(0xFFF3F4F6)),
+                separatorBuilder: (context, index) =>
+                    const Divider(height: 1, color: Color(0xFFF3F4F6)),
                 itemBuilder: (context, index) {
                   final a = activities[index];
                   return InkWell(
                     borderRadius: BorderRadius.circular(AppDimensions.radiusLg),
                     onTap: () => controller.openServiceDashboard(a.service),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 12,
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -717,12 +825,16 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       child: Text(
                                         a.title,
-                                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w700,
+                                        ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -730,14 +842,20 @@ class VendorHomeScreen extends GetView<VendorHomeController> {
                                     const SizedBox(width: 6),
                                     Text(
                                       a.time,
-                                      style: const TextStyle(fontSize: 11, color: Colors.grey),
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 3),
                                 Text(
                                   a.description,
-                                  style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    color: AppColors.textSecondary,
+                                  ),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),

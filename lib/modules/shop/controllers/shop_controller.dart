@@ -58,7 +58,9 @@ class ShopController extends GetxController {
 
   List<ProductModel> get filteredProducts {
     if (selectedStateFilter.value == 'All States') return products;
-    return products.where((p) => p.originState == selectedStateFilter.value).toList();
+    return products
+        .where((p) => p.originState == selectedStateFilter.value)
+        .toList();
   }
 
   Future<void> submitProduct() async {

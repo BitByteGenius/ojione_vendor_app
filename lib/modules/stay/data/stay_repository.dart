@@ -10,7 +10,7 @@ class StayRepository {
   final StayDataSource _dataSource;
 
   StayRepository({StayDataSource? dataSource})
-      : _dataSource = dataSource ?? MockStayDataSource();
+    : _dataSource = dataSource ?? MockStayDataSource();
 
   Future<ApiResponse<StayDashboardAnalytics>> getStayAnalytics() {
     return _dataSource.getStayAnalytics();
@@ -24,7 +24,9 @@ class StayRepository {
     return _dataSource.getPricing(propertyId);
   }
 
-  Future<ApiResponse<List<StayAvailabilityModel>>> getAvailability(String propertyId) {
+  Future<ApiResponse<List<StayAvailabilityModel>>> getAvailability(
+    String propertyId,
+  ) {
     return _dataSource.getAvailability(propertyId);
   }
 

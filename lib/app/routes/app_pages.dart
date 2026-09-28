@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import '../../modules/auth/auth.dart';
 import '../../modules/bookings/bookings.dart';
 import '../../modules/earnings/earnings.dart';
-import '../../modules/local_experiences/local_experiences.dart';
+import '../../modules/home_services/local_experiences.dart';
 import '../../modules/notifications/notifications.dart';
 import '../../modules/rental/rental.dart';
 import '../../modules/settings/settings.dart';
@@ -22,10 +22,7 @@ class AppPages {
 
   static final routes = <GetPage>[
     // Splash & Onboarding
-    GetPage(
-      name: AppRoutes.splash,
-      page: () => const SplashScreen(),
-    ),
+    GetPage(name: AppRoutes.splash, page: () => const SplashScreen()),
 
     // Auth
     GetPage(

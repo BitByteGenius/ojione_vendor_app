@@ -20,7 +20,8 @@ class EarningSummaryModel {
       totalGrossRevenue: (json['total_gross_revenue'] ?? 0).toDouble(),
       totalCommission: (json['total_commission'] ?? 0).toDouble(),
       netEarnings: (json['net_earnings'] ?? 0).toDouble(),
-      availablePayoutBalance: (json['available_payout_balance'] ?? 0).toDouble(),
+      availablePayoutBalance: (json['available_payout_balance'] ?? 0)
+          .toDouble(),
       pendingPayoutBalance: (json['pending_payout_balance'] ?? 0).toDouble(),
       totalWithdrawn: (json['total_withdrawn'] ?? 0).toDouble(),
     );

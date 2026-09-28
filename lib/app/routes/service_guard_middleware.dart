@@ -22,7 +22,10 @@ class ServiceGuardMiddleware extends GetMiddleware {
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: const Color(0xFFFEF2F2),
             colorText: const Color(0xFF991B1B),
-            icon: const Icon(Icons.lock_outline_rounded, color: Color(0xFFDC2626)),
+            icon: const Icon(
+              Icons.lock_outline_rounded,
+              color: Color(0xFFDC2626),
+            ),
             duration: const Duration(seconds: 4),
           );
         });

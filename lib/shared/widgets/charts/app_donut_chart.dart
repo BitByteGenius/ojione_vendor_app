@@ -35,7 +35,10 @@ class _AppDonutChartState extends State<AppDonutChart> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final total = widget.slices.fold<double>(0, (sum, item) => sum + item.value);
+    final total = widget.slices.fold<double>(
+      0,
+      (sum, item) => sum + item.value,
+    );
 
     if (widget.slices.isEmpty || total <= 0) {
       return SizedBox(
@@ -63,10 +66,7 @@ class _AppDonutChartState extends State<AppDonutChart> {
         if (widget.title != null) ...[
           Text(
             widget.title!,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-            ),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: AppDimensions.spaceMd),
         ],
@@ -82,18 +82,20 @@ class _AppDonutChartState extends State<AppDonutChart> {
                     PieChart(
                       PieChartData(
                         pieTouchData: PieTouchData(
-                          touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                            setState(() {
-                              if (!event.isInterestedForInteractions ||
-                                  pieTouchResponse == null ||
-                                  pieTouchResponse.touchedSection == null) {
-                                touchedIndex = -1;
-                                return;
-                              }
-                              touchedIndex =
-                                  pieTouchResponse.touchedSection!.touchedSectionIndex;
-                            });
-                          },
+                          touchCallback:
+                              (FlTouchEvent event, pieTouchResponse) {
+                                setState(() {
+                                  if (!event.isInterestedForInteractions ||
+                                      pieTouchResponse == null ||
+                                      pieTouchResponse.touchedSection == null) {
+                                    touchedIndex = -1;
+                                    return;
+                                  }
+                                  touchedIndex = pieTouchResponse
+                                      .touchedSection!
+                                      .touchedSectionIndex;
+                                });
+                              },
                         ),
                         borderData: FlBorderData(show: false),
                         sectionsSpace: 3,
@@ -101,7 +103,8 @@ class _AppDonutChartState extends State<AppDonutChart> {
                         sections: sections,
                       ),
                     ),
-                    if (widget.centerValue != null || widget.centerLabel != null)
+                    if (widget.centerValue != null ||
+                        widget.centerLabel != null)
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -118,7 +121,9 @@ class _AppDonutChartState extends State<AppDonutChart> {
                               widget.centerLabel!,
                               style: TextStyle(
                                 fontSize: 11,
-                                color: isDark ? Colors.grey[400] : Colors.grey[600],
+                                color: isDark
+                                    ? Colors.grey[400]
+                                    : Colors.grey[600],
                               ),
                             ),
                         ],
@@ -134,7 +139,9 @@ class _AppDonutChartState extends State<AppDonutChart> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: widget.slices.map((slice) {
-                        final pct = total > 0 ? (slice.value / total * 100).toStringAsFixed(0) : '0';
+                        final pct = total > 0
+                            ? (slice.value / total * 100).toStringAsFixed(0)
+                            : '0';
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 4),
                           child: Row(

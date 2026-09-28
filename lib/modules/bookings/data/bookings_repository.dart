@@ -8,7 +8,9 @@ import '../models/booking_status_model.dart';
 class BookingsRepository {
   final ApiClient apiClient = ApiClient.instance;
 
-  Future<ApiResponse<List<BookingModel>>> getBookings({BookingFilterModel? filter}) async {
+  Future<ApiResponse<List<BookingModel>>> getBookings({
+    BookingFilterModel? filter,
+  }) async {
     // API client call ready:
     // final response = await _apiClient.get(ApiEndpoints.bookings, queryParameters: {...});
     // return ApiResponse.fromJson(response.data, (json) => ...);
@@ -94,7 +96,9 @@ class BookingsRepository {
     var result = mockBookings;
     if (filter != null) {
       if (filter.serviceType != null) {
-        result = result.where((b) => b.serviceType == filter.serviceType).toList();
+        result = result
+            .where((b) => b.serviceType == filter.serviceType)
+            .toList();
       }
       if (filter.status != null) {
         result = result.where((b) => b.status == filter.status).toList();
@@ -104,8 +108,14 @@ class BookingsRepository {
     return ApiResponse.success(data: result);
   }
 
-  Future<ApiResponse<bool>> updateBookingStatus(String bookingId, BookingStatus newStatus) async {
+  Future<ApiResponse<bool>> updateBookingStatus(
+    String bookingId,
+    BookingStatus newStatus,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 300));
-    return ApiResponse.success(data: true, message: 'Booking status updated successfully');
+    return ApiResponse.success(
+      data: true,
+      message: 'Booking status updated successfully',
+    );
   }
 }

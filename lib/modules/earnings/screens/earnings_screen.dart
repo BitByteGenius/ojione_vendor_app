@@ -25,7 +25,10 @@ class EarningsScreen extends GetView<EarningsController> {
         onPressed: () {
           final balance = controller.summary.value?.availablePayoutBalance ?? 0;
           if (balance <= 0) {
-            Get.snackbar('Notice', 'No available balance to withdraw at this time');
+            Get.snackbar(
+              'Notice',
+              'No available balance to withdraw at this time',
+            );
             return;
           }
           controller.requestPayout(balance);
@@ -52,7 +55,9 @@ class EarningsScreen extends GetView<EarningsController> {
                       Expanded(
                         child: _financialCard(
                           title: 'Available Payout Balance',
-                          amount: Formatters.currency(s?.availablePayoutBalance ?? 0),
+                          amount: Formatters.currency(
+                            s?.availablePayoutBalance ?? 0,
+                          ),
                           subtitle: 'Ready for bank settlement',
                           color: AppColors.primary,
                           icon: Icons.account_balance_wallet_rounded,
@@ -73,7 +78,9 @@ class EarningsScreen extends GetView<EarningsController> {
                         Expanded(
                           child: _financialCard(
                             title: 'Pending Settlements',
-                            amount: Formatters.currency(s?.pendingPayoutBalance ?? 0),
+                            amount: Formatters.currency(
+                              s?.pendingPayoutBalance ?? 0,
+                            ),
                             subtitle: 'Under clearing period',
                             color: AppColors.warning,
                             icon: Icons.hourglass_empty_rounded,
@@ -111,7 +118,8 @@ class EarningsScreen extends GetView<EarningsController> {
               // Recent Transactions Table
               AppCard(
                 title: 'Recent Commission & Settlement Ledger',
-                subtitle: 'Dynamic commission per service without hardcoded rates',
+                subtitle:
+                    'Dynamic commission per service without hardcoded rates',
                 trailing: TextButton(
                   onPressed: () => Get.toNamed('/earnings/transactions'),
                   child: const Text('See All'),
@@ -131,7 +139,11 @@ class EarningsScreen extends GetView<EarningsController> {
                           CircleAvatar(
                             radius: 18,
                             backgroundColor: tx.serviceType.bgColor,
-                            child: Icon(tx.serviceType.icon, color: tx.serviceType.color, size: 16),
+                            child: Icon(
+                              tx.serviceType.icon,
+                              color: tx.serviceType.color,
+                              size: 16,
+                            ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
@@ -139,7 +151,8 @@ class EarningsScreen extends GetView<EarningsController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       child: Text(
@@ -152,13 +165,16 @@ class EarningsScreen extends GetView<EarningsController> {
                                     const SizedBox(width: 8),
                                     Text(
                                       '+ ${Formatters.currency(tx.netAmount)}',
-                                      style: AppTextStyles.h4.copyWith(color: AppColors.primary),
+                                      style: AppTextStyles.h4.copyWith(
+                                        color: AppColors.primary,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 3),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       child: Text(
@@ -213,7 +229,9 @@ class EarningsScreen extends GetView<EarningsController> {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.caption.copyWith(fontWeight: FontWeight.w600),
+                  style: AppTextStyles.caption.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               const SizedBox(width: 4),
@@ -224,7 +242,13 @@ class EarningsScreen extends GetView<EarningsController> {
           FittedBox(
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerLeft,
-            child: Text(amount, style: AppTextStyles.h2.copyWith(color: color, fontWeight: FontWeight.bold)),
+            child: Text(
+              amount,
+              style: AppTextStyles.h2.copyWith(
+                color: color,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           const SizedBox(height: AppDimensions.spaceXs),
           Text(

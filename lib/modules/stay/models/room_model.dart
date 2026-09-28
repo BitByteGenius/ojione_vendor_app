@@ -34,7 +34,9 @@ class RoomModel {
       roomType: json['room_type'] ?? 'Deluxe Room',
       maxOccupancy: json['max_occupancy'] ?? 2,
       totalRooms: json['total_rooms'] ?? 1,
-      basePricePerNight: (json['base_price_per_night'] ?? json['basePricePerNight'] ?? 0).toDouble(),
+      basePricePerNight:
+          (json['base_price_per_night'] ?? json['basePricePerNight'] ?? 0)
+              .toDouble(),
       amenities: (json['amenities'] as List<dynamic>? ?? [])
           .map((e) => AmenityModel.fromJson(e))
           .toList(),

@@ -40,9 +40,24 @@ class MockRentalDataSource implements RentalDataSource {
         BarGroupDataModel(x: 6, label: 'Sun', value: 22),
       ],
       fleetStatusBreakdown: const [
-        PieSliceDataModel(label: 'Available', value: 8, color: Color(0xFF10B981), displayValue: '8 (57%)'),
-        PieSliceDataModel(label: 'Currently Rented', value: 5, color: AppColors.rentalService, displayValue: '5 (36%)'),
-        PieSliceDataModel(label: 'In Maintenance', value: 1, color: Color(0xFFF59E0B), displayValue: '1 (7%)'),
+        PieSliceDataModel(
+          label: 'Available',
+          value: 8,
+          color: Color(0xFF10B981),
+          displayValue: '8 (57%)',
+        ),
+        PieSliceDataModel(
+          label: 'Currently Rented',
+          value: 5,
+          color: AppColors.rentalService,
+          displayValue: '5 (36%)',
+        ),
+        PieSliceDataModel(
+          label: 'In Maintenance',
+          value: 1,
+          color: Color(0xFFF59E0B),
+          displayValue: '1 (7%)',
+        ),
       ],
       recentBookings: const [
         RentalBookingItemModel(
@@ -156,12 +171,24 @@ class MockRentalDataSource implements RentalDataSource {
   @override
   Future<ApiResponse<List<String>>> getAvailableCities() async {
     await Future.delayed(const Duration(milliseconds: 150));
-    return ApiResponse.success(data: ['Guwahati', 'Dibrugarh', 'Jorhat', 'Shillong', 'Silchar', 'Tezpur']);
+    return ApiResponse.success(
+      data: [
+        'Guwahati',
+        'Dibrugarh',
+        'Jorhat',
+        'Shillong',
+        'Silchar',
+        'Tezpur',
+      ],
+    );
   }
 
   @override
   Future<ApiResponse<bool>> createVehicle(Map<String, dynamic> data) async {
     await Future.delayed(const Duration(milliseconds: 300));
-    return ApiResponse.success(data: true, message: 'Vehicle added successfully');
+    return ApiResponse.success(
+      data: true,
+      message: 'Vehicle added successfully',
+    );
   }
 }

@@ -91,7 +91,10 @@ class ServiceOverviewCard extends StatelessWidget {
       children: [
         Text(label, style: AppTextStyles.caption),
         const SizedBox(height: 2),
-        Text(value, style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.w700)),
+        Text(
+          value,
+          style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.w700),
+        ),
       ],
     );
   }

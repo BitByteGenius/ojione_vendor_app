@@ -24,10 +24,7 @@ class MockAuthDataSource implements AuthDataSource {
       pincode: '781001',
       fullAddress: 'Plot 42, Brahmaputra View Road, Uzanbazar',
       role: UserRole.vendor,
-      assignedServices: [
-        ServiceType.stay,
-        ServiceType.rental,
-      ],
+      assignedServices: [ServiceType.stay, ServiceType.rental],
       permissions: AppPermissions.allPermissions,
       verificationStatus: VendorVerificationStatus.verified,
       accountStatus: VendorStatus.approved,
@@ -43,7 +40,8 @@ class MockAuthDataSource implements AuthDataSource {
     await Future.delayed(const Duration(milliseconds: 350));
 
     // Preset demo accounts for quick testing
-    final vendor = _currentVendor ??
+    final vendor =
+        _currentVendor ??
         VendorModel(
           id: 'VEN-2026-8891',
           fullName: 'Gunajit Sharma',
@@ -91,7 +89,9 @@ class MockAuthDataSource implements AuthDataSource {
     final newVendor = VendorModel(
       id: 'VEN-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
       fullName: fullName,
-      businessName: businessName.isNotEmpty ? businessName : '$fullName Enterprises',
+      businessName: businessName.isNotEmpty
+          ? businessName
+          : '$fullName Enterprises',
       aadhaarNumber: aadhaarNumber,
       phone: phone,
       email: email,
@@ -100,10 +100,13 @@ class MockAuthDataSource implements AuthDataSource {
       pincode: pincode,
       fullAddress: fullAddress,
       role: UserRole.vendor,
-      assignedServices: selectedServices.isNotEmpty ? selectedServices : [ServiceType.stay],
+      assignedServices: selectedServices.isNotEmpty
+          ? selectedServices
+          : [ServiceType.stay],
       permissions: AppPermissions.allPermissions,
       verificationStatus: VendorVerificationStatus.pendingReview,
-      accountStatus: VendorStatus.approved, // allow immediate preview of dashboard
+      accountStatus:
+          VendorStatus.approved, // allow immediate preview of dashboard
       createdAt: DateTime.now(),
     );
 
@@ -121,7 +124,10 @@ class MockAuthDataSource implements AuthDataSource {
     required String otp,
   }) async {
     await Future.delayed(const Duration(milliseconds: 300));
-    return ApiResponse.success(data: true, message: 'OTP verified successfully');
+    return ApiResponse.success(
+      data: true,
+      message: 'OTP verified successfully',
+    );
   }
 
   @override

@@ -19,7 +19,8 @@ class AddPackageScreen extends GetView<TripsController> {
         padding: const EdgeInsets.all(AppDimensions.spaceLg),
         child: AppCard(
           title: 'Trip Details',
-          subtitle: 'Define package title, duration, pricing, and covered destinations',
+          subtitle:
+              'Define package title, duration, pricing, and covered destinations',
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

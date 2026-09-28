@@ -59,12 +59,19 @@ class RentalController extends GetxController {
 
   List<VehicleModel> get filteredVehicles {
     if (selectedCityFilter.value == 'All Cities') return vehicles;
-    return vehicles.where((v) => v.operatingCity == selectedCityFilter.value).toList();
+    return vehicles
+        .where((v) => v.operatingCity == selectedCityFilter.value)
+        .toList();
   }
 
   Future<void> submitVehicle() async {
-    if (makeController.text.isEmpty || modelController.text.isEmpty || regNumberController.text.isEmpty) {
-      Get.snackbar('Validation', 'Make, model, and registration number are required');
+    if (makeController.text.isEmpty ||
+        modelController.text.isEmpty ||
+        regNumberController.text.isEmpty) {
+      Get.snackbar(
+        'Validation',
+        'Make, model, and registration number are required',
+      );
       return;
     }
     try {

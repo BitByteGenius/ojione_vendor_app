@@ -26,7 +26,9 @@ class BookingsController extends GetxController {
       final res = await _repository.getBookings(filter: filter.value);
       if (res.success && res.data != null) {
         final assigned = AuthService.to.assignedServices;
-        final isolated = res.data!.where((b) => assigned.contains(b.serviceType)).toList();
+        final isolated = res.data!
+            .where((b) => assigned.contains(b.serviceType))
+            .toList();
         bookings.assignAll(isolated);
       }
     } catch (e) {

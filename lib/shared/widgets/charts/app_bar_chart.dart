@@ -29,8 +29,12 @@ class AppBarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final gridColor = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
-    final textColor = isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B);
+    final gridColor = isDark
+        ? const Color(0xFF334155)
+        : const Color(0xFFE2E8F0);
+    final textColor = isDark
+        ? const Color(0xFF94A3B8)
+        : const Color(0xFF64748B);
 
     if (groups.isEmpty) {
       return SizedBox(
@@ -39,11 +43,13 @@ class AppBarChart extends StatelessWidget {
       );
     }
 
-    final maxY = groups.map((g) {
-      final v1 = g.value;
-      final v2 = g.secondaryValue ?? 0;
-      return v1 > v2 ? v1 : v2;
-    }).reduce((a, b) => a > b ? a : b);
+    final maxY = groups
+        .map((g) {
+          final v1 = g.value;
+          final v2 = g.secondaryValue ?? 0;
+          return v1 > v2 ? v1 : v2;
+        })
+        .reduce((a, b) => a > b ? a : b);
 
     final barGroups = groups.map((g) {
       final rods = <BarChartRodData>[
@@ -66,11 +72,7 @@ class AppBarChart extends StatelessWidget {
         );
       }
 
-      return BarChartGroupData(
-        x: g.x,
-        barRods: rods,
-        barsSpace: 4,
-      );
+      return BarChartGroupData(x: g.x, barRods: rods, barsSpace: 4);
     }).toList();
 
     return Column(
@@ -130,14 +132,20 @@ class AppBarChart extends StatelessWidget {
               ),
               titlesData: FlTitlesData(
                 show: true,
-                rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                rightTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                topTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
                 bottomTitles: AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,
                     reservedSize: 28,
                     getTitlesWidget: (value, meta) {
-                      final index = groups.indexWhere((g) => g.x == value.toInt());
+                      final index = groups.indexWhere(
+                        (g) => g.x == value.toInt(),
+                      );
                       if (index >= 0 && index < groups.length) {
                         return Padding(
                           padding: const EdgeInsets.only(top: 6),

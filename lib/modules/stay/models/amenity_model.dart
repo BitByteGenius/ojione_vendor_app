@@ -21,11 +21,6 @@ class AmenityModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'icon': icon,
-      'category': category,
-    };
+    return {'id': id, 'name': name, 'icon': icon, 'category': category};
   }
 }

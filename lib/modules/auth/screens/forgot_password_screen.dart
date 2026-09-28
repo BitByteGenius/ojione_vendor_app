@@ -16,7 +16,8 @@ class ForgotPasswordScreen extends GetView<AuthController> {
   Widget build(BuildContext context) {
     return AuthLayout(
       title: 'Reset Password',
-      subtitle: 'Enter your registered email address to receive reset instructions.',
+      subtitle:
+          'Enter your registered email address to receive reset instructions.',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -28,11 +29,13 @@ class ForgotPasswordScreen extends GetView<AuthController> {
             validator: Validators.email,
           ),
           const SizedBox(height: AppDimensions.spaceLg),
-          Obx(() => AppButton(
-                text: 'Send Reset Link',
-                isLoading: controller.isLoading.value,
-                onPressed: controller.forgotPassword,
-              )),
+          Obx(
+            () => AppButton(
+              text: 'Send Reset Link',
+              isLoading: controller.isLoading.value,
+              onPressed: controller.forgotPassword,
+            ),
+          ),
           const SizedBox(height: AppDimensions.spaceMd),
           Center(
             child: TextButton(

@@ -78,7 +78,9 @@ class AppDialog extends StatelessWidget {
                 const SizedBox(width: AppDimensions.spaceSm),
                 AppButton(
                   text: confirmText,
-                  type: isDestructive ? AppButtonType.danger : AppButtonType.primary,
+                  type: isDestructive
+                      ? AppButtonType.danger
+                      : AppButtonType.primary,
                   onPressed: onConfirm,
                 ),
               ],

@@ -35,7 +35,8 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final canGoBack = showBackButton || (Navigator.canPop(context));
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = backgroundColor ?? (isDark ? AppColors.darkSurface : Colors.white);
+    final bg =
+        backgroundColor ?? (isDark ? AppColors.darkSurface : Colors.white);
 
     return Container(
       decoration: BoxDecoration(
@@ -50,30 +51,42 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: SafeArea(
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppDimensions.spaceMd),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.spaceMd,
+          ),
           child: SizedBox(
             height: preferredSize.height,
             child: Row(
               children: [
                 if (canGoBack)
                   Padding(
-                    padding: const EdgeInsets.only(right: AppDimensions.spaceSm),
+                    padding: const EdgeInsets.only(
+                      right: AppDimensions.spaceSm,
+                    ),
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
+                        borderRadius: BorderRadius.circular(
+                          AppDimensions.radiusMd,
+                        ),
                         onTap: onBackPressed ?? () => Get.back(),
                         child: Container(
                           width: 38,
                           height: 38,
                           decoration: BoxDecoration(
-                            color: isDark ? AppColors.darkCard : const Color(0xFFF3F4F6),
-                            borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
+                            color: isDark
+                                ? AppColors.darkCard
+                                : const Color(0xFFF3F4F6),
+                            borderRadius: BorderRadius.circular(
+                              AppDimensions.radiusMd,
+                            ),
                           ),
                           child: Icon(
                             Icons.arrow_back_ios_new_rounded,
                             size: 18,
-                            color: isDark ? Colors.white : AppColors.textPrimary,
+                            color: isDark
+                                ? Colors.white
+                                : AppColors.textPrimary,
                           ),
                         ),
                       ),
@@ -146,7 +159,9 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
           color: isVerified ? const Color(0xFFE8F5E9) : const Color(0xFFFFF3E0),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isVerified ? const Color(0xFF81C784) : const Color(0xFFFFB74D),
+            color: isVerified
+                ? const Color(0xFF81C784)
+                : const Color(0xFFFFB74D),
             width: 0.8,
           ),
         ),

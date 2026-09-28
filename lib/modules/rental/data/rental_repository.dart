@@ -8,7 +8,7 @@ class RentalRepository {
   final RentalDataSource _dataSource;
 
   RentalRepository({RentalDataSource? dataSource})
-      : _dataSource = dataSource ?? MockRentalDataSource();
+    : _dataSource = dataSource ?? MockRentalDataSource();
 
   Future<ApiResponse<RentalDashboardAnalytics>> getRentalAnalytics() {
     return _dataSource.getRentalAnalytics();

@@ -68,7 +68,8 @@ class RentalDashboardScreen extends GetView<RentalController> {
                         AppKpiCard(
                           title: 'Total Fleet Size',
                           value: '${a?.totalVehicles ?? 0}',
-                          subtitle: '${a?.availableVehicles ?? 0} Ready • ${a?.inMaintenance ?? 0} Maint',
+                          subtitle:
+                              '${a?.availableVehicles ?? 0} Ready • ${a?.inMaintenance ?? 0} Maint',
                           icon: Icons.directions_car_rounded,
                           color: AppColors.rentalService,
                           trendBadge: 'Fleet',
@@ -95,7 +96,8 @@ class RentalDashboardScreen extends GetView<RentalController> {
                         AppKpiCard(
                           title: 'Rental Gross Revenue',
                           value: Formatters.currency(a?.totalRevenue ?? 0),
-                          subtitle: 'Pending payout: ${Formatters.currency(a?.pendingPayouts ?? 0)}',
+                          subtitle:
+                              'Pending payout: ${Formatters.currency(a?.pendingPayouts ?? 0)}',
                           icon: Icons.account_balance_wallet_rounded,
                           color: AppColors.secondary,
                           trendBadge: '+11.8%',
@@ -124,17 +126,27 @@ class RentalDashboardScreen extends GetView<RentalController> {
                         children: [
                           const Text(
                             'Fleet Utilization Rate',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
                               color: AppColors.rentalService.withAlpha(20),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
                               '${a?.utilizationRate ?? 0}% Utilization',
-                              style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.rentalService, fontSize: 12),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.rentalService,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ],
@@ -151,10 +163,20 @@ class RentalDashboardScreen extends GetView<RentalController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Fleet Status', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                          const Text(
+                            'Fleet Status',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
                           Text(
                             '${a?.availableVehicles ?? 0} Available for Dispatch',
-                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.success),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.success,
+                            ),
                           ),
                         ],
                       ),
@@ -190,7 +212,8 @@ class RentalDashboardScreen extends GetView<RentalController> {
                             flex: 4,
                             child: AppCard(
                               title: 'Fleet Status Breakdown',
-                              subtitle: 'Real-time vehicle availability distribution',
+                              subtitle:
+                                  'Real-time vehicle availability distribution',
                               child: AppDonutChart(
                                 slices: a?.fleetStatusBreakdown ?? [],
                                 centerLabel: 'Fleet',
@@ -217,7 +240,8 @@ class RentalDashboardScreen extends GetView<RentalController> {
                           const SizedBox(height: AppDimensions.spaceLg),
                           AppCard(
                             title: 'Fleet Status Breakdown',
-                            subtitle: 'Real-time vehicle availability distribution',
+                            subtitle:
+                                'Real-time vehicle availability distribution',
                             child: AppDonutChart(
                               slices: a?.fleetStatusBreakdown ?? [],
                               centerLabel: 'Fleet',
@@ -249,7 +273,8 @@ class RentalDashboardScreen extends GetView<RentalController> {
                 // Recent Rental Bookings Table
                 AppCard(
                   title: 'Recent Vehicle Rental Bookings',
-                  subtitle: 'Customer vehicle reservations and trip dispatch logs',
+                  subtitle:
+                      'Customer vehicle reservations and trip dispatch logs',
                   trailing: TextButton(
                     onPressed: () => Get.toNamed('/bookings'),
                     child: const Text('View All Bookings'),
@@ -262,7 +287,8 @@ class RentalDashboardScreen extends GetView<RentalController> {
                 // Active Vehicles List
                 AppCard(
                   title: 'Registered Fleet Inventory',
-                  subtitle: 'Live vehicles available for booking with fuel and transmission details',
+                  subtitle:
+                      'Live vehicles available for booking with fuel and transmission details',
                   trailing: TextButton(
                     onPressed: () => Get.toNamed('/rental/vehicles'),
                     child: const Text('Manage Fleet'),
@@ -283,19 +309,31 @@ class RentalDashboardScreen extends GetView<RentalController> {
       child: Row(
         children: [
           ActionChip(
-            avatar: const Icon(Icons.directions_car_filled_outlined, size: 16, color: AppColors.rentalService),
+            avatar: const Icon(
+              Icons.directions_car_filled_outlined,
+              size: 16,
+              color: AppColors.rentalService,
+            ),
             label: const Text('Vehicles Fleet Catalog'),
             onPressed: () => Get.toNamed('/rental/vehicles'),
           ),
           const SizedBox(width: AppDimensions.spaceSm),
           ActionChip(
-            avatar: const Icon(Icons.event_available_outlined, size: 16, color: AppColors.rentalService),
+            avatar: const Icon(
+              Icons.event_available_outlined,
+              size: 16,
+              color: AppColors.rentalService,
+            ),
             label: const Text('Availability & Booking Calendar'),
             onPressed: () => Get.toNamed('/rental/availability'),
           ),
           const SizedBox(width: AppDimensions.spaceSm),
           ActionChip(
-            avatar: const Icon(Icons.currency_rupee_rounded, size: 16, color: AppColors.rentalService),
+            avatar: const Icon(
+              Icons.currency_rupee_rounded,
+              size: 16,
+              color: AppColors.rentalService,
+            ),
             label: const Text('Tariffs & Security Deposit'),
             onPressed: () => Get.toNamed('/rental/pricing'),
           ),
@@ -306,7 +344,10 @@ class RentalDashboardScreen extends GetView<RentalController> {
 
   Widget _buildRecentBookingsTable(List<RentalBookingItemModel> bookings) {
     if (bookings.isEmpty) {
-      return const Padding(padding: EdgeInsets.all(16), child: Text('No rental bookings found.'));
+      return const Padding(
+        padding: EdgeInsets.all(16),
+        child: Text('No rental bookings found.'),
+      );
     }
 
     return SingleChildScrollView(
@@ -314,30 +355,75 @@ class RentalDashboardScreen extends GetView<RentalController> {
       child: DataTable(
         headingRowColor: WidgetStateProperty.all(const Color(0xFFF8FAFC)),
         columns: const [
-          DataColumn(label: Text('BOOKING ID', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('CUSTOMER', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('VEHICLE & REG #', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('RENTAL DATES', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('AMOUNT', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('STATUS', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
+          DataColumn(
+            label: Text(
+              'BOOKING ID',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'CUSTOMER',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'VEHICLE & REG #',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'RENTAL DATES',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'AMOUNT',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'STATUS',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
         ],
         rows: bookings.map((b) {
           return DataRow(
             cells: [
-              DataCell(Text(b.id, style: const TextStyle(fontWeight: FontWeight.bold))),
+              DataCell(
+                Text(b.id, style: const TextStyle(fontWeight: FontWeight.bold)),
+              ),
               DataCell(Text(b.customerName)),
               DataCell(
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(b.vehicleName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5)),
+                    Text(
+                      b.vehicleName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.5,
+                      ),
+                    ),
                     Text(b.registrationNumber, style: AppTextStyles.caption),
                   ],
                 ),
               ),
-              DataCell(Text(b.rentalDates, style: const TextStyle(fontSize: 12))),
-              DataCell(Text(Formatters.currency(b.amount), style: const TextStyle(fontWeight: FontWeight.bold))),
+              DataCell(
+                Text(b.rentalDates, style: const TextStyle(fontSize: 12)),
+              ),
+              DataCell(
+                Text(
+                  Formatters.currency(b.amount),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
               DataCell(AppStatusChip(status: b.status.name)),
             ],
           );
@@ -348,7 +434,10 @@ class RentalDashboardScreen extends GetView<RentalController> {
 
   Widget _buildFleetList(List<VehicleModel> list) {
     if (list.isEmpty) {
-      return const Padding(padding: EdgeInsets.all(16), child: Text('No vehicles added yet.'));
+      return const Padding(
+        padding: EdgeInsets.all(16),
+        child: Text('No vehicles added yet.'),
+      );
     }
 
     return ListView.separated(
@@ -366,12 +455,18 @@ class RentalDashboardScreen extends GetView<RentalController> {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: isRented ? const Color(0xFFFEF3C7) : AppColors.rentalServiceBg,
+                color: isRented
+                    ? const Color(0xFFFEF3C7)
+                    : AppColors.rentalServiceBg,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
-                v.category.contains('Motorcycle') ? Icons.two_wheeler_rounded : Icons.directions_car_rounded,
-                color: isRented ? const Color(0xFFD97706) : AppColors.rentalService,
+                v.category.contains('Motorcycle')
+                    ? Icons.two_wheeler_rounded
+                    : Icons.directions_car_rounded,
+                color: isRented
+                    ? const Color(0xFFD97706)
+                    : AppColors.rentalService,
               ),
             ),
             const SizedBox(width: 12),
@@ -381,7 +476,10 @@ class RentalDashboardScreen extends GetView<RentalController> {
                 children: [
                   Text(
                     '${v.make} ${v.modelName}',
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13.5,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -401,12 +499,21 @@ class RentalDashboardScreen extends GetView<RentalController> {
               children: [
                 Text(
                   '${Formatters.currency(v.pricePerDay)}/day',
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.rentalService),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: AppColors.rentalService,
+                  ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
-                    color: isRented ? const Color(0xFFFEF3C7) : AppColors.successLight,
+                    color: isRented
+                        ? const Color(0xFFFEF3C7)
+                        : AppColors.successLight,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -414,7 +521,9 @@ class RentalDashboardScreen extends GetView<RentalController> {
                     style: TextStyle(
                       fontSize: 10.5,
                       fontWeight: FontWeight.bold,
-                      color: isRented ? const Color(0xFFD97706) : AppColors.success,
+                      color: isRented
+                          ? const Color(0xFFD97706)
+                          : AppColors.success,
                     ),
                   ),
                 ),

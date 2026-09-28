@@ -32,7 +32,9 @@ class ShopDashboardScreen extends GetView<ShopController> {
       ),
       body: Obx(() {
         if (controller.isLoading.value && controller.analytics.value == null) {
-          return const AppLoader(message: 'Loading Shop analytics & inventory...');
+          return const AppLoader(
+            message: 'Loading Shop analytics & inventory...',
+          );
         }
 
         final a = controller.analytics.value;
@@ -75,8 +77,10 @@ class ShopDashboardScreen extends GetView<ShopController> {
                         ),
                         AppKpiCard(
                           title: 'Inventory Alerts',
-                          value: '${(a?.lowStock ?? 0) + (a?.outOfStock ?? 0)} Alerts',
-                          subtitle: '${a?.lowStock ?? 0} Low Stock • ${a?.outOfStock ?? 0} Out',
+                          value:
+                              '${(a?.lowStock ?? 0) + (a?.outOfStock ?? 0)} Alerts',
+                          subtitle:
+                              '${a?.lowStock ?? 0} Low Stock • ${a?.outOfStock ?? 0} Out',
                           icon: Icons.warning_amber_rounded,
                           color: AppColors.warning,
                           trendBadge: 'Action Req',
@@ -95,7 +99,8 @@ class ShopDashboardScreen extends GetView<ShopController> {
                         AppKpiCard(
                           title: 'Shop Sales Revenue',
                           value: Formatters.currency(a?.totalRevenue ?? 0),
-                          subtitle: 'Pending payout: ${Formatters.currency(a?.pendingPayouts ?? 0)}',
+                          subtitle:
+                              'Pending payout: ${Formatters.currency(a?.pendingPayouts ?? 0)}',
                           icon: Icons.account_balance_wallet_rounded,
                           color: AppColors.secondary,
                           trendBadge: '+19.2%',
@@ -192,7 +197,8 @@ class ShopDashboardScreen extends GetView<ShopController> {
                 // Recent Orders Table
                 AppCard(
                   title: 'Recent Marketplace Orders',
-                  subtitle: 'Latest customer purchases awaiting dispatch or delivered',
+                  subtitle:
+                      'Latest customer purchases awaiting dispatch or delivered',
                   trailing: TextButton(
                     onPressed: () => Get.toNamed('/shop/orders'),
                     child: const Text('View All Orders'),
@@ -205,8 +211,11 @@ class ShopDashboardScreen extends GetView<ShopController> {
                 // Category Performance Section
                 AppCard(
                   title: 'Category Sales Performance',
-                  subtitle: 'Revenue generated and order volume by craft category',
-                  child: _buildCategoryPerformanceList(a?.categoryPerformances ?? []),
+                  subtitle:
+                      'Revenue generated and order volume by craft category',
+                  child: _buildCategoryPerformanceList(
+                    a?.categoryPerformances ?? [],
+                  ),
                 ),
               ],
             ),
@@ -222,19 +231,31 @@ class ShopDashboardScreen extends GetView<ShopController> {
       child: Row(
         children: [
           ActionChip(
-            avatar: const Icon(Icons.inventory_2_outlined, size: 16, color: AppColors.shopService),
+            avatar: const Icon(
+              Icons.inventory_2_outlined,
+              size: 16,
+              color: AppColors.shopService,
+            ),
             label: const Text('Products Catalog'),
             onPressed: () => Get.toNamed('/shop/products'),
           ),
           const SizedBox(width: AppDimensions.spaceSm),
           ActionChip(
-            avatar: const Icon(Icons.shelves, size: 16, color: AppColors.shopService),
+            avatar: const Icon(
+              Icons.shelves,
+              size: 16,
+              color: AppColors.shopService,
+            ),
             label: const Text('Inventory & Stock'),
             onPressed: () => Get.toNamed('/shop/inventory'),
           ),
           const SizedBox(width: AppDimensions.spaceSm),
           ActionChip(
-            avatar: const Icon(Icons.receipt_long_outlined, size: 16, color: AppColors.shopService),
+            avatar: const Icon(
+              Icons.receipt_long_outlined,
+              size: 16,
+              color: AppColors.shopService,
+            ),
             label: const Text('Customer Orders'),
             onPressed: () => Get.toNamed('/shop/orders'),
           ),
@@ -245,7 +266,10 @@ class ShopDashboardScreen extends GetView<ShopController> {
 
   Widget _buildRecentOrdersTable(List<ShopOrderModel> orders) {
     if (orders.isEmpty) {
-      return const Padding(padding: EdgeInsets.all(16), child: Text('No orders recorded.'));
+      return const Padding(
+        padding: EdgeInsets.all(16),
+        child: Text('No orders recorded.'),
+      );
     }
 
     return SingleChildScrollView(
@@ -253,21 +277,69 @@ class ShopDashboardScreen extends GetView<ShopController> {
       child: DataTable(
         headingRowColor: WidgetStateProperty.all(const Color(0xFFF8FAFC)),
         columns: const [
-          DataColumn(label: Text('ORDER #', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('CUSTOMER', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('PRODUCT', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('QTY', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('AMOUNT', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('STATUS', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
+          DataColumn(
+            label: Text(
+              'ORDER #',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'CUSTOMER',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'PRODUCT',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'QTY',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'AMOUNT',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'STATUS',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
         ],
         rows: orders.map((o) {
           return DataRow(
             cells: [
-              DataCell(Text(o.orderNumber, style: const TextStyle(fontWeight: FontWeight.bold))),
+              DataCell(
+                Text(
+                  o.orderNumber,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
               DataCell(Text(o.customerName)),
-              DataCell(Text(o.productName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5))),
+              DataCell(
+                Text(
+                  o.productName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12.5,
+                  ),
+                ),
+              ),
               DataCell(Text('× ${o.quantity}')),
-              DataCell(Text(Formatters.currency(o.totalPrice), style: const TextStyle(fontWeight: FontWeight.bold))),
+              DataCell(
+                Text(
+                  Formatters.currency(o.totalPrice),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
               DataCell(AppStatusChip(status: o.status)),
             ],
           );
@@ -292,7 +364,11 @@ class ShopDashboardScreen extends GetView<ShopController> {
                 color: AppColors.shopServiceBg,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(Icons.storefront_rounded, color: AppColors.shopService, size: 22),
+              child: const Icon(
+                Icons.storefront_rounded,
+                color: AppColors.shopService,
+                size: 22,
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -301,7 +377,10 @@ class ShopDashboardScreen extends GetView<ShopController> {
                 children: [
                   Text(
                     c.categoryName,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13.5,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -318,7 +397,11 @@ class ShopDashboardScreen extends GetView<ShopController> {
             const SizedBox(width: 12),
             Text(
               Formatters.currency(c.revenue),
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.shopService),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: AppColors.shopService,
+              ),
             ),
           ],
         );

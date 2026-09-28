@@ -42,7 +42,8 @@ class VendorModel {
   factory VendorModel.fromJson(Map<String, dynamic> json) {
     return VendorModel(
       id: json['id'] ?? '',
-      fullName: json['full_name'] ?? json['fullName'] ?? json['owner_name'] ?? '',
+      fullName:
+          json['full_name'] ?? json['fullName'] ?? json['owner_name'] ?? '',
       businessName: json['business_name'] ?? json['businessName'] ?? '',
       aadhaarNumber: json['aadhaar_number'] ?? json['aadhaarNumber'] ?? '',
       phone: json['phone'] ?? '',
@@ -50,7 +51,8 @@ class VendorModel {
       city: json['city'] ?? '',
       state: json['state'] ?? '',
       pincode: json['pincode'] ?? '',
-      fullAddress: json['full_address'] ?? json['fullAddress'] ?? json['address'] ?? '',
+      fullAddress:
+          json['full_address'] ?? json['fullAddress'] ?? json['address'] ?? '',
       role: UserRole.fromString(json['role'] ?? 'vendor'),
       assignedServices: (json['assigned_services'] as List<dynamic>? ?? [])
           .map((e) => ServiceType.fromString(e.toString()))

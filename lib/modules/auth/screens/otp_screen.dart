@@ -15,7 +15,8 @@ class OtpScreen extends GetView<AuthController> {
   Widget build(BuildContext context) {
     return AuthLayout(
       title: 'Verify Mobile Number',
-      subtitle: 'Please enter the 6-digit OTP sent to your registered mobile number.',
+      subtitle:
+          'Please enter the 6-digit OTP sent to your registered mobile number.',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -27,16 +28,21 @@ class OtpScreen extends GetView<AuthController> {
             prefixIcon: const Icon(Icons.security_rounded, size: 20),
           ),
           const SizedBox(height: AppDimensions.spaceLg),
-          Obx(() => AppButton(
-                text: 'Verify & Enter Dashboard',
-                isLoading: controller.isLoading.value,
-                onPressed: controller.verifyOtp,
-              )),
+          Obx(
+            () => AppButton(
+              text: 'Verify & Enter Dashboard',
+              isLoading: controller.isLoading.value,
+              onPressed: controller.verifyOtp,
+            ),
+          ),
           const SizedBox(height: AppDimensions.spaceMd),
           Center(
             child: TextButton(
               onPressed: () {
-                Get.snackbar('Sent', 'A new OTP has been dispatched to your mobile');
+                Get.snackbar(
+                  'Sent',
+                  'A new OTP has been dispatched to your mobile',
+                );
               },
               child: Text(
                 'Resend OTP Code',

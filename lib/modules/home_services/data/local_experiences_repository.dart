@@ -9,9 +9,10 @@ class LocalExperiencesRepository {
   final LocalExperiencesDataSource _dataSource;
 
   LocalExperiencesRepository({LocalExperiencesDataSource? dataSource})
-      : _dataSource = dataSource ?? MockLocalExperiencesDataSource();
+    : _dataSource = dataSource ?? MockLocalExperiencesDataSource();
 
-  Future<ApiResponse<LocalExperiencesDashboardAnalytics>> getExperiencesAnalytics() {
+  Future<ApiResponse<LocalExperiencesDashboardAnalytics>>
+  getExperiencesAnalytics() {
     return _dataSource.getExperiencesAnalytics();
   }
 

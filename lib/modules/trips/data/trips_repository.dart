@@ -8,7 +8,7 @@ class TripsRepository {
   final TripsDataSource _dataSource;
 
   TripsRepository({TripsDataSource? dataSource})
-      : _dataSource = dataSource ?? MockTripsDataSource();
+    : _dataSource = dataSource ?? MockTripsDataSource();
 
   Future<ApiResponse<TripsDashboardAnalytics>> getTripsAnalytics() {
     return _dataSource.getTripsAnalytics();

@@ -6,7 +6,7 @@ import '../../../shared/widgets/mobile_app_bar.dart';
 import '../../../shared/widgets/mobile_bottom_nav_bar.dart';
 import '../../bookings/screens/bookings_screen.dart';
 import '../../earnings/screens/earnings_screen.dart';
-import '../../local_experiences/screens/experiences_dashboard_screen.dart';
+import '../../home_services/screens/experiences_dashboard_screen.dart';
 import '../../rental/screens/rental_dashboard_screen.dart';
 import '../../shop/screens/shop_dashboard_screen.dart';
 import '../../stay/screens/stay_dashboard_screen.dart';
@@ -29,9 +29,7 @@ class VendorShellScreen extends GetView<VendorHomeController> {
       final singleService = hasSingleService ? assigned.first : null;
 
       // Construct pages according to single vs multi service assignment
-      final pages = <Widget>[
-        const VendorHomeScreen(),
-      ];
+      final pages = <Widget>[const VendorHomeScreen()];
 
       if (hasSingleService && singleService != null) {
         // Tab 1: Dedicated Dashboard for that single service
@@ -63,10 +61,7 @@ class VendorShellScreen extends GetView<VendorHomeController> {
           showVendorBadge: activeIndex == 0,
           showNotificationBell: true,
         ),
-        body: IndexedStack(
-          index: activeIndex,
-          children: pages,
-        ),
+        body: IndexedStack(index: activeIndex, children: pages),
         bottomNavigationBar: MobileBottomNavBar(
           currentIndex: activeIndex,
           onTap: controller.changeTab,
@@ -91,7 +86,11 @@ class VendorShellScreen extends GetView<VendorHomeController> {
     }
   }
 
-  String _getAppBarTitle(int index, bool hasSingleService, ServiceType? singleService) {
+  String _getAppBarTitle(
+    int index,
+    bool hasSingleService,
+    ServiceType? singleService,
+  ) {
     if (index == 0) return 'SewaSetu Vendor';
     if (index == 1) {
       return hasSingleService && singleService != null

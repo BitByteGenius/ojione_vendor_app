@@ -44,7 +44,9 @@ class ProductModel {
           .toList(),
       rating: (json['rating'] ?? 4.8).toDouble(),
       salesCount: json['sales_count'] ?? 0,
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : DateTime.now(),
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
     );
   }
 

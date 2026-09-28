@@ -39,7 +39,9 @@ class AuthService extends GetxService {
     ServiceType.rental,
   }.obs;
 
-  final RxList<String> permissions = <String>[...AppPermissions.allPermissions].obs;
+  final RxList<String> permissions = <String>[
+    ...AppPermissions.allPermissions,
+  ].obs;
 
   @override
   void onInit() {
@@ -128,10 +130,14 @@ class AuthService extends GetxService {
   }
 
   // Demo profile switchers to instantly test strict service separation
-  void setDemoVendorAStayRental() => applyVendorProfile(MockVendorProfiles.vendorA);
-  void setDemoVendorBShopOnly() => applyVendorProfile(MockVendorProfiles.vendorB);
-  void setDemoVendorCTripsExperiences() => applyVendorProfile(MockVendorProfiles.vendorC);
-  void setDemoVendorDStayShopExperiences() => applyVendorProfile(MockVendorProfiles.vendorD);
+  void setDemoVendorAStayRental() =>
+      applyVendorProfile(MockVendorProfiles.vendorA);
+  void setDemoVendorBShopOnly() =>
+      applyVendorProfile(MockVendorProfiles.vendorB);
+  void setDemoVendorCTripsExperiences() =>
+      applyVendorProfile(MockVendorProfiles.vendorC);
+  void setDemoVendorDStayShopExperiences() =>
+      applyVendorProfile(MockVendorProfiles.vendorD);
 
   void setRole(UserRole role) {
     currentRole.value = role;
@@ -154,7 +160,11 @@ class AuthService extends GetxService {
     Get.offAllNamed('/login');
   }
 
-  void login({required String token, required List<ServiceType> services, required UserRole role}) {
+  void login({
+    required String token,
+    required List<ServiceType> services,
+    required UserRole role,
+  }) {
     isLoggedIn.value = true;
     ApiClient.instance.setAuthToken(token);
     assignedServices.assignAll(services);

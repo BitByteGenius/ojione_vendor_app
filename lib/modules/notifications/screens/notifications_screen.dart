@@ -35,7 +35,8 @@ class NotificationsScreen extends GetView<NotificationsController> {
           padding: const EdgeInsets.all(AppDimensions.spaceLg),
           child: AppCard(
             title: 'System & Service Alerts',
-            subtitle: 'Real-time updates regarding bookings, approvals, and payouts',
+            subtitle:
+                'Real-time updates regarding bookings, approvals, and payouts',
             child: ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -58,7 +59,11 @@ class NotificationsScreen extends GetView<NotificationsController> {
                         CircleAvatar(
                           radius: 18,
                           backgroundColor: _typeColor(n.type).withAlpha(25),
-                          child: Icon(_typeIcon(n.type), color: _typeColor(n.type), size: 18),
+                          child: Icon(
+                            _typeIcon(n.type),
+                            color: _typeColor(n.type),
+                            size: 18,
+                          ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
@@ -96,7 +101,10 @@ class NotificationsScreen extends GetView<NotificationsController> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 4),
-                              Text(Formatters.dateTime(n.createdAt), style: AppTextStyles.caption),
+                              Text(
+                                Formatters.dateTime(n.createdAt),
+                                style: AppTextStyles.caption,
+                              ),
                             ],
                           ),
                         ),

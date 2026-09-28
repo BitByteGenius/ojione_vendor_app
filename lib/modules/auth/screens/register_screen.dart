@@ -17,7 +17,8 @@ class RegisterScreen extends GetView<AuthController> {
   Widget build(BuildContext context) {
     return AuthLayout(
       title: 'Join SewaSetu Partner Network',
-      subtitle: 'Register your business and choose the marketplace service(s) you wish to operate.',
+      subtitle:
+          'Register your business and choose the marketplace service(s) you wish to operate.',
       child: Obx(() {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -70,7 +71,9 @@ class RegisterScreen extends GetView<AuthController> {
       children: List.generate(steps.length, (index) {
         final isCompleted = step > index;
         final isCurrent = step == index;
-        final color = isCompleted || isCurrent ? AppColors.primary : Colors.grey[300]!;
+        final color = isCompleted || isCurrent
+            ? AppColors.primary
+            : Colors.grey[300]!;
 
         return Expanded(
           child: Row(
@@ -86,7 +89,9 @@ class RegisterScreen extends GetView<AuthController> {
                           decoration: BoxDecoration(
                             color: isCompleted
                                 ? AppColors.primary
-                                : (isCurrent ? AppColors.primaryLight : Colors.grey[200]),
+                                : (isCurrent
+                                      ? AppColors.primaryLight
+                                      : Colors.grey[200]),
                             shape: BoxShape.circle,
                             border: Border.all(
                               color: isCompleted || isCurrent
@@ -97,7 +102,11 @@ class RegisterScreen extends GetView<AuthController> {
                           ),
                           child: Center(
                             child: isCompleted
-                                ? const Icon(Icons.check, size: 14, color: Colors.white)
+                                ? const Icon(
+                                    Icons.check,
+                                    size: 14,
+                                    color: Colors.white,
+                                  )
                                 : Text(
                                     '${index + 1}',
                                     style: TextStyle(
@@ -116,10 +125,14 @@ class RegisterScreen extends GetView<AuthController> {
                             steps[index],
                             style: TextStyle(
                               fontSize: 12,
-                              fontWeight: isCurrent ? FontWeight.bold : FontWeight.w500,
+                              fontWeight: isCurrent
+                                  ? FontWeight.bold
+                                  : FontWeight.w500,
                               color: isCurrent
                                   ? AppColors.primary
-                                  : (isCompleted ? Colors.black87 : Colors.grey[500]),
+                                  : (isCompleted
+                                        ? Colors.black87
+                                        : Colors.grey[500]),
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -301,7 +314,11 @@ class RegisterScreen extends GetView<AuthController> {
           ),
           child: const Row(
             children: [
-              Icon(Icons.info_outline_rounded, color: Color(0xFF1D4ED8), size: 18),
+              Icon(
+                Icons.info_outline_rounded,
+                color: Color(0xFF1D4ED8),
+                size: 18,
+              ),
               SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -340,7 +357,9 @@ class RegisterScreen extends GetView<AuthController> {
                         color: isSelected
                             ? service.color
                             : service.color.withAlpha(20),
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+                        borderRadius: BorderRadius.circular(
+                          AppDimensions.radiusSm,
+                        ),
                       ),
                       child: Icon(
                         service.icon,
@@ -358,7 +377,9 @@ class RegisterScreen extends GetView<AuthController> {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: isSelected ? service.color : AppColors.lightTextPrimary,
+                              color: isSelected
+                                  ? service.color
+                                  : AppColors.lightTextPrimary,
                             ),
                           ),
                           const SizedBox(height: 2),
@@ -377,7 +398,8 @@ class RegisterScreen extends GetView<AuthController> {
                     Checkbox(
                       value: isSelected,
                       activeColor: service.color,
-                      onChanged: (_) => controller.toggleServiceSelection(service),
+                      onChanged: (_) =>
+                          controller.toggleServiceSelection(service),
                     ),
                   ],
                 ),
@@ -416,16 +438,26 @@ class RegisterScreen extends GetView<AuthController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _reviewRow('Full Name', controller.fullNameController.text),
-              _reviewRow('Business Name', controller.businessNameController.text),
+              _reviewRow(
+                'Business Name',
+                controller.businessNameController.text,
+              ),
               _reviewRow('Aadhaar Number', controller.aadhaarController.text),
               _reviewRow('Phone', controller.phoneController.text),
               _reviewRow('Email', controller.emailController.text),
               const Divider(height: 20),
-              _reviewRow('Address', '${controller.addressController.text}, ${controller.cityController.text}, ${controller.stateController.text} - ${controller.pincodeController.text}'),
+              _reviewRow(
+                'Address',
+                '${controller.addressController.text}, ${controller.cityController.text}, ${controller.stateController.text} - ${controller.pincodeController.text}',
+              ),
               const Divider(height: 20),
               const Text(
                 'Assigned Services (Strict Separation):',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black87),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
               const SizedBox(height: 8),
               Wrap(
@@ -434,7 +466,14 @@ class RegisterScreen extends GetView<AuthController> {
                 children: controller.selectedServices.map((s) {
                   return Chip(
                     avatar: Icon(s.icon, size: 16, color: s.color),
-                    label: Text(s.displayName, style: TextStyle(color: s.color, fontWeight: FontWeight.bold, fontSize: 12)),
+                    label: Text(
+                      s.displayName,
+                      style: TextStyle(
+                        color: s.color,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
                     backgroundColor: s.bgColor,
                     side: BorderSide(color: s.color.withAlpha(80)),
                   );
@@ -477,14 +516,25 @@ class RegisterScreen extends GetView<AuthController> {
         children: [
           Expanded(
             flex: 2,
-            child: Text(label, style: const TextStyle(fontSize: 12, color: Color(0xFF64748B), fontWeight: FontWeight.w500)),
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Color(0xFF64748B),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
           const SizedBox(width: 8),
           Expanded(
             flex: 3,
             child: Text(
               value.isNotEmpty ? value : '-',
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF0F172A)),
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF0F172A),
+              ),
             ),
           ),
         ],
@@ -503,7 +553,9 @@ class RegisterScreen extends GetView<AuthController> {
               onPressed: controller.previousStep,
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               child: const Text('Back'),
             ),
@@ -513,10 +565,16 @@ class RegisterScreen extends GetView<AuthController> {
         Expanded(
           flex: 2,
           child: AppButton(
-            text: step == 3 ? 'Submit Vendor Registration' : 'Continue to ${['Address', 'Services', 'Review'][step]}',
+            text: step == 3
+                ? 'Submit Vendor Registration'
+                : 'Continue to ${['Address', 'Services', 'Review'][step]}',
             isLoading: controller.isLoading.value,
-            icon: step == 3 ? Icons.check_circle_outline_rounded : Icons.arrow_forward_rounded,
-            onPressed: step == 3 ? controller.submitRegistration : controller.nextStep,
+            icon: step == 3
+                ? Icons.check_circle_outline_rounded
+                : Icons.arrow_forward_rounded,
+            onPressed: step == 3
+                ? controller.submitRegistration
+                : controller.nextStep,
           ),
         ),
       ],

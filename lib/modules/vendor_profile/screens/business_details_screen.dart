@@ -32,7 +32,10 @@ class BusinessDetailsScreen extends GetView<VendorProfileController> {
                 child: Column(
                   children: [
                     _detailRow('Business Type', b.businessType),
-                    _detailRow('Registration / Incorporation Number', b.registrationNumber),
+                    _detailRow(
+                      'Registration / Incorporation Number',
+                      b.registrationNumber,
+                    ),
                     _detailRow('GSTIN Number', b.gstin),
                     _detailRow('Permanent Account Number (PAN)', b.panNumber),
                   ],
@@ -41,7 +44,8 @@ class BusinessDetailsScreen extends GetView<VendorProfileController> {
               const SizedBox(height: AppDimensions.spaceLg),
               AppCard(
                 title: 'Registered Business Address',
-                subtitle: 'Official operating location for service verification',
+                subtitle:
+                    'Official operating location for service verification',
                 child: Column(
                   children: [
                     _detailRow('Address Line', b.registeredAddress),
@@ -54,7 +58,8 @@ class BusinessDetailsScreen extends GetView<VendorProfileController> {
               const SizedBox(height: AppDimensions.spaceLg),
               AppCard(
                 title: 'Bank Account / Payout Settlement',
-                subtitle: 'Designated account for verified marketplace disbursements',
+                subtitle:
+                    'Designated account for verified marketplace disbursements',
                 child: Column(
                   children: [
                     _detailRow('Bank Name', b.bankName),
@@ -77,8 +82,18 @@ class BusinessDetailsScreen extends GetView<VendorProfileController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.lightTextSecondary)),
-          Text(value, style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.w600)),
+          Text(
+            label,
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.lightTextSecondary,
+            ),
+          ),
+          Text(
+            value,
+            style: AppTextStyles.bodyMedium.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ],
       ),
     );

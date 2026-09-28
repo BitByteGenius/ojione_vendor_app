@@ -20,7 +20,8 @@ class StayAvailabilityScreen extends GetView<StayController> {
           children: [
             AppCard(
               title: '7-Day Room Inventory Forecast',
-              subtitle: 'Monitor open inventory and block dates for private booking or maintenance',
+              subtitle:
+                  'Monitor open inventory and block dates for private booking or maintenance',
               child: Obx(() {
                 return StayAvailabilityCalendarWidget(
                   availabilityList: controller.availabilityList,

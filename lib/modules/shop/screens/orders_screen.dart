@@ -37,7 +37,11 @@ class ShopOrdersScreen extends GetView<ShopController> {
                       const CircleAvatar(
                         radius: 18,
                         backgroundColor: Color(0xFFFEF3C7),
-                        child: Icon(Icons.shopping_bag_outlined, color: Colors.amber, size: 18),
+                        child: Icon(
+                          Icons.shopping_bag_outlined,
+                          color: Colors.amber,
+                          size: 18,
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
@@ -58,7 +62,9 @@ class ShopOrdersScreen extends GetView<ShopController> {
                                 const SizedBox(width: 8),
                                 Text(
                                   Formatters.currency(ord.totalPrice),
-                                  style: AppTextStyles.h4.copyWith(color: AppColors.primary),
+                                  style: AppTextStyles.h4.copyWith(
+                                    color: AppColors.primary,
+                                  ),
                                 ),
                               ],
                             ),

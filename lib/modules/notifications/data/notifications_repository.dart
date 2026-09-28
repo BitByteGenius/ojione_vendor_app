@@ -11,7 +11,8 @@ class NotificationsRepository {
       AppNotificationModel(
         id: '1',
         title: 'New Stay Booking Confirmed!',
-        message: 'Rohan Das has booked Boutique Heritage Villa for 2 nights starting 17 Sep.',
+        message:
+            'Rohan Das has booked Boutique Heritage Villa for 2 nights starting 17 Sep.',
         type: NotificationType.booking,
         isRead: false,
         actionRoute: '/bookings',
@@ -20,7 +21,8 @@ class NotificationsRepository {
       AppNotificationModel(
         id: '2',
         title: 'Service Listing Approved',
-        message: 'Your Local Experience "Assam Tea Tasting Tour" has been verified and is now live!',
+        message:
+            'Your Local Experience "Assam Tea Tasting Tour" has been verified and is now live!',
         type: NotificationType.approval,
         isRead: false,
         actionRoute: '/experiences',
@@ -29,7 +31,8 @@ class NotificationsRepository {
       AppNotificationModel(
         id: '3',
         title: 'Payout Disbursement Processed',
-        message: '₹45,000 has been transferred to your SBI account ending in 8901.',
+        message:
+            '₹45,000 has been transferred to your SBI account ending in 8901.',
         type: NotificationType.payment,
         isRead: false,
         actionRoute: '/earnings/payouts',
@@ -38,7 +41,8 @@ class NotificationsRepository {
       AppNotificationModel(
         id: '4',
         title: 'Platform Maintenance Notice',
-        message: 'Scheduled marketplace maintenance will take place on Sunday 2:00 AM - 4:00 AM IST.',
+        message:
+            'Scheduled marketplace maintenance will take place on Sunday 2:00 AM - 4:00 AM IST.',
         type: NotificationType.system,
         isRead: true,
         createdAt: DateTime.now().subtract(const Duration(days: 2)),

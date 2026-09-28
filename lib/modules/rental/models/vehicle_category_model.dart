@@ -18,10 +18,6 @@ class VehicleCategoryModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'capacity_seats': capacitySeats,
-    };
+    return {'id': id, 'name': name, 'capacity_seats': capacitySeats};
   }
 }

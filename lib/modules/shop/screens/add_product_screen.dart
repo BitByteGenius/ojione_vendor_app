@@ -19,7 +19,8 @@ class AddProductScreen extends GetView<ShopController> {
         padding: const EdgeInsets.all(AppDimensions.spaceLg),
         child: AppCard(
           title: 'Product Information',
-          subtitle: 'Provide product details, state of origin, and inventory levels',
+          subtitle:
+              'Provide product details, state of origin, and inventory levels',
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -32,7 +33,8 @@ class AddProductScreen extends GetView<ShopController> {
               const SizedBox(height: AppDimensions.spaceMd),
               AppTextField(
                 label: 'Description & Craft Details',
-                hint: 'Describe materials, heritage origin, and artisan technique...',
+                hint:
+                    'Describe materials, heritage origin, and artisan technique...',
                 controller: controller.descriptionController,
                 maxLines: 4,
               ),

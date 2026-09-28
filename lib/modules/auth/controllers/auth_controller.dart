@@ -13,20 +13,28 @@ class AuthController extends GetxController {
 
   // Personal Info Controllers
   final fullNameController = TextEditingController(text: 'Gunajit Sharma');
-  final businessNameController = TextEditingController(text: 'Assam Heritage Retreat & Rentals');
+  final businessNameController = TextEditingController(
+    text: 'Assam Heritage Retreat & Rentals',
+  );
   final aadhaarController = TextEditingController(text: '7890 1234 5678');
   final phoneController = TextEditingController(text: '9876543210');
-  final emailController = TextEditingController(text: 'gunajit.sharma@gmail.com');
+  final emailController = TextEditingController(
+    text: 'gunajit.sharma@gmail.com',
+  );
 
   // Address Controllers
   final cityController = TextEditingController(text: 'Guwahati');
   final stateController = TextEditingController(text: 'Assam');
   final pincodeController = TextEditingController(text: '781001');
-  final addressController = TextEditingController(text: 'Plot 42, Riverside Heritage Road, Uzanbazar');
+  final addressController = TextEditingController(
+    text: 'Plot 42, Riverside Heritage Road, Uzanbazar',
+  );
 
   // Login Controllers
   final passwordController = TextEditingController(text: 'password123');
-  final loginEmailController = TextEditingController(text: 'vendor@sewasetu.com');
+  final loginEmailController = TextEditingController(
+    text: 'vendor@sewasetu.com',
+  );
   final loginPasswordController = TextEditingController(text: 'password123');
   final otpController = TextEditingController();
 
@@ -68,7 +76,10 @@ class AuthController extends GetxController {
           aadhaarController.text.trim().isEmpty ||
           phoneController.text.trim().isEmpty ||
           emailController.text.trim().isEmpty) {
-        Get.snackbar('Missing Details', 'Please fill in all personal information fields.');
+        Get.snackbar(
+          'Missing Details',
+          'Please fill in all personal information fields.',
+        );
         return;
       }
       if (aadhaarController.text.trim().replaceAll(' ', '').length < 12) {
@@ -80,12 +91,18 @@ class AuthController extends GetxController {
           stateController.text.trim().isEmpty ||
           pincodeController.text.trim().isEmpty ||
           addressController.text.trim().isEmpty) {
-        Get.snackbar('Missing Details', 'Please provide complete address details.');
+        Get.snackbar(
+          'Missing Details',
+          'Please provide complete address details.',
+        );
         return;
       }
     } else if (currentStep.value == 2) {
       if (selectedServices.isEmpty) {
-        Get.snackbar('Select Services', 'Please select at least one service to offer.');
+        Get.snackbar(
+          'Select Services',
+          'Please select at least one service to offer.',
+        );
         return;
       }
     }
@@ -103,7 +120,10 @@ class AuthController extends GetxController {
 
   Future<void> submitRegistration() async {
     if (!termsAccepted.value) {
-      Get.snackbar('Agreement Required', 'Please accept the Vendor Terms of Service & Privacy Policy.');
+      Get.snackbar(
+        'Agreement Required',
+        'Please accept the Vendor Terms of Service & Privacy Policy.',
+      );
       return;
     }
 
@@ -151,7 +171,10 @@ class AuthController extends GetxController {
 
     try {
       isLoading.value = true;
-      final response = await _repository.login(emailOrPhone: email, password: password);
+      final response = await _repository.login(
+        emailOrPhone: email,
+        password: password,
+      );
       if (response.success && response.data != null) {
         final data = response.data!;
         AuthService.to.setRegisteredVendor(data.vendor);

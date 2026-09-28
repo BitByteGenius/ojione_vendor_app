@@ -10,7 +10,7 @@ class AuthRepository {
 
   // Defaults to MockAuthDataSource, backend remote data source can be passed in
   AuthRepository({AuthDataSource? dataSource})
-      : _dataSource = dataSource ?? MockAuthDataSource();
+    : _dataSource = dataSource ?? MockAuthDataSource();
 
   Future<ApiResponse<AuthResponseModel>> login({
     required String emailOrPhone,

@@ -9,7 +9,7 @@ class ShopRepository {
   final ShopDataSource _dataSource;
 
   ShopRepository({ShopDataSource? dataSource})
-      : _dataSource = dataSource ?? MockShopDataSource();
+    : _dataSource = dataSource ?? MockShopDataSource();
 
   Future<ApiResponse<ShopDashboardAnalytics>> getShopAnalytics() {
     return _dataSource.getShopAnalytics();

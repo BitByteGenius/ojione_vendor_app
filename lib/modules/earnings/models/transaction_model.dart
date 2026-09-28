@@ -39,7 +39,9 @@ class TransactionModel {
       netAmount: (json['net_amount'] ?? 0).toDouble(),
       type: json['type'] ?? 'credit',
       status: json['status'] ?? 'settled',
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : DateTime.now(),
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
     );
   }
 }

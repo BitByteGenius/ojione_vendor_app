@@ -22,7 +22,8 @@ class DashboardScreen extends GetView<DashboardController> {
     return MainLayout(
       title: 'Vendor Core Dashboard',
       body: Obx(() {
-        if (controller.isLoading.value && controller.dashboardData.value == null) {
+        if (controller.isLoading.value &&
+            controller.dashboardData.value == null) {
           return const AppLoader(message: 'Loading vendor account overview...');
         }
 
@@ -108,7 +109,10 @@ class DashboardScreen extends GetView<DashboardController> {
                       children: [
                         const Text(
                           'Your Assigned Marketplace Services',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           'Each service has its own dedicated dashboard with deep analytics, listings, and bookings.',
@@ -118,7 +122,10 @@ class DashboardScreen extends GetView<DashboardController> {
                     ),
                     OutlinedButton.icon(
                       onPressed: () => Get.toNamed('/register'),
-                      icon: const Icon(Icons.add_circle_outline_rounded, size: 16),
+                      icon: const Icon(
+                        Icons.add_circle_outline_rounded,
+                        size: 16,
+                      ),
                       label: const Text('Add Service'),
                     ),
                   ],
@@ -138,12 +145,20 @@ class DashboardScreen extends GetView<DashboardController> {
                   ),
                   child: const Row(
                     children: [
-                      Icon(Icons.shield_outlined, color: Color(0xFF1D4ED8), size: 20),
+                      Icon(
+                        Icons.shield_outlined,
+                        color: Color(0xFF1D4ED8),
+                        size: 20,
+                      ),
                       SizedBox(width: 10),
                       Expanded(
                         child: Text(
                           'Strict Service Separation Active: You only have access to the service(s) you registered. Detailed analytics, booking charts, and inventory are managed inside each separate service dashboard.',
-                          style: TextStyle(fontSize: 12.5, color: Color(0xFF1E40AF), fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            color: Color(0xFF1E40AF),
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ],
@@ -176,7 +191,9 @@ class DashboardScreen extends GetView<DashboardController> {
                 else
                   const AppCard(
                     title: 'No Services Assigned',
-                    child: Text('No service portals are currently active for this vendor.'),
+                    child: Text(
+                      'No service portals are currently active for this vendor.',
+                    ),
                   ),
 
                 const SizedBox(height: AppDimensions.spaceXl),
@@ -191,7 +208,9 @@ class DashboardScreen extends GetView<DashboardController> {
                         children: [
                           Expanded(
                             flex: 6,
-                            child: _buildRecentActivityCard(data?.recentActivities ?? []),
+                            child: _buildRecentActivityCard(
+                              data?.recentActivities ?? [],
+                            ),
                           ),
                           const SizedBox(width: AppDimensions.spaceLg),
                           Expanded(
@@ -203,7 +222,9 @@ class DashboardScreen extends GetView<DashboardController> {
                     } else {
                       return Column(
                         children: [
-                          _buildRecentActivityCard(data?.recentActivities ?? []),
+                          _buildRecentActivityCard(
+                            data?.recentActivities ?? [],
+                          ),
                           const SizedBox(height: AppDimensions.spaceLg),
                           _buildAccountComplianceCard(auth),
                         ],
@@ -281,7 +302,10 @@ class DashboardScreen extends GetView<DashboardController> {
                         ),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: auth.verificationStatus.value.bgColor,
                             borderRadius: BorderRadius.circular(12),
@@ -317,10 +341,16 @@ class DashboardScreen extends GetView<DashboardController> {
             spacing: 12,
             runSpacing: 6,
             children: [
-              _bannerBadge(Icons.badge_outlined, 'Aadhaar: ${auth.aadhaarNumber.value}'),
+              _bannerBadge(
+                Icons.badge_outlined,
+                'Aadhaar: ${auth.aadhaarNumber.value}',
+              ),
               _bannerBadge(Icons.phone_outlined, auth.phone.value),
               _bannerBadge(Icons.mail_outline_rounded, auth.email.value),
-              _bannerBadge(Icons.domain_verification_rounded, 'Account: ${auth.accountStatus.value.label}'),
+              _bannerBadge(
+                Icons.domain_verification_rounded,
+                'Account: ${auth.accountStatus.value.label}',
+              ),
             ],
           ),
         ],
@@ -336,13 +366,20 @@ class DashboardScreen extends GetView<DashboardController> {
         const SizedBox(width: 5),
         Text(
           text,
-          style: const TextStyle(color: Color(0xFFD1FAE5), fontSize: 11.5, fontWeight: FontWeight.w500),
+          style: const TextStyle(
+            color: Color(0xFFD1FAE5),
+            fontSize: 11.5,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildServicePortalCard(BuildContext context, ServicePortalSummary summary) {
+  Widget _buildServicePortalCard(
+    BuildContext context,
+    ServicePortalSummary summary,
+  ) {
     final srv = summary.service;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -384,7 +421,10 @@ class DashboardScreen extends GetView<DashboardController> {
                   children: [
                     Text(
                       srv.displayName,
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                       srv.description,
@@ -418,30 +458,49 @@ class DashboardScreen extends GetView<DashboardController> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Active Listings', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                  const Text(
+                    'Active Listings',
+                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  ),
                   Text(
                     '${summary.activeListingsCount}',
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Today Bookings', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                  const Text(
+                    'Today Bookings',
+                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  ),
                   Text(
                     '${summary.todayBookingsCount}',
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Month Revenue', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                  const Text(
+                    'Month Revenue',
+                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  ),
                   Text(
                     Formatters.currency(summary.monthRevenue),
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: srv.color),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: srv.color,
+                    ),
                   ),
                 ],
               ),
@@ -460,7 +519,9 @@ class DashboardScreen extends GetView<DashboardController> {
                 backgroundColor: srv.color,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
           ),
@@ -515,14 +576,23 @@ class DashboardScreen extends GetView<DashboardController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(item.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                          Text(
+                            item.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
+                          ),
                           const SizedBox(height: 2),
                           Text(item.description, style: AppTextStyles.caption),
                         ],
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Text(item.timestamp, style: const TextStyle(fontSize: 11, color: Colors.grey)),
+                    Text(
+                      item.timestamp,
+                      style: const TextStyle(fontSize: 11, color: Colors.grey),
+                    ),
                   ],
                 );
               },
@@ -576,7 +646,13 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _complianceItem(String label, String value, String sub, IconData icon, Color color) {
+  Widget _complianceItem(
+    String label,
+    String value,
+    String sub,
+    IconData icon,
+    Color color,
+  ) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -586,9 +662,21 @@ class DashboardScreen extends GetView<DashboardController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: const TextStyle(fontSize: 11, color: Colors.grey)),
-              Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-              Text(sub, style: const TextStyle(fontSize: 11, color: Colors.black54)),
+              Text(
+                label,
+                style: const TextStyle(fontSize: 11, color: Colors.grey),
+              ),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
+              ),
+              Text(
+                sub,
+                style: const TextStyle(fontSize: 11, color: Colors.black54),
+              ),
             ],
           ),
         ),

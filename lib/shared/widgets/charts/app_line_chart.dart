@@ -27,8 +27,12 @@ class AppLineChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final gridColor = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
-    final textColor = isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B);
+    final gridColor = isDark
+        ? const Color(0xFF334155)
+        : const Color(0xFFE2E8F0);
+    final textColor = isDark
+        ? const Color(0xFF94A3B8)
+        : const Color(0xFF64748B);
 
     if (dataPoints.isEmpty) {
       return SizedBox(
@@ -80,7 +84,11 @@ class AppLineChart extends StatelessWidget {
                     return touchedSpots.map((barSpot) {
                       final point = dataPoints.firstWhere(
                         (p) => p.x == barSpot.x,
-                        orElse: () => ChartDataPoint(x: barSpot.x, y: barSpot.y, label: ''),
+                        orElse: () => ChartDataPoint(
+                          x: barSpot.x,
+                          y: barSpot.y,
+                          label: '',
+                        ),
                       );
                       final formattedVal = valueFormatter != null
                           ? valueFormatter!(barSpot.y)
@@ -111,8 +119,12 @@ class AppLineChart extends StatelessWidget {
               ),
               titlesData: FlTitlesData(
                 show: true,
-                rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                rightTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                topTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
                 bottomTitles: AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,

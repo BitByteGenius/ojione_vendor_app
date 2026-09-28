@@ -40,10 +40,30 @@ class MockTripsDataSource implements TripsDataSource {
         BarGroupDataModel(x: 6, label: 'Sun', value: 19),
       ],
       bookingStatusBreakdown: const [
-        PieSliceDataModel(label: 'Confirmed', value: 52, color: AppColors.tripsService, displayValue: '52 (55%)'),
-        PieSliceDataModel(label: 'Completed', value: 31, color: Color(0xFF10B981), displayValue: '31 (33%)'),
-        PieSliceDataModel(label: 'Upcoming', value: 8, color: Color(0xFFF59E0B), displayValue: '8 (9%)'),
-        PieSliceDataModel(label: 'Cancelled', value: 3, color: Color(0xFFEF4444), displayValue: '3 (3%)'),
+        PieSliceDataModel(
+          label: 'Confirmed',
+          value: 52,
+          color: AppColors.tripsService,
+          displayValue: '52 (55%)',
+        ),
+        PieSliceDataModel(
+          label: 'Completed',
+          value: 31,
+          color: Color(0xFF10B981),
+          displayValue: '31 (33%)',
+        ),
+        PieSliceDataModel(
+          label: 'Upcoming',
+          value: 8,
+          color: Color(0xFFF59E0B),
+          displayValue: '8 (9%)',
+        ),
+        PieSliceDataModel(
+          label: 'Cancelled',
+          value: 3,
+          color: Color(0xFFEF4444),
+          displayValue: '3 (3%)',
+        ),
       ],
       packagePerformances: const [
         PackagePerformanceModel(
@@ -137,13 +157,23 @@ class MockTripsDataSource implements TripsDataSource {
       TripPackageModel(
         id: 'tp-01',
         title: 'Kaziranga Safari & Majuli River Island Heritage',
-        description: 'Complete 4-day wildlife safari including elephant and jeep safaris, plus ferry to Majuli mask-making sattras.',
+        description:
+            'Complete 4-day wildlife safari including elephant and jeep safaris, plus ferry to Majuli mask-making sattras.',
         durationDays: 4,
         durationNights: 3,
         pricePerPerson: 14500,
         destinations: ['Kaziranga', 'Jorhat', 'Majuli Island'],
-        inclusions: ['All Transfers (AC Cab)', '3-Star Resort Stay', 'Jeep & Elephant Safari Passes', 'Daily Breakfast & Dinner'],
-        exclusions: ['Flight/Train Tickets', 'Camera Fees', 'Personal Expenses'],
+        inclusions: [
+          'All Transfers (AC Cab)',
+          '3-Star Resort Stay',
+          'Jeep & Elephant Safari Passes',
+          'Daily Breakfast & Dinner',
+        ],
+        exclusions: [
+          'Flight/Train Tickets',
+          'Camera Fees',
+          'Personal Expenses',
+        ],
         status: 'published',
         rating: 4.9,
         reviewsCount: 28,
@@ -151,14 +181,20 @@ class MockTripsDataSource implements TripsDataSource {
           ItineraryDayModel(
             dayNumber: 1,
             title: 'Arrival in Guwahati & Drive to Kaziranga',
-            description: 'Pick up from airport/railway station, scenic drive through Brahmaputra valley.',
-            activities: ['Airport pickup', 'Orchid Park visit', 'Resort check-in'],
+            description:
+                'Pick up from airport/railway station, scenic drive through Brahmaputra valley.',
+            activities: [
+              'Airport pickup',
+              'Orchid Park visit',
+              'Resort check-in',
+            ],
             mealsIncluded: 'Dinner',
           ),
           ItineraryDayModel(
             dayNumber: 2,
             title: 'Kaziranga Jungle Safari',
-            description: 'Early morning elephant safari in Kohora range followed by afternoon open-top jeep safari.',
+            description:
+                'Early morning elephant safari in Kohora range followed by afternoon open-top jeep safari.',
             activities: ['Elephant Safari', 'Jeep Safari', 'Tea Garden Walk'],
             mealsIncluded: 'Breakfast, Dinner',
           ),
@@ -168,12 +204,17 @@ class MockTripsDataSource implements TripsDataSource {
       TripPackageModel(
         id: 'tp-02',
         title: 'Meghalaya Living Root Bridges & Waterfalls Expedition',
-        description: '3-day hiking trip covering Cherrapunjee waterfalls, double-decker root bridge, and Dawki crystal river.',
+        description:
+            '3-day hiking trip covering Cherrapunjee waterfalls, double-decker root bridge, and Dawki crystal river.',
         durationDays: 3,
         durationNights: 2,
         pricePerPerson: 11200,
         destinations: ['Shillong', 'Cherrapunjee', 'Dawki'],
-        inclusions: ['Dedicated SUV & Fuel', 'Homestay Lodging', 'Guide for Root Bridge Hike'],
+        inclusions: [
+          'Dedicated SUV & Fuel',
+          'Homestay Lodging',
+          'Guide for Root Bridge Hike',
+        ],
         exclusions: ['Meals unless mentioned', 'Boating entry charges'],
         status: 'published',
         rating: 4.8,
@@ -188,6 +229,9 @@ class MockTripsDataSource implements TripsDataSource {
   @override
   Future<ApiResponse<bool>> createPackage(Map<String, dynamic> data) async {
     await Future.delayed(const Duration(milliseconds: 300));
-    return ApiResponse.success(data: true, message: 'Trip package submitted for approval');
+    return ApiResponse.success(
+      data: true,
+      message: 'Trip package submitted for approval',
+    );
   }
 }

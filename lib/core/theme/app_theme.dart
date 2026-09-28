@@ -22,10 +22,13 @@ class AppTheme {
         error: AppColors.error,
         onError: Colors.white,
       ),
-      textTheme: GoogleFonts.plusJakartaSansTextTheme(ThemeData.light().textTheme).apply(
-        bodyColor: AppColors.lightTextPrimary,
-        displayColor: AppColors.lightTextPrimary,
-      ),
+      textTheme:
+          GoogleFonts.plusJakartaSansTextTheme(
+            ThemeData.light().textTheme,
+          ).apply(
+            bodyColor: AppColors.lightTextPrimary,
+            displayColor: AppColors.lightTextPrimary,
+          ),
       cardTheme: CardThemeData(
         color: AppColors.lightSurface,
         elevation: 0,
@@ -136,10 +139,13 @@ class AppTheme {
         error: AppColors.error,
         onError: Colors.white,
       ),
-      textTheme: GoogleFonts.plusJakartaSansTextTheme(ThemeData.dark().textTheme).apply(
-        bodyColor: AppColors.darkTextPrimary,
-        displayColor: AppColors.darkTextPrimary,
-      ),
+      textTheme:
+          GoogleFonts.plusJakartaSansTextTheme(
+            ThemeData.dark().textTheme,
+          ).apply(
+            bodyColor: AppColors.darkTextPrimary,
+            displayColor: AppColors.darkTextPrimary,
+          ),
       cardTheme: CardThemeData(
         color: AppColors.darkSurface,
         elevation: 0,

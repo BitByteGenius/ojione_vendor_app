@@ -3,7 +3,8 @@ class ExperienceScheduleModel {
   final String experienceId;
   final String startTime; // '09:00 AM'
   final String endTime; // '12:00 PM'
-  final List<String> daysOfWeek; // ['Monday', 'Wednesday', 'Friday', 'Saturday']
+  final List<String>
+  daysOfWeek; // ['Monday', 'Wednesday', 'Friday', 'Saturday']
   final int maxCapacity;
   final int bookedCount;
 

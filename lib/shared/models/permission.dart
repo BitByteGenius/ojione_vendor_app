@@ -69,8 +69,5 @@ class AppPermissions {
     earningsView,
   ];
 
-  static const List<String> staffPermissions = [
-    bookingView,
-    bookingUpdate,
-  ];
+  static const List<String> staffPermissions = [bookingView, bookingUpdate];
 }

@@ -12,10 +12,26 @@ class DestinationsScreen extends GetView<TripsController> {
   @override
   Widget build(BuildContext context) {
     final destinations = [
-      {'name': 'Kaziranga National Park', 'state': 'Assam', 'packages': '2 Active Tours'},
-      {'name': 'Majuli River Island', 'state': 'Assam', 'packages': '1 Active Tour'},
-      {'name': 'Shillong & Cherrapunjee', 'state': 'Meghalaya', 'packages': '1 Active Tour'},
-      {'name': 'Tawang Monastery Trail', 'state': 'Arunachal Pradesh', 'packages': 'Upcoming'},
+      {
+        'name': 'Kaziranga National Park',
+        'state': 'Assam',
+        'packages': '2 Active Tours',
+      },
+      {
+        'name': 'Majuli River Island',
+        'state': 'Assam',
+        'packages': '1 Active Tour',
+      },
+      {
+        'name': 'Shillong & Cherrapunjee',
+        'state': 'Meghalaya',
+        'packages': '1 Active Tour',
+      },
+      {
+        'name': 'Tawang Monastery Trail',
+        'state': 'Arunachal Pradesh',
+        'packages': 'Upcoming',
+      },
     ];
 
     return MainLayout(
@@ -39,7 +55,11 @@ class DestinationsScreen extends GetView<TripsController> {
                     const CircleAvatar(
                       radius: 18,
                       backgroundColor: Color(0xFFF3E8FF),
-                      child: Icon(Icons.place_rounded, color: Colors.deepPurple, size: 18),
+                      child: Icon(
+                        Icons.place_rounded,
+                        color: Colors.deepPurple,
+                        size: 18,
+                      ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -53,20 +73,29 @@ class DestinationsScreen extends GetView<TripsController> {
                             overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 2),
-                          Text('State: ${d['state']}', style: AppTextStyles.caption),
+                          Text(
+                            'State: ${d['state']}',
+                            style: AppTextStyles.caption,
+                          ),
                         ],
                       ),
                     ),
                     const SizedBox(width: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFF3F4F6),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         d['packages']!,
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],

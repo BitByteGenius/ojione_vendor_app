@@ -65,7 +65,10 @@ class TripsController extends GetxController {
         'duration_days': int.tryParse(daysController.text) ?? 3,
         'duration_nights': int.tryParse(nightsController.text) ?? 2,
         'price_per_person': double.tryParse(priceController.text) ?? 9999,
-        'destinations': destinationsController.text.split(',').map((e) => e.trim()).toList(),
+        'destinations': destinationsController.text
+            .split(',')
+            .map((e) => e.trim())
+            .toList(),
       });
       if (res.success) {
         Get.snackbar('Success', 'Trip package submitted for approval');

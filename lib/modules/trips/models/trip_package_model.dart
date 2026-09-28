@@ -56,7 +56,9 @@ class TripPackageModel {
       status: json['status'] ?? 'draft',
       rating: (json['rating'] ?? 4.8).toDouble(),
       reviewsCount: json['reviews_count'] ?? 0,
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : DateTime.now(),
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
     );
   }
 

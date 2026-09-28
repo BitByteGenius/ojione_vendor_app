@@ -7,13 +7,17 @@ class VendorHomeRepository {
   final VendorHomeDataSource dataSource;
 
   VendorHomeRepository({VendorHomeDataSource? dataSource})
-      : dataSource = dataSource ?? MockVendorHomeDataSource();
+    : dataSource = dataSource ?? MockVendorHomeDataSource();
 
-  Future<VendorHomeSummary> getHomeSummary({required List<ServiceType> assignedServices}) {
+  Future<VendorHomeSummary> getHomeSummary({
+    required List<ServiceType> assignedServices,
+  }) {
     return dataSource.getHomeSummary(assignedServices: assignedServices);
   }
 
-  Future<List<VendorActivityItem>> getRecentActivities({required List<ServiceType> assignedServices}) {
+  Future<List<VendorActivityItem>> getRecentActivities({
+    required List<ServiceType> assignedServices,
+  }) {
     return dataSource.getRecentActivities(assignedServices: assignedServices);
   }
 

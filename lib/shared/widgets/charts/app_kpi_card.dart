@@ -66,11 +66,18 @@ class AppKpiCard extends StatelessWidget {
                 ),
                 if (trendBadge != null)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 7,
+                      vertical: 3,
+                    ),
                     decoration: BoxDecoration(
                       color: isPositiveTrend
-                          ? (isDark ? const Color(0xFF064E3B) : AppColors.successLight)
-                          : (isDark ? const Color(0xFF7F1D1D) : AppColors.errorLight),
+                          ? (isDark
+                                ? const Color(0xFF064E3B)
+                                : AppColors.successLight)
+                          : (isDark
+                                ? const Color(0xFF7F1D1D)
+                                : AppColors.errorLight),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
@@ -81,7 +88,9 @@ class AppKpiCard extends StatelessWidget {
                               ? Icons.arrow_upward_rounded
                               : Icons.arrow_downward_rounded,
                           size: 11,
-                          color: isPositiveTrend ? AppColors.success : AppColors.error,
+                          color: isPositiveTrend
+                              ? AppColors.success
+                              : AppColors.error,
                         ),
                         const SizedBox(width: 3),
                         Text(
@@ -89,7 +98,9 @@ class AppKpiCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
-                            color: isPositiveTrend ? AppColors.success : AppColors.error,
+                            color: isPositiveTrend
+                                ? AppColors.success
+                                : AppColors.error,
                           ),
                         ),
                       ],
@@ -107,7 +118,9 @@ class AppKpiCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
-                    color: isDark ? AppColors.darkTextMuted : AppColors.lightTextSecondary,
+                    color: isDark
+                        ? AppColors.darkTextMuted
+                        : AppColors.lightTextSecondary,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -121,7 +134,9 @@ class AppKpiCard extends StatelessWidget {
                     style: AppTextStyles.h3.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary,
+                      color: isDark
+                          ? AppColors.darkTextPrimary
+                          : AppColors.lightTextPrimary,
                     ),
                     maxLines: 1,
                   ),
@@ -132,7 +147,9 @@ class AppKpiCard extends StatelessWidget {
                     subtitle!,
                     style: TextStyle(
                       fontSize: 11,
-                      color: isDark ? AppColors.darkTextMuted : AppColors.lightTextMuted,
+                      color: isDark
+                          ? AppColors.darkTextMuted
+                          : AppColors.lightTextMuted,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

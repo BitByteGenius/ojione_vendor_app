@@ -37,7 +37,9 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = backgroundColor ?? (isDark ? AppColors.darkBackground : AppColors.lightBackground);
+    final bg =
+        backgroundColor ??
+        (isDark ? AppColors.darkBackground : AppColors.lightBackground);
 
     final mergedActions = <Widget>[
       if (trailingHeader != null)
@@ -65,10 +67,7 @@ class MainLayout extends StatelessWidget {
         ),
         floatingActionButton: floatingActionButton,
         bottomNavigationBar: bottomNavigationBar,
-        body: SafeArea(
-          top: false,
-          child: body,
-        ),
+        body: SafeArea(top: false, child: body),
       ),
     );
   }

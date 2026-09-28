@@ -99,7 +99,11 @@ class MockVendorProfiles {
     state: 'Assam',
     pincode: '785609',
     address: 'Central Range, Kohora, Kaziranga',
-    services: [ServiceType.stay, ServiceType.shop, ServiceType.localExperiences],
+    services: [
+      ServiceType.stay,
+      ServiceType.shop,
+      ServiceType.localExperiences,
+    ],
     activeService: ServiceType.stay,
     label: 'Vendor D: Stay + Shop + Local Experiences',
   );

@@ -29,7 +29,8 @@ class RoomsScreen extends GetView<StayController> {
         return ListView.separated(
           padding: const EdgeInsets.all(AppDimensions.spaceLg),
           itemCount: rooms.length,
-          separatorBuilder: (_, index) => const SizedBox(height: AppDimensions.spaceMd),
+          separatorBuilder: (_, index) =>
+              const SizedBox(height: AppDimensions.spaceMd),
           itemBuilder: (context, index) {
             return RoomCard(room: rooms[index]);
           },

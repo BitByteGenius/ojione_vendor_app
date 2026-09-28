@@ -50,7 +50,9 @@ class RegistrationSuccessScreen extends StatelessWidget {
           Center(
             child: Text(
               'Welcome, ${auth.ownerName.value}! Your vendor application is active and your tailored business environment is ready.',
-              style: AppTextStyles.bodyMedium.copyWith(color: AppColors.lightTextSecondary),
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.lightTextSecondary,
+              ),
               textAlign: TextAlign.center,
             ),
           ),
@@ -66,17 +68,34 @@ class RegistrationSuccessScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Vendor ID:', style: TextStyle(color: Colors.grey, fontSize: 13)),
-                    Obx(() => Text(auth.vendorId.value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13))),
+                    const Text(
+                      'Vendor ID:',
+                      style: TextStyle(color: Colors.grey, fontSize: 13),
+                    ),
+                    Obx(
+                      () => Text(
+                        auth.vendorId.value,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('KYC Verification:', style: TextStyle(color: Colors.grey, fontSize: 13)),
+                    const Text(
+                      'KYC Verification:',
+                      style: TextStyle(color: Colors.grey, fontSize: 13),
+                    ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.warningLight,
                         borderRadius: BorderRadius.circular(12),
@@ -84,7 +103,11 @@ class RegistrationSuccessScreen extends StatelessWidget {
                       child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.hourglass_top_rounded, size: 12, color: AppColors.warning),
+                          Icon(
+                            Icons.hourglass_top_rounded,
+                            size: 12,
+                            color: AppColors.warning,
+                          ),
                           SizedBox(width: 4),
                           Text(
                             'Pending Review',

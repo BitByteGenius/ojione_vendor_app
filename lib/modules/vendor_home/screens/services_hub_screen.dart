@@ -19,7 +19,11 @@ class ServicesHubScreen extends GetView<VendorHomeController> {
       appBar: AppBar(
         title: const Text(
           'My Services',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            color: AppColors.textPrimary,
+          ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -50,7 +54,11 @@ class ServicesHubScreen extends GetView<VendorHomeController> {
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.shield_outlined, color: Color(0xFF1D4ED8), size: 20),
+                      const Icon(
+                        Icons.shield_outlined,
+                        color: Color(0xFF1D4ED8),
+                        size: 20,
+                      ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
@@ -78,7 +86,9 @@ class ServicesHubScreen extends GetView<VendorHomeController> {
                 const SizedBox(height: AppDimensions.spaceMd),
 
                 // Grid / List of active services
-                ...assigned.map((service) => _buildServiceTile(context, service)),
+                ...assigned.map(
+                  (service) => _buildServiceTile(context, service),
+                ),
               ],
             ),
           );
@@ -138,12 +148,19 @@ class ServicesHubScreen extends GetView<VendorHomeController> {
                           const SizedBox(height: 2),
                           Text(
                             service.description,
-                            style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppColors.textSecondary,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.grey),
+                    const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -156,14 +173,21 @@ class ServicesHubScreen extends GetView<VendorHomeController> {
                   runSpacing: 6,
                   children: _getServiceFeatures(service).map((feat) {
                     return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFF3F4F6),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         feat,
-                        style: const TextStyle(fontSize: 11, color: Color(0xFF4B5563), fontWeight: FontWeight.w500),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF4B5563),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     );
                   }).toList(),

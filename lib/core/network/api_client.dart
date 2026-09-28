@@ -13,8 +13,12 @@ class ApiClient {
     _dio = Dio(
       BaseOptions(
         baseUrl: ApiEndpoints.baseUrl,
-        connectTimeout: const Duration(milliseconds: AppConstants.connectTimeout),
-        receiveTimeout: const Duration(milliseconds: AppConstants.receiveTimeout),
+        connectTimeout: const Duration(
+          milliseconds: AppConstants.connectTimeout,
+        ),
+        receiveTimeout: const Duration(
+          milliseconds: AppConstants.receiveTimeout,
+        ),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -60,7 +64,11 @@ class ApiClient {
     Options? options,
   }) async {
     try {
-      return await _dio.get<T>(path, queryParameters: queryParameters, options: options);
+      return await _dio.get<T>(
+        path,
+        queryParameters: queryParameters,
+        options: options,
+      );
     } on DioException catch (e) {
       throw _handleDioError(e);
     }
@@ -73,7 +81,12 @@ class ApiClient {
     Options? options,
   }) async {
     try {
-      return await _dio.post<T>(path, data: data, queryParameters: queryParameters, options: options);
+      return await _dio.post<T>(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
     } on DioException catch (e) {
       throw _handleDioError(e);
     }
@@ -86,7 +99,12 @@ class ApiClient {
     Options? options,
   }) async {
     try {
-      return await _dio.put<T>(path, data: data, queryParameters: queryParameters, options: options);
+      return await _dio.put<T>(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
     } on DioException catch (e) {
       throw _handleDioError(e);
     }
@@ -99,7 +117,12 @@ class ApiClient {
     Options? options,
   }) async {
     try {
-      return await _dio.patch<T>(path, data: data, queryParameters: queryParameters, options: options);
+      return await _dio.patch<T>(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
     } on DioException catch (e) {
       throw _handleDioError(e);
     }
@@ -112,7 +135,12 @@ class ApiClient {
     Options? options,
   }) async {
     try {
-      return await _dio.delete<T>(path, data: data, queryParameters: queryParameters, options: options);
+      return await _dio.delete<T>(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
     } on DioException catch (e) {
       throw _handleDioError(e);
     }
@@ -123,34 +151,62 @@ class ApiClient {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        return const NetworkException(message: 'Connection timed out. Please check your internet connection.');
+        return const NetworkException(
+          message:
+              'Connection timed out. Please check your internet connection.',
+        );
       case DioExceptionType.badResponse:
         final statusCode = error.response?.statusCode;
         final data = error.response?.data;
-        final message = data is Map<String, dynamic> ? (data['message'] ?? 'Unexpected server error') : 'Unexpected server error';
+        final message = data is Map<String, dynamic>
+            ? (data['message'] ?? 'Unexpected server error')
+            : 'Unexpected server error';
 
         if (statusCode == 401) {
-          return UnauthorizedException(message: message.toString(), statusCode: statusCode);
+          return UnauthorizedException(
+            message: message.toString(),
+            statusCode: statusCode,
+          );
         } else if (statusCode == 403) {
-          return ForbiddenException(message: message.toString(), statusCode: statusCode);
+          return ForbiddenException(
+            message: message.toString(),
+            statusCode: statusCode,
+          );
         } else if (statusCode == 404) {
-          return NotFoundException(message: message.toString(), statusCode: statusCode);
+          return NotFoundException(
+            message: message.toString(),
+            statusCode: statusCode,
+          );
         } else if (statusCode == 422) {
           return ValidationException(
             message: message.toString(),
             statusCode: statusCode,
             errors: (data is Map && data['errors'] is Map)
-                ? (data['errors'] as Map).map((k, v) => MapEntry(k.toString(), List<String>.from(v is List ? v : [v.toString()])))
+                ? (data['errors'] as Map).map(
+                    (k, v) => MapEntry(
+                      k.toString(),
+                      List<String>.from(v is List ? v : [v.toString()]),
+                    ),
+                  )
                 : {},
           );
         }
-        return AppException(message: message.toString(), statusCode: statusCode, details: data);
+        return AppException(
+          message: message.toString(),
+          statusCode: statusCode,
+          details: data,
+        );
       case DioExceptionType.cancel:
         return const AppException(message: 'Request was cancelled.');
       case DioExceptionType.connectionError:
-        return const NetworkException(message: 'Unable to connect to server. Please check internet connection.');
+        return const NetworkException(
+          message:
+              'Unable to connect to server. Please check internet connection.',
+        );
       default:
-        return AppException(message: error.message ?? 'An unexpected network error occurred.');
+        return AppException(
+          message: error.message ?? 'An unexpected network error occurred.',
+        );
     }
   }
 }

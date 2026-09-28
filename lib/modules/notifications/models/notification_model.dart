@@ -53,7 +53,9 @@ class AppNotificationModel {
       type: NotificationType.fromString(json['type'] ?? 'system'),
       isRead: json['is_read'] ?? false,
       actionRoute: json['action_route'],
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : DateTime.now(),
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
     );
   }
 }

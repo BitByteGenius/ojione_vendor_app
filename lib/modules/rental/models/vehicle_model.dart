@@ -11,7 +11,8 @@ class VehicleModel {
   final int seatingCapacity;
   final double pricePerDay;
   final double securityDeposit;
-  final String status; // 'available', 'rented', 'maintenance', 'pending_approval'
+  final String
+  status; // 'available', 'rented', 'maintenance', 'pending_approval'
   final double rating;
   final int tripsCompleted;
   final DateTime createdAt;
@@ -42,19 +43,26 @@ class VehicleModel {
       id: json['id'] ?? '',
       make: json['make'] ?? '',
       modelName: json['model_name'] ?? json['modelName'] ?? '',
-      registrationNumber: json['registration_number'] ?? json['registrationNumber'] ?? '',
+      registrationNumber:
+          json['registration_number'] ?? json['registrationNumber'] ?? '',
       category: json['category'] ?? 'SUV',
-      operatingCity: json['operating_city'] ?? json['operatingCity'] ?? 'Guwahati',
+      operatingCity:
+          json['operating_city'] ?? json['operatingCity'] ?? 'Guwahati',
       transmission: json['transmission'] ?? 'Manual',
       fuelType: json['fuel_type'] ?? json['fuelType'] ?? 'Diesel',
       rentalType: json['rental_type'] ?? json['rentalType'] ?? 'Self-Drive',
       seatingCapacity: json['seating_capacity'] ?? json['seatingCapacity'] ?? 5,
-      pricePerDay: (json['price_per_day'] ?? json['pricePerDay'] ?? 0).toDouble(),
-      securityDeposit: (json['security_deposit'] ?? json['securityDeposit'] ?? 5000).toDouble(),
+      pricePerDay: (json['price_per_day'] ?? json['pricePerDay'] ?? 0)
+          .toDouble(),
+      securityDeposit:
+          (json['security_deposit'] ?? json['securityDeposit'] ?? 5000)
+              .toDouble(),
       status: json['status'] ?? 'available',
       rating: (json['rating'] ?? 4.8).toDouble(),
       tripsCompleted: json['trips_completed'] ?? 0,
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : DateTime.now(),
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
     );
   }
 

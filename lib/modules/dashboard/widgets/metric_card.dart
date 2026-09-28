@@ -51,7 +51,9 @@ class MetricCard extends StatelessWidget {
                 style: AppTextStyles.caption.copyWith(
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.5,
-                  color: isDark ? AppColors.darkTextMuted : AppColors.lightTextMuted,
+                  color: isDark
+                      ? AppColors.darkTextMuted
+                      : AppColors.lightTextMuted,
                 ),
               ),
               Container(
@@ -74,15 +76,22 @@ class MetricCard extends StatelessWidget {
             children: [
               if (badgeText != null) ...[
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
-                    color: isPositiveBadge ? AppColors.successLight : AppColors.errorLight,
+                    color: isPositiveBadge
+                        ? AppColors.successLight
+                        : AppColors.errorLight,
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
                     badgeText!,
                     style: TextStyle(
-                      color: isPositiveBadge ? AppColors.success : AppColors.error,
+                      color: isPositiveBadge
+                          ? AppColors.success
+                          : AppColors.error,
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
                     ),

@@ -5,11 +5,7 @@ class ChartDataPoint {
   final double y;
   final String label;
 
-  const ChartDataPoint({
-    required this.x,
-    required this.y,
-    required this.label,
-  });
+  const ChartDataPoint({required this.x, required this.y, required this.label});
 }
 
 class BarGroupDataModel {

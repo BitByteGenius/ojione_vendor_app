@@ -31,7 +31,9 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
       ),
       body: Obx(() {
         if (controller.isLoading.value && controller.analytics.value == null) {
-          return const AppLoader(message: 'Loading Local Experiences analytics...');
+          return const AppLoader(
+            message: 'Loading Local Experiences analytics...',
+          );
         }
 
         final a = controller.analytics.value;
@@ -66,7 +68,8 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                         AppKpiCard(
                           title: 'Total Experiences',
                           value: '${a?.totalExperiences ?? 0}',
-                          subtitle: '${a?.activeExperiences ?? 0} Live • ${a?.pendingApproval ?? 0} Review',
+                          subtitle:
+                              '${a?.activeExperiences ?? 0} Live • ${a?.pendingApproval ?? 0} Review',
                           icon: Icons.local_activity_rounded,
                           color: AppColors.localExpService,
                           trendBadge: 'Catalog',
@@ -92,7 +95,8 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                         AppKpiCard(
                           title: 'Experience Revenue',
                           value: Formatters.currency(a?.totalRevenue ?? 0),
-                          subtitle: 'Pending payout: ${Formatters.currency(a?.pendingPayouts ?? 0)}',
+                          subtitle:
+                              'Pending payout: ${Formatters.currency(a?.pendingPayouts ?? 0)}',
                           icon: Icons.account_balance_wallet_rounded,
                           color: AppColors.secondary,
                           trendBadge: '+15.4%',
@@ -122,7 +126,11 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                       return Padding(
                         padding: const EdgeInsets.only(right: 8),
                         child: Chip(
-                          avatar: const Icon(Icons.star_outline_rounded, size: 16, color: AppColors.localExpService),
+                          avatar: const Icon(
+                            Icons.star_outline_rounded,
+                            size: 16,
+                            color: AppColors.localExpService,
+                          ),
                           label: Text(
                             c.name,
                             style: const TextStyle(
@@ -132,7 +140,9 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                             ),
                           ),
                           backgroundColor: AppColors.localExpServiceBg,
-                          side: BorderSide(color: AppColors.localExpService.withAlpha(60)),
+                          side: BorderSide(
+                            color: AppColors.localExpService.withAlpha(60),
+                          ),
                         ),
                       );
                     }).toList(),
@@ -153,7 +163,8 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                             flex: 6,
                             child: AppCard(
                               title: 'Monthly Revenue Trends (Past 6 Months)',
-                              subtitle: 'Gross ticket earnings from workshops and tours (INR)',
+                              subtitle:
+                                  'Gross ticket earnings from workshops and tours (INR)',
                               child: AppLineChart(
                                 dataPoints: a?.revenueTrends ?? [],
                                 primaryColor: AppColors.localExpService,
@@ -183,7 +194,8 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                         children: [
                           AppCard(
                             title: 'Monthly Revenue Trends (Past 6 Months)',
-                            subtitle: 'Gross ticket earnings from workshops and tours (INR)',
+                            subtitle:
+                                'Gross ticket earnings from workshops and tours (INR)',
                             child: AppLineChart(
                               dataPoints: a?.revenueTrends ?? [],
                               primaryColor: AppColors.localExpService,
@@ -226,7 +238,8 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                 // Recent Bookings Table
                 AppCard(
                   title: 'Recent Participant Bookings',
-                  subtitle: 'Confirmed guest reservations for upcoming workshops & walks',
+                  subtitle:
+                      'Confirmed guest reservations for upcoming workshops & walks',
                   trailing: TextButton(
                     onPressed: () => Get.toNamed('/bookings'),
                     child: const Text('View All Bookings'),
@@ -239,12 +252,15 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                 // Experience Performance List
                 AppCard(
                   title: 'Experience Popularity & Revenue',
-                  subtitle: 'Attendee counts and revenue generated per local experience',
+                  subtitle:
+                      'Attendee counts and revenue generated per local experience',
                   trailing: TextButton(
                     onPressed: () => Get.toNamed('/experiences/list'),
                     child: const Text('Manage Experiences'),
                   ),
-                  child: _buildExperiencePerformanceList(a?.experiencePerformances ?? []),
+                  child: _buildExperiencePerformanceList(
+                    a?.experiencePerformances ?? [],
+                  ),
                 ),
               ],
             ),
@@ -260,13 +276,21 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
       child: Row(
         children: [
           ActionChip(
-            avatar: const Icon(Icons.local_activity_outlined, size: 16, color: AppColors.localExpService),
+            avatar: const Icon(
+              Icons.local_activity_outlined,
+              size: 16,
+              color: AppColors.localExpService,
+            ),
             label: const Text('Experiences Catalog'),
             onPressed: () => Get.toNamed('/experiences/list'),
           ),
           const SizedBox(width: AppDimensions.spaceSm),
           ActionChip(
-            avatar: const Icon(Icons.schedule_outlined, size: 16, color: AppColors.localExpService),
+            avatar: const Icon(
+              Icons.schedule_outlined,
+              size: 16,
+              color: AppColors.localExpService,
+            ),
             label: const Text('Schedules & Time Slots'),
             onPressed: () => Get.toNamed('/experiences/schedule'),
           ),
@@ -277,7 +301,10 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
 
   Widget _buildRecentBookingsTable(List<ExperienceBookingItemModel> bookings) {
     if (bookings.isEmpty) {
-      return const Padding(padding: EdgeInsets.all(16), child: Text('No experience bookings found.'));
+      return const Padding(
+        padding: EdgeInsets.all(16),
+        child: Text('No experience bookings found.'),
+      );
     }
 
     return SingleChildScrollView(
@@ -285,23 +312,78 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
       child: DataTable(
         headingRowColor: WidgetStateProperty.all(const Color(0xFFF8FAFC)),
         columns: const [
-          DataColumn(label: Text('BOOKING ID', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('PARTICIPANT', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('EXPERIENCE', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('SLOT', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('GUESTS', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('AMOUNT', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
-          DataColumn(label: Text('STATUS', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11))),
+          DataColumn(
+            label: Text(
+              'BOOKING ID',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'PARTICIPANT',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'EXPERIENCE',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'SLOT',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'GUESTS',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'AMOUNT',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'STATUS',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            ),
+          ),
         ],
         rows: bookings.map((b) {
           return DataRow(
             cells: [
-              DataCell(Text(b.id, style: const TextStyle(fontWeight: FontWeight.bold))),
+              DataCell(
+                Text(b.id, style: const TextStyle(fontWeight: FontWeight.bold)),
+              ),
               DataCell(Text(b.participantName)),
-              DataCell(Text(b.experienceTitle, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5))),
-              DataCell(Text('${b.slotDate}, ${b.slotTime}', style: const TextStyle(fontSize: 12))),
+              DataCell(
+                Text(
+                  b.experienceTitle,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12.5,
+                  ),
+                ),
+              ),
+              DataCell(
+                Text(
+                  '${b.slotDate}, ${b.slotTime}',
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
               DataCell(Text('${b.participantsCount} Guests')),
-              DataCell(Text(Formatters.currency(b.amount), style: const TextStyle(fontWeight: FontWeight.bold))),
+              DataCell(
+                Text(
+                  Formatters.currency(b.amount),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
               DataCell(AppStatusChip(status: b.status.name)),
             ],
           );
@@ -310,7 +392,9 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
     );
   }
 
-  Widget _buildExperiencePerformanceList(List<ExperiencePerformanceModel> performances) {
+  Widget _buildExperiencePerformanceList(
+    List<ExperiencePerformanceModel> performances,
+  ) {
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -340,7 +424,10 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
                 children: [
                   Text(
                     p.title,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13.5,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -360,10 +447,17 @@ class ExperiencesDashboardScreen extends GetView<LocalExperiencesController> {
               children: [
                 Text(
                   Formatters.currency(p.revenue),
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.localExpService),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: AppColors.localExpService,
+                  ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.successLight,
                     borderRadius: BorderRadius.circular(8),

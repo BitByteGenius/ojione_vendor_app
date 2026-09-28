@@ -19,7 +19,8 @@ class RentalAvailabilityScreen extends GetView<RentalController> {
           padding: const EdgeInsets.all(AppDimensions.spaceLg),
           child: AppCard(
             title: 'Fleet Status',
-            subtitle: 'Real-time booking and dispatch status across operating cities',
+            subtitle:
+                'Real-time booking and dispatch status across operating cities',
             child: ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -37,7 +38,11 @@ class RentalAvailabilityScreen extends GetView<RentalController> {
                           color: Colors.blueAccent.withAlpha(25),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Icon(Icons.directions_car_rounded, color: Colors.blueAccent, size: 20),
+                        child: const Icon(
+                          Icons.directions_car_rounded,
+                          color: Colors.blueAccent,
+                          size: 20,
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(

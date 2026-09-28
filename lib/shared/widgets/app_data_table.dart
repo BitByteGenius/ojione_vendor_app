@@ -55,7 +55,9 @@ class AppDataTable extends StatelessWidget {
                         title.toUpperCase(),
                         style: AppTextStyles.caption.copyWith(
                           fontWeight: FontWeight.w700,
-                          color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                          color: isDark
+                              ? AppColors.darkTextSecondary
+                              : AppColors.lightTextSecondary,
                           letterSpacing: 0.5,
                         ),
                       ),

@@ -19,18 +19,23 @@ class StayAvailabilityModel {
     this.customPrice,
   });
 
-  int get availableUnits => isBlocked ? 0 : (totalUnits - bookedUnits).clamp(0, totalUnits);
+  int get availableUnits =>
+      isBlocked ? 0 : (totalUnits - bookedUnits).clamp(0, totalUnits);
 
   factory StayAvailabilityModel.fromJson(Map<String, dynamic> json) {
     return StayAvailabilityModel(
       id: json['id'] ?? '',
       propertyId: json['property_id'] ?? '',
       roomId: json['room_id'],
-      date: json['date'] != null ? DateTime.parse(json['date']) : DateTime.now(),
+      date: json['date'] != null
+          ? DateTime.parse(json['date'])
+          : DateTime.now(),
       totalUnits: json['total_units'] ?? 1,
       bookedUnits: json['booked_units'] ?? 0,
       isBlocked: json['is_blocked'] ?? false,
-      customPrice: json['custom_price'] != null ? (json['custom_price']).toDouble() : null,
+      customPrice: json['custom_price'] != null
+          ? (json['custom_price']).toDouble()
+          : null,
     );
   }
 

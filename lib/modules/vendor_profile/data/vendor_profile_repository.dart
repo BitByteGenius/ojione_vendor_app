@@ -79,6 +79,9 @@ class VendorProfileRepository {
 
   Future<ApiResponse<bool>> updateProfile(Map<String, dynamic> data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return ApiResponse.success(data: true, message: 'Profile updated successfully');
+    return ApiResponse.success(
+      data: true,
+      message: 'Profile updated successfully',
+    );
   }
 }

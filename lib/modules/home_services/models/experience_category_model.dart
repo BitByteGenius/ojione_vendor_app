@@ -1,6 +1,7 @@
 class ExperienceCategoryModel {
   final String id;
-  final String name; // e.g. 'Craft Workshop', 'Food Tour', 'Village Walk', 'Nature Trek'
+  final String
+  name; // e.g. 'Craft Workshop', 'Food Tour', 'Village Walk', 'Nature Trek'
   final String icon;
 
   ExperienceCategoryModel({
@@ -18,10 +19,6 @@ class ExperienceCategoryModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'icon': icon,
-    };
+    return {'id': id, 'name': name, 'icon': icon};
   }
 }

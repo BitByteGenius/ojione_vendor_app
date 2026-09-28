@@ -69,21 +69,24 @@ class MockDashboardDataSource implements DashboardDataSource {
       const VendorActivityItem(
         id: 'act-1',
         title: 'GST & Aadhaar KYC Verified',
-        description: 'Vendor account status updated to Verified by SewaSetu Compliance Team.',
+        description:
+            'Vendor account status updated to Verified by SewaSetu Compliance Team.',
         timestamp: 'Today, 10:45 AM',
         type: 'kyc',
       ),
       const VendorActivityItem(
         id: 'act-2',
         title: 'Payout Dispatched',
-        description: 'Monthly settlement of ₹45,000 initiated to registered HDFC Bank account.',
+        description:
+            'Monthly settlement of ₹45,000 initiated to registered HDFC Bank account.',
         timestamp: 'Yesterday, 4:15 PM',
         type: 'payout',
       ),
       const VendorActivityItem(
         id: 'act-3',
         title: 'Stay Booking Confirmed',
-        description: 'Booking #BK-8821 for 3 nights in Deluxe Heritage Cottage.',
+        description:
+            'Booking #BK-8821 for 3 nights in Deluxe Heritage Cottage.',
         timestamp: 'Yesterday, 11:30 AM',
         serviceType: ServiceType.stay,
         type: 'booking',
@@ -115,7 +118,8 @@ class MockDashboardDataSource implements DashboardDataSource {
       const VendorActivityItem(
         id: 'act-7',
         title: 'Experience Registration',
-        description: '3 slots reserved for Traditional Tea Tasting & Garden Tour.',
+        description:
+            '3 slots reserved for Traditional Tea Tasting & Garden Tour.',
         timestamp: '4 days ago',
         serviceType: ServiceType.localExperiences,
         type: 'booking',

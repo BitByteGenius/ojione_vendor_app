@@ -19,7 +19,8 @@ class AddExperienceScreen extends GetView<LocalExperiencesController> {
         padding: const EdgeInsets.all(AppDimensions.spaceLg),
         child: AppCard(
           title: 'Experience Details',
-          subtitle: 'Share your city culture, culinary heritage, or artisan skills with travelers',
+          subtitle:
+              'Share your city culture, culinary heritage, or artisan skills with travelers',
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,21 +41,45 @@ class AddExperienceScreen extends GetView<LocalExperiencesController> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Category', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                  const Text(
+                    'Category',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
                   const SizedBox(height: 6),
-                  Obx(() => DropdownButtonFormField<String>(
-                        initialValue: controller.selectedCategory.value,
-                        decoration: const InputDecoration(),
-                        items: const [
-                          DropdownMenuItem(value: 'Cultural Walk', child: Text('Cultural Walk')),
-                          DropdownMenuItem(value: 'Food & Tea Tasting', child: Text('Food & Tea Tasting')),
-                          DropdownMenuItem(value: 'Cooking Class', child: Text('Cooking Class')),
-                          DropdownMenuItem(value: 'Craft Workshop', child: Text('Craft Workshop')),
-                          DropdownMenuItem(value: 'Village Experience', child: Text('Village Experience')),
-                          DropdownMenuItem(value: 'Nature & Birding Walk', child: Text('Nature & Birding Walk')),
-                        ],
-                        onChanged: (v) => controller.selectedCategory.value = v ?? 'Cultural Walk',
-                      )),
+                  Obx(
+                    () => DropdownButtonFormField<String>(
+                      initialValue: controller.selectedCategory.value,
+                      decoration: const InputDecoration(),
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'Cultural Walk',
+                          child: Text('Cultural Walk'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Food & Tea Tasting',
+                          child: Text('Food & Tea Tasting'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Cooking Class',
+                          child: Text('Cooking Class'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Craft Workshop',
+                          child: Text('Craft Workshop'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Village Experience',
+                          child: Text('Village Experience'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Nature & Birding Walk',
+                          child: Text('Nature & Birding Walk'),
+                        ),
+                      ],
+                      onChanged: (v) => controller.selectedCategory.value =
+                          v ?? 'Cultural Walk',
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: AppDimensions.spaceMd),

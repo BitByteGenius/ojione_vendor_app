@@ -19,7 +19,8 @@ class InventoryScreen extends GetView<ShopController> {
           padding: const EdgeInsets.all(AppDimensions.spaceLg),
           child: AppCard(
             title: 'Stock Counts',
-            subtitle: 'Monitor stock levels to avoid overselling on the marketplace',
+            subtitle:
+                'Monitor stock levels to avoid overselling on the marketplace',
             child: ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -38,7 +39,11 @@ class InventoryScreen extends GetView<ShopController> {
                           color: const Color(0xFFF3F4F6),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Icon(Icons.inventory_rounded, color: Colors.blueGrey, size: 20),
+                        child: const Icon(
+                          Icons.inventory_rounded,
+                          color: Colors.blueGrey,
+                          size: 20,
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
@@ -57,7 +62,13 @@ class InventoryScreen extends GetView<ShopController> {
                                   ),
                                 ),
                                 const SizedBox(width: 8),
-                                Text('${p.stockQuantity} in stock', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                                Text(
+                                  '${p.stockQuantity} in stock',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(height: 3),
@@ -73,7 +84,11 @@ class InventoryScreen extends GetView<ShopController> {
                                   ),
                                 ),
                                 const SizedBox(width: 8),
-                                AppStatusChip(status: p.stockQuantity > 5 ? 'active' : 'low_stock'),
+                                AppStatusChip(
+                                  status: p.stockQuantity > 5
+                                      ? 'active'
+                                      : 'low_stock',
+                                ),
                               ],
                             ),
                           ],

@@ -102,6 +102,9 @@ class EarningsRepository {
 
   Future<ApiResponse<bool>> requestPayout(double amount) async {
     await Future.delayed(const Duration(milliseconds: 400));
-    return ApiResponse.success(data: true, message: 'Payout request of ₹$amount submitted successfully');
+    return ApiResponse.success(
+      data: true,
+      message: 'Payout request of ₹$amount submitted successfully',
+    );
   }
 }

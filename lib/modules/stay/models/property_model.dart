@@ -7,7 +7,8 @@ class PropertyModel {
   final String id;
   final String name;
   final String description;
-  final String propertyType; // 'Hotel', 'Homestay', 'Resort', 'Villa', or StayType
+  final String
+  propertyType; // 'Hotel', 'Homestay', 'Resort', 'Villa', or StayType
   final StayType? stayType;
   final String? roomConfiguration;
   final String address;
@@ -96,7 +97,8 @@ class PropertyModel {
       stayType: json['stay_type'] != null
           ? StayType.fromString(json['stay_type'])
           : StayType.fromString(typeStr),
-      roomConfiguration: json['room_configuration'] ?? json['roomConfiguration'],
+      roomConfiguration:
+          json['room_configuration'] ?? json['roomConfiguration'],
       address: json['address'] ?? '',
       city: json['city'] ?? 'Guwahati',
       state: json['state'] ?? 'Assam',
@@ -111,36 +113,56 @@ class PropertyModel {
       furnishingStatus: json['furnishing_status'] as String?,
       availableFrom: json['available_from'] as String?,
       maxOccupancy: json['max_occupancy'] ?? 2,
-      houseRules: (json['house_rules'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
-      requiredDocuments: (json['required_documents'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
+      houseRules:
+          (json['house_rules'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+      requiredDocuments:
+          (json['required_documents'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
       checkInTime: json['check_in_time'] ?? '12:00 PM',
       checkOutTime: json['check_out_time'] ?? '11:00 AM',
       status: json['status'] ?? 'draft',
       rating: (json['rating'] ?? 4.8).toDouble(),
       reviewsCount: json['reviews_count'] ?? 0,
-      basePricePerNight: ((json['base_price_per_night'] ?? json['price_per_night'] ?? json['pricePerNight']) ?? 0).toDouble(),
-      pricePerMonth: (json['price_per_month'] ?? json['pricePerMonth'] as num?)?.toDouble(),
+      basePricePerNight:
+          ((json['base_price_per_night'] ??
+                      json['price_per_night'] ??
+                      json['pricePerNight']) ??
+                  0)
+              .toDouble(),
+      pricePerMonth: (json['price_per_month'] ?? json['pricePerMonth'] as num?)
+          ?.toDouble(),
       availableRooms: json['available_rooms'] ?? json['availableRooms'] ?? 1,
       rooms: (json['rooms'] as List<dynamic>? ?? [])
           .map((r) => RoomModel.fromJson(r))
           .toList(),
-      amenities: (json['amenities'] as List<dynamic>? ?? [])
-          .map((a) {
-            if (a is Map<String, dynamic>) {
-              return AmenityModel.fromJson(a);
-            }
-            return AmenityModel(id: a.toString(), name: a.toString(), icon: 'check_circle', category: 'General');
-          })
-          .toList(),
-      images: (json['images'] as List<dynamic>? ?? [])
-          .map((img) {
-            if (img is Map<String, dynamic>) {
-              return PropertyImageModel.fromJson(img);
-            }
-            return PropertyImageModel(id: 'img-${DateTime.now().millisecondsSinceEpoch}', url: img.toString());
-          })
-          .toList(),
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : DateTime.now(),
+      amenities: (json['amenities'] as List<dynamic>? ?? []).map((a) {
+        if (a is Map<String, dynamic>) {
+          return AmenityModel.fromJson(a);
+        }
+        return AmenityModel(
+          id: a.toString(),
+          name: a.toString(),
+          icon: 'check_circle',
+          category: 'General',
+        );
+      }).toList(),
+      images: (json['images'] as List<dynamic>? ?? []).map((img) {
+        if (img is Map<String, dynamic>) {
+          return PropertyImageModel.fromJson(img);
+        }
+        return PropertyImageModel(
+          id: 'img-${DateTime.now().millisecondsSinceEpoch}',
+          url: img.toString(),
+        );
+      }).toList(),
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
     );
   }
 
