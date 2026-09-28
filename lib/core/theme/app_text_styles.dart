@@ -5,63 +5,63 @@ import 'app_colors.dart';
 class AppTextStyles {
   AppTextStyles._();
 
-  static TextStyle get h1 => GoogleFonts.inter(
+  static TextStyle get h1 => GoogleFonts.plusJakartaSans(
         fontSize: 28,
         fontWeight: FontWeight.w700,
         color: AppColors.lightTextPrimary,
         letterSpacing: -0.5,
       );
 
-  static TextStyle get h2 => GoogleFonts.inter(
+  static TextStyle get h2 => GoogleFonts.plusJakartaSans(
         fontSize: 22,
         fontWeight: FontWeight.w600,
         color: AppColors.lightTextPrimary,
         letterSpacing: -0.3,
       );
 
-  static TextStyle get h3 => GoogleFonts.inter(
+  static TextStyle get h3 => GoogleFonts.plusJakartaSans(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: AppColors.lightTextPrimary,
       );
 
-  static TextStyle get h4 => GoogleFonts.inter(
+  static TextStyle get h4 => GoogleFonts.plusJakartaSans(
         fontSize: 16,
         fontWeight: FontWeight.w600,
         color: AppColors.lightTextPrimary,
       );
 
-  static TextStyle get subtitle => GoogleFonts.inter(
+  static TextStyle get subtitle => GoogleFonts.plusJakartaSans(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: AppColors.lightTextSecondary,
       );
 
-  static TextStyle get bodyLarge => GoogleFonts.inter(
+  static TextStyle get bodyLarge => GoogleFonts.plusJakartaSans(
         fontSize: 15,
         fontWeight: FontWeight.w400,
         color: AppColors.lightTextPrimary,
       );
 
-  static TextStyle get bodyMedium => GoogleFonts.inter(
+  static TextStyle get bodyMedium => GoogleFonts.plusJakartaSans(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: AppColors.lightTextPrimary,
       );
 
-  static TextStyle get bodySmall => GoogleFonts.inter(
+  static TextStyle get bodySmall => GoogleFonts.plusJakartaSans(
         fontSize: 12,
         fontWeight: FontWeight.w400,
         color: AppColors.lightTextSecondary,
       );
 
-  static TextStyle get caption => GoogleFonts.inter(
+  static TextStyle get caption => GoogleFonts.plusJakartaSans(
         fontSize: 11,
         fontWeight: FontWeight.w500,
         color: AppColors.lightTextMuted,
       );
 
-  static TextStyle get button => GoogleFonts.inter(
+  static TextStyle get button => GoogleFonts.plusJakartaSans(
         fontSize: 14,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.2,
