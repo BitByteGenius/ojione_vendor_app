@@ -8,6 +8,7 @@ import '../models/availability_model.dart';
 import '../models/pricing_model.dart';
 import '../models/property_image_model.dart';
 import '../models/property_model.dart';
+import '../models/room_model.dart';
 import '../models/stay_analytics_model.dart';
 
 class PropertyPhotoItem {
@@ -866,6 +867,59 @@ class StayController extends GetxController {
       Get.snackbar(
         'Property Deleted',
         '${target.name} has been removed from your catalog',
+        snackPosition: SnackPosition.BOTTOM,
+        duration: const Duration(seconds: 2),
+      );
+    }
+  }
+
+  void toggleRoomStatus(String roomId) {
+    final selProp = selectedProperty.value;
+    if (selProp == null) return;
+
+    final roomIndex = selProp.rooms.indexWhere((r) => r.id == roomId);
+    if (roomIndex != -1) {
+      final oldRoom = selProp.rooms[roomIndex];
+      final newRoom = oldRoom.copyWith(isAvailable: !oldRoom.isAvailable);
+
+      final updatedRooms = List<RoomModel>.from(selProp.rooms);
+      updatedRooms[roomIndex] = newRoom;
+
+      final updatedProp = selProp.copyWith(rooms: updatedRooms);
+
+      final propIndex = properties.indexWhere((p) => p.id == selProp.id);
+      if (propIndex != -1) {
+        properties[propIndex] = updatedProp;
+      }
+      selectedProperty.value = updatedProp;
+
+      Get.snackbar(
+        'Room Status Updated',
+        '${newRoom.name} is now ${newRoom.isAvailable ? 'Active & Available' : 'Deactivated / Unavailable'}',
+        snackPosition: SnackPosition.BOTTOM,
+        duration: const Duration(seconds: 2),
+      );
+    }
+  }
+
+  void deleteRoom(String roomId) {
+    final selProp = selectedProperty.value;
+    if (selProp == null) return;
+
+    final targetRoom = selProp.rooms.firstWhereOrNull((r) => r.id == roomId);
+    if (targetRoom != null) {
+      final updatedRooms = selProp.rooms.where((r) => r.id != roomId).toList();
+      final updatedProp = selProp.copyWith(rooms: updatedRooms);
+
+      final propIndex = properties.indexWhere((p) => p.id == selProp.id);
+      if (propIndex != -1) {
+        properties[propIndex] = updatedProp;
+      }
+      selectedProperty.value = updatedProp;
+
+      Get.snackbar(
+        'Room Deleted',
+        '${targetRoom.name} was removed from ${selProp.name}',
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 2),
       );

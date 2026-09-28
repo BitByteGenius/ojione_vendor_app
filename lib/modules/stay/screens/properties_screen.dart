@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/theme/app_dimensions.dart';
-import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_loader.dart';
 import '../../../../shared/widgets/main_layout.dart';
 import '../controllers/stay_controller.dart';
@@ -14,7 +13,7 @@ class PropertiesScreen extends GetView<StayController> {
   Widget build(BuildContext context) {
     return MainLayout(
       title: 'Properties & Accommodations',
-      
+
       body: Obx(() {
         if (controller.isLoading.value && controller.properties.isEmpty) {
           return const AppLoader(message: 'Loading properties...');

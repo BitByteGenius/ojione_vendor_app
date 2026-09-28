@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/formatters.dart';
 import '../../../../shared/widgets/app_card.dart';
@@ -32,32 +31,42 @@ class PropertyCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 72,
-                height: 72,
+                width: 64,
+                height: 64,
                 decoration: BoxDecoration(
                   color: isActive
                       ? AppColors.stayServiceBg
                       : const Color(0xFFF3F4F6),
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: isActive
+                        ? AppColors.stayService.withAlpha(40)
+                        : const Color(0xFFE5E7EB),
+                  ),
                 ),
                 child: Icon(
-                  Icons.hotel_rounded,
-                  size: 36,
+                  Icons.apartment_rounded,
+                  size: 30,
                   color: isActive ? AppColors.stayService : Colors.grey,
                 ),
               ),
-              const SizedBox(width: AppDimensions.spaceMd),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Text(
                             property.name,
-                            style: AppTextStyles.h4,
-                            maxLines: 1,
+                            style: AppTextStyles.h4.copyWith(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.textPrimary,
+                            ),
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -68,39 +77,13 @@ class PropertyCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       '${property.propertyType} • ${property.city}, ${property.state}',
-                      style: AppTextStyles.caption,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 6),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.star_rounded,
-                          color: Colors.amber,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 4),
-                        Flexible(
-                          child: Text(
-                            '${property.rating} (${property.reviewsCount})',
-                            style: AppTextStyles.caption,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            '${Formatters.currency(property.basePricePerNight)} / night',
-                            style: AppTextStyles.bodyMedium.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -114,8 +97,8 @@ class PropertyCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Transform.scale(
-                    scale: 0.8,
+                  SizedBox(
+                    height: 28,
                     child: Switch.adaptive(
                       value: isActive,
                       activeTrackColor: AppColors.stayService,
@@ -124,26 +107,46 @@ class PropertyCard extends StatelessWidget {
                       },
                     ),
                   ),
+                  const SizedBox(width: 6),
                   Text(
-                    isActive ? 'Active' : 'Inactive',
+                    isActive ? 'Active' : 'Deactivated',
                     style: TextStyle(
                       fontSize: 12,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                       color: isActive
                           ? AppColors.stayService
-                          : Colors.grey[600],
+                          : AppColors.textSecondary,
                     ),
                   ),
                 ],
               ),
-              IconButton(
-                icon: const Icon(
-                  Icons.delete_outline_rounded,
-                  color: AppColors.error,
-                  size: 20,
-                ),
-                tooltip: 'Delete Property',
-                onPressed: () => _confirmDelete(context, controller, property),
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.edit_outlined,
+                      color: AppColors.primary,
+                      size: 18,
+                    ),
+                    tooltip: 'Edit Property',
+                    onPressed: () => Get.toNamed('/stay/properties/add'),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.delete_outline_rounded,
+                      color: AppColors.error,
+                      size: 18,
+                    ),
+                    tooltip: 'Delete Property',
+                    onPressed: () =>
+                        _confirmDelete(context, controller, property),
+                  ),
+                  const Icon(
+                    Icons.chevron_right_rounded,
+                    color: Colors.grey,
+                    size: 20,
+                  ),
+                ],
               ),
             ],
           ),

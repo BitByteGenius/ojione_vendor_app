@@ -47,6 +47,32 @@ class RoomModel {
     );
   }
 
+  RoomModel copyWith({
+    String? id,
+    String? propertyId,
+    String? name,
+    String? roomType,
+    int? maxOccupancy,
+    int? totalRooms,
+    double? basePricePerNight,
+    List<AmenityModel>? amenities,
+    List<PropertyImageModel>? images,
+    bool? isAvailable,
+  }) {
+    return RoomModel(
+      id: id ?? this.id,
+      propertyId: propertyId ?? this.propertyId,
+      name: name ?? this.name,
+      roomType: roomType ?? this.roomType,
+      maxOccupancy: maxOccupancy ?? this.maxOccupancy,
+      totalRooms: totalRooms ?? this.totalRooms,
+      basePricePerNight: basePricePerNight ?? this.basePricePerNight,
+      amenities: amenities ?? this.amenities,
+      images: images ?? this.images,
+      isAvailable: isAvailable ?? this.isAvailable,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
